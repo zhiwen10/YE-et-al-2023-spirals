@@ -1,12 +1,11 @@
-githubdir = 'C:\Users\Steinmetz lab\Documents\git';
-addpath(genpath(fullfile(githubdir, 'spikes'))); % https://github.com/cortex-lab/spikes
-addpath(genpath(fullfile(githubdir, 'Pipelines'))); % https://github.com/SteinmetzLab/Pipelines
-addpath(genpath(fullfile(githubdir, 'widefield'))); % https://github.com/cortex-lab/widefield
-addpath(genpath(fullfile(githubdir, 'npy-matlab'))); % https://github.com/kwikteam/npy-matlab
-addpath(genpath(fullfile(githubdir, 'YE-et-al-2023-spirals'))); 
+githubdir2 = 'C:\Users\Steinmetz lab\Documents\git';
+addpath(genpath(fullfile(githubdir2, 'spikes'))); % https://github.com/cortex-lab/spikes
+addpath(genpath(fullfile(githubdir2, 'Pipelines'))); % https://github.com/SteinmetzLab/Pipelines
+addpath(genpath(fullfile(githubdir2, 'widefield'))); % https://github.com/cortex-lab/widefield
+addpath(genpath(fullfile(githubdir2, 'npy-matlab'))); % https://github.com/kwikteam/npy-matlab
 %%
 folder = 'C:\Users\Steinmetz lab\Documents\git\YE-et-al-2023-spirals\spiral_detection';
-T = readtable('spiralSessions3.xlsx');
+T = readtable('spiralSessions2.xlsx');
 %%
 for kk = 7
     %%
@@ -57,7 +56,7 @@ for kk = 7
 %     fname1 = [mn '_' tdb '_' num2str(en) '_roi'];
 %     save(fname1,'roi');
     %%
-    dfolder = fullfile(folder,'full_roi');
+    dfolder = fullfile(folder,mn,td,num2str(en));
     fname1 = [mn '_' tdb '_' num2str(en) '_roi'];
     load(fullfile(dfolder,[fname1 '.mat']));
     tf = inROI(roi,xx(:),yy(:));
@@ -66,8 +65,8 @@ for kk = 7
     rate = 1;
     %%
     pwAll = [];
-    % for kkk = 1:numel(params.frameRange)-1
-    for kkk = 1:2
+    for kkk = 1:numel(params.frameRange)-1
+    % for kk=1:2
         tic
         pwAll1 = []; pwAll2 = []; pwAll3 = []; pwAll4 = []; pwAll5 = [];
         %%
@@ -100,6 +99,6 @@ for kk = 7
         fprintf('Frame %g/%g; time elapsed %g seconds \n', [frameStart,frameN1, toc])
     end
     pwAll(:,1:2) = pwAll(:,1:2)-params.halfpadding;
-    fname = [mn '_' tdb '_' num2str(en) '_spirals_all'];
+    fname = [mn '_' tdb '_' num2str(en) '_spirals_predicted'];
     save(fname,'pwAll');
 end

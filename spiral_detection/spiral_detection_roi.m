@@ -1,17 +1,12 @@
-githubdir2 = 'C:\Users\Steinmetz lab\Documents\git';
-addpath(genpath(fullfile(githubdir2, 'spikes')));
-addpath(genpath(fullfile(githubdir2, 'Pipelines')));
-addpath(genpath(fullfile(githubdir2, 'widefield')));
-addpath(genpath(fullfile(githubdir2, 'npy-matlab')));
-addpath('C:\Users\Steinmetz lab\Documents\MATLAB\YE2023\spiral_detection');
-% addpath(genpath(fullfile(githubdir2, 'NeuroPattToolbox'))) %https://github.com/BrainDynamicsUSYD/NeuroPattToolbox
-% addpath(genpath('C:\Users\Steinmetz lab\Documents\MATLAB\widefield_DIY\phase'))
+githubdir = 'C:\Users\Steinmetz lab\Documents\git';
+addpath(genpath(fullfile(githubdir, 'spikes'))); % https://github.com/cortex-lab/spikes
+addpath(genpath(fullfile(githubdir, 'Pipelines'))); % https://github.com/SteinmetzLab/Pipelines
+addpath(genpath(fullfile(githubdir, 'widefield'))); % https://github.com/cortex-lab/widefield
+addpath(genpath(fullfile(githubdir, 'npy-matlab'))); % https://github.com/kwikteam/npy-matlab
+addpath(genpath(fullfile(githubdir, 'YE-et-al-2023-spirals'))); 
 %%
-T = readtable('spiralSessions.xlsx');
-session_all = find(T.use);
-session_total = numel(session_all);
-T1 = T(session_all,:);
-id = [1,2,3,7,10];
+T1 = readtable('spiralSessions3.xlsx');
+id = 1:15;
 %%
 for kk = numel(id)
     %%
