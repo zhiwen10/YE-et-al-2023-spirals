@@ -1,17 +1,27 @@
 githubdir2 = 'C:\Users\Steinmetz lab\Documents\git';
-addpath(genpath(fullfile(githubdir2, 'spikes'))); % https://github.com/cortex-lab/spikes
-addpath(genpath(fullfile(githubdir2, 'Pipelines'))); % https://github.com/SteinmetzLab/Pipelines
-addpath(genpath(fullfile(githubdir2, 'widefield'))); % https://github.com/cortex-lab/widefield
-addpath(genpath(fullfile(githubdir2, 'npy-matlab'))); % https://github.com/kwikteam/npy-matlab
+addpath(genpath(fullfile(githubdir2, 'spikes')));
+addpath(genpath(fullfile(githubdir2, 'Pipelines')));
+addpath(genpath(fullfile(githubdir2, 'widefield')));
+addpath(genpath(fullfile(githubdir2, 'npy-matlab')));
+addpath('C:\Users\Steinmetz lab\Documents\MATLAB\YE2023\spiral_detection');
+% addpath(genpath(fullfile(githubdir2, 'NeuroPattToolbox'))) %https://github.com/BrainDynamicsUSYD/NeuroPattToolbox
+% addpath(genpath('C:\Users\Steinmetz lab\Documents\MATLAB\widefield_DIY\phase'))
 %%
-folder = 'C:\Users\Steinmetz lab\Documents\git\YE-et-al-2023-spirals\spiral_detection';
-T = readtable('spiralSessions2.xlsx');
+% T = readtable('spiralSessions.xlsx');
+
+codefolder = 'C:\Users\Steinmetz lab\Documents\MATLAB\widefield_DIY\phase\compareFlowField\compare_flow1';
+T = readtable(fullfile(codefolder, 'session_list_sorted2.csv'));
 %%
-for kk = 7
+for kk = 11
     %%
-    mn = T.MouseID{kk};
+%     mn = T.MouseID{kk};
+%     tda = T.date(kk);
+%     en = T.folder(kk);
+    
+    mn = T.mouseId{kk};
     tda = T.date(kk);
-    en = T.folder(kk);    
+    en = T.en(kk);
+    
     td = datestr(tda,'yyyy-mm-dd');
     tdb = datestr(tda,'yyyymmdd');
     %% SVD, plot example trace, overlay with pupil and stim time
@@ -56,9 +66,8 @@ for kk = 7
 %     fname1 = [mn '_' tdb '_' num2str(en) '_roi'];
 %     save(fname1,'roi');
     %%
-    dfolder = fullfile(folder,mn,td,num2str(en));
     fname1 = [mn '_' tdb '_' num2str(en) '_roi'];
-    load(fullfile(dfolder,[fname1 '.mat']));
+    load([fname1 '.mat']);
     tf = inROI(roi,xx(:),yy(:));
     params.xxRoi = xx(tf); 
     params.yyRoi =yy(tf);
@@ -73,7 +82,6 @@ for kk = 7
         frameStart = params.frameRange(kkk);
         frameEnd = frameStart+params.epochL-1;
         frameTemp = frameStart-35:frameEnd+35; % extra 2*35 frames before filter data 
-        % dV1 = dV_predict(1:50,frameTemp);
         dV1 = dV(1:50,frameTemp);
         t1 = t(frameTemp);
         [trace2d1,traceAmp1,tracePhase1] = spiralPhaseMap4(U1,dV1,t1,params,rate);
@@ -98,7 +106,55 @@ for kk = 7
         end
         fprintf('Frame %g/%g; time elapsed %g seconds \n', [frameStart,frameN1, toc])
     end
+    %%
+    % pwAll = pwAll(pwAll(:,1)>0 & pwAll(:,2)>0,:);
     pwAll(:,1:2) = pwAll(:,1:2)-params.halfpadding;
-    fname = [mn '_' tdb '_' num2str(en) '_spirals_predicted'];
+    %%
+    fname = [mn '_' tdb '_' num2str(en) '_spirals'];
     save(fname,'pwAll');
 end
+
+%% sanity check
+frame2 = 36:236; 
+% frame2 = 13967:14167; 
+framei = 100;
+rate1 = 1;
+spiralSanityCheck(U,dV,t,pwAll,frame2,framei,params,rate1)
+% spiralSanityCheck;
+%% kernel density plot
+figure; 
+ax2 = subplot(1,1,1);
+% imagesc(mimg);
+% hold on
+scatter_kde(pwAll(:,1),pwAll(:,2),'filled', 'MarkerSize', 5')
+set(gca,'Ydir','reverse')
+set(ax2, 'XTickLabel', '', 'YTickLabel', '');
+xlim([0 512]); ylim([0 512]);
+axis off; axis image
+box off
+colormap(ax2,parula)
+%%
+pwAll2 = pwAll(pwAll(:,3)>=30,:);
+% [unique_spirals1,scolor,low_color_bound,high_color_bound] = density_color_plot(pwAll);
+[unique_spirals1,scolor,low_color_bound,high_color_bound] = density_color_plot(pwAll2,600,high_color_bound);
+figure;
+scatter(unique_spirals1(:,1),unique_spirals1(:,2),6,scolor,'filled');
+set(gca,'Ydir','reverse')
+%% epoch spirals
+tStart = 1860; tEnd = 1870; % find spirals between time tStart:tEnd
+frameS = find(t>tStart,1,'first'); frameE = find(t>tEnd,1,'first');
+frameID = frameS:frameE;
+rate1 = 1;
+[tracePhase, pwAllEpoch, cells] = upsampleEpoch(U1,dV,t,frameID,params, rate1);
+%% epoch spirals upsampled
+frameID2 = frameID(228:236);
+rate1 = 0.1;
+[tracePhase, pwAllEpoch, cells] = upsampleEpoch(U1,dV,t,frameID2,params, rate1);
+pwAllEpoch1 = pwAllEpoch(pwAllEpoch(:,3)>50,:);
+%%
+figure; scatter(pwAllEpoch1(:,1),pwAllEpoch1(:,2),pwAllEpoch1(:,3),pwAllEpoch1(:,4),'filled');
+set(gca,'Ydir','reverse')
+set(gca, 'XTickLabel', '', 'YTickLabel', '');
+xlim([0 512]); ylim([0 512]);
+axis off; axis image
+box off;
