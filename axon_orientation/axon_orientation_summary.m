@@ -2,13 +2,15 @@
 githubDir = 'C:\Users\Steinmetz lab\Documents\git';
 addpath(genpath(fullfile(githubDir, 'npy-matlab')))
 addpath(genpath(fullfile(githubDir, 'allenCCF')))
-addpath(genpath('C:\Users\Steinmetz lab\Documents\MATLAB\widefield_DIY\phase'));
+% addpath(genpath(fullfile(githubDir, 'FMAToolbox')))
+addpath(genpath(fullfile(githubDir, 'YE-et-al-2023-spirals'))); 
 addpath(genpath('C:\Users\Steinmetz lab\Documents\MATLAB\colorcet'));
+addpath(genpath('C:\Users\Steinmetz lab\Documents\MATLAB\CircStat2012a'));
 %%
 av = readNPY('annotation_volume_10um_by_index.npy');
 st = loadStructureTree();
 %%
-load('all_cell_with_parents.mat');
+load('C:\Users\Steinmetz lab\Documents\git\BIL\all_cell_with_parents.mat');
 %%
 axon_region_label = {'VIS','RSP','AUD','TEa','VISa','VISC','VISrl','SSp-tr','SSp-ll','SSp-ul','SSp-m','SSp-n','SSp-bfd','SSp-un','SSs'};
 axon_st_cortex_indx = get_region_index_list(axon_region_label,st); % get all index values that contain "Isocortex" in st table
@@ -25,6 +27,9 @@ SSp_indx = get_region_index_list(SSp_label,st);
 load(fullfile('C:\Users\Steinmetz lab\Documents\git\allenCCF\Browsing Functions', 'ctxOutlines.mat'));
 load('C:\Users\Steinmetz lab\Documents\MATLAB\widefield_DIY\phase\atlasMaskArea\segmentationCode\projectedOutlineAtlas.mat');
 [projectedAtlas1,projectedTemplate1] = filterProjectedAtlas(projectedAtlas,projectedTemplate);
+%%
+BW = logical(projectedAtlas1);
+BW1 = BW(1:8:end,1:8:end);
 %% get horizontal brain outline 
 dataFolder = 'C:\Users\Steinmetz lab\Documents\MATLAB\AllenProjection\allenData';
 [atlas, metaAVGT] = nrrdread(fullfile(dataFolder, 'annotation_50.nrrd'));
@@ -81,86 +86,34 @@ end
 %%
 soma_all3 = soma_all2;
 axon_terminal_all3 = axon_terminal_all2;
-axon_points_all3 = axon_points_all2;
 soma_all3 = cat(2, soma_all3{:});
 axon_terminal_all3 = cat(2,axon_terminal_all3{:});
-axon_points_all3 = cat(2,axon_points_all3{:});
 labels_all = cat(1,labels{:});
 a = cellfun(@(x) not(isempty(x)), axon_terminal_all3);
 labels_all = labels_all(a);
 soma_all3 = soma_all3(a);
 axon_terminal_all3 = axon_terminal_all3(a);
-axon_points_all3 = axon_points_all3(a);
 [soma_center,vector_all, angle1, polarity] = get_axon_pc(axon_terminal_all3,soma_all3);   
 T = get_axon_bias_table(soma_center,vector_all,angle1,polarity,labels_all);
 %%
-clear a1 T1
-a1 = not(ismember(T.labels,string(["VIS";"RSP";"AUD";"TEa";"VISC"])));
-T1 = T(a1,:);
-h = plot_distribution(T1,coords);
+clear T1
+T1 = T;
+% T1.pc_ratio = T1.pc_ratio/200;
+% h = plot_distribution(T1,coords);
+h = plot_distribution_outline(T1,coords,st);
 %%
-x1 = linspace(-pi,pi,180);
-color2 = colorcet('C06','N',180);
-color3 = interp1(x1,color2,T1.soma_angle);
-center = [244,542]; % SSp-un
-figure;
-subplot(1,3,1);
-overlayOutlines(coords,scale,[0.8,0.8,0.8]);
-set(gca, 'YDir','reverse');
-ax1 = scatter(T1.soma_center(:,1),T1.soma_center(:,2),3,color3,'filled');
-set(gca, 'YDir','reverse');
-xline(center(1),'--k');
-yline(center(2),'--k');
-axis image; axis off;
-vector_scale = 2;
-ring_scale = 10;
-%%
-range = [-pi,-pi/2; -pi/2,0; 0, pi/2; pi/2, pi];
-%%
-clear axon_terminals1 axon_points1 soma1
-for kk = 1:4
-    clear a1 axon_terminal_temp axon_points_temp soma_all_temp
-    a1 = (T1.soma_angle>= range(kk,1) & T1.soma_angle<range(kk,2));
-    axon_terminal_temp = axon_terminal_all3(a1);
-    axon_points_temp = axon_points_all3(a1);
-    soma_all_temp = soma_all3(a1);
-    %%
-    clear axon_terminals axon_points soma
-    for i = 1:numel(soma_all_temp)
-        clear axon_terminal_temp1 axon_points_temp1 soma_temp1
-        axon_terminal_temp1 = double(axon_terminal_temp{i});
-        axon_points_temp1 = double(axon_points_temp{i});
-        soma_temp1 = double(soma_all_temp{i});
-        
-        axon_terminal_temp2 = zeros(size(axon_terminal_temp1));
-        axon_points_temp2 = zeros(size(axon_points_temp1));
-        axon_terminal_temp2 = axon_terminal_temp1-soma_temp1(1,:);
-        axon_points_temp2 = axon_points_temp1-soma_temp1(1,:);
-        axon_terminals{i} = axon_terminal_temp2;
-        axon_points{i} = axon_points_temp2;
-        soma{i} =  soma_temp1(1,:);
-    end
-    axon_terminals1{kk} = cat(1,axon_terminals{:});
-    axon_points1{kk} = cat(1,axon_points{:});
-    soma1{kk} = cat(1,soma{:});
-end
+print(h, 'all_axon_bias_version8_color', '-dpdf', '-bestfit', '-painters');
 %%
 figure;
-for kk = 1:4
-    subplot(1,4,kk);
-    clear axon_points1a axon_terminals1a
-    axon_points1a = axon_points1{kk};
-    axon_terminals1a = axon_terminals1{kk};
-    soma1a = soma1{kk};
-    soma_mean = mean(soma1a);
-    overlayOutlines(coords,scale,[0.8,0.8,0.8]);
-    set(gca, 'YDir','reverse');
-    plot(axon_points1a(:,3)+soma_mean(3), axon_points1a(:,1)+soma_mean(1), '.', 'Color', 'k','MarkerSize',1); 
-    hold on;
-    plot(axon_terminals1a(:,3)+soma_mean(3), axon_terminals1a(:,1)+soma_mean(1), '.', 'Color', 'r','MarkerSize',5); 
-%     xlim([-200,400]);
-%     ylim([-300,400]);
-    axis off; axis image;
-    xlim([0,600]);
-    ylim([0,1200]);
+ax4 = subplot(1,1,1);
+[ax4,angle_diff_real,angle_diff_perm,edges,N1,N_rp] = plot_angle_histogram_and_stats(ax4,T1,coords);
+%%
+% a1 = deg2rad(90); a2 = a1*ones(100,1);
+% [h mu ul ll] = circ_mtest(a2,deg2rad(90));
+[h mu ul ll] = circ_mtest(angle_diff_real,deg2rad(90));
+mean_rad = [mu,ll,ul];
+mean_deg = rad2deg(mean_rad);
+pval = circ_wwtest(angle_diff_real,angle_diff_perm); % bad
+for i = 1:100
+    [p(i)]=watsons_U2_perm_test(angle_diff_real,angle_diff_perm(i,:),100); % good
 end
