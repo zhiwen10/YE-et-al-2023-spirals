@@ -15,6 +15,8 @@ The figure ploting functions (`figure1/2/3/4.m`) use preprocessed data to genera
 ## Spiral detection algorithm
 The main functions for spiral detection are listed in the beginning of `pipeline1_spirals.m`, 
 which are `getSpiralDetection.m` and `getSpiralGrouping.m`.
+
+
 ![Pipeline](https://github.com/zhiwen10/YE-et-al-2023-spirals/blob/main/images/pipeline.png)
 
 
