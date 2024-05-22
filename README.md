@@ -26,4 +26,4 @@ In total, 2 parts together require 39.2 GB disk space after unzipping.
 After downloading and unzipping both repositories, place all 6 subfolders under a root data folder:
 `axons`, `ephys`, `spirals`, `spirals_mirror`, `tables`. 
 
-The companion code below will look for data inputs from these 6 subfolders, after specifying the root data folder.
+The companion code below will look for data inputs from these 5 subfolders, after specifying the root data folder.
