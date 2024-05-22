@@ -17,6 +17,7 @@ The main functions for spiral detection are listed in the beginning of `pipeline
 which are `getSpiralDetection.m` and `getSpiralGrouping.m`.
 
 
+
 ![Pipeline](https://github.com/zhiwen10/YE-et-al-2023-spirals/blob/main/images/pipeline.png)
 
 
