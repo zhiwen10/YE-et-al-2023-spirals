@@ -1,7 +1,5 @@
-function h4f = plotProbeLocation(data_folder,save_folder)
+function h4f = plotProbeLocation(T,data_folder,save_folder)
 mainfolder  = fullfile(data_folder,'ephys\probe_location');
-T = readtable(fullfile(data_folder,'tables', ...
-    'sessions_with_histology.xlsx'));
 [atlas, metaAVGT] = nrrdread(fullfile(data_folder,'tables',...
     'annotation_50.nrrd'));
 [maskPath,st] = get_cortex_atlas_path(data_folder);                        % get cortical atlas path and tree
@@ -46,9 +44,8 @@ for iplot = 1:3
     ylim([-20,axis_lim(2,iplot)]+20);
     for current_area = [2,3,4]
         %%
-        indx = find(contains(T.Area,area{current_area}) & T.track_tracing);     
+        indx = find(contains(T.Area,area{current_area}));     
         current_T = T(indx,:);
-        %% save phase data
         count = 1;
         atlas_convert = permute(atlas,[2,1,3]);
         clear points pointColor lineColor
