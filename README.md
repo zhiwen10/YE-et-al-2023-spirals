@@ -9,8 +9,8 @@ The core of code is a spiral detection algorithm.
 The preprocessing workflows are described in `pipline1/2/3/4.m` files in the root folder; 
 while the figure plotting functions are organized in the `figure1/2/3/4.m` files.
 
-The preprocessing workflows (`pipline1/2/3/4.m`) sometimes take a long time to run, with results saved in data folder.
-The figure ploting functions (`figure1/2/3/4.m`) use preprocessed data to generate final plots.
+The preprocessing workflows (`pipline1/2/3/4.m`) sometimes take a long time to run. Therefore, the results of the preprocessing steps are saved in data folder, ahead of time.
+The figure ploting functions (`figure1/2/3/4.m`) use preprocessed data to generate final plots within minutes, after specifying the root data folder.
 
 ## Spiral detection algorithm
 The main functions for spiral detection are listed in the beginning of `pipeline1_spirals.m`, 
