@@ -1,0 +1,72 @@
+githubdir = 'C:\Users\Steinmetz lab\Documents\git';                        % folder where repositories are hosted
+addpath(genpath(fullfile(githubdir, 'npy-matlab')));                       % https://github.com/kwikteam/npy-matlab
+addpath(genpath('C:\Users\Steinmetz lab\Documents\MATLAB\colorcet'));
+addpath(genpath('C:\Users\Steinmetz lab\Documents\MATLAB\cbrewer2'));
+addpath(genpath(fullfile(githubdir, 'YE-et-al-2023-spirals-test')));       % paper repository
+%% load session table
+data_folder = 'E:\spiral_data_share\data';     
+figure_folder = 'E:\spiral_data_share\figures';
+T = readtable(fullfile(data_folder,'tables','spiralSessions3.xlsx'));
+T1 = T(1,:);
+%% Figure 1.
+save_folder = fullfile(figure_folder, 'Fig1');
+h1ac = plotSpiralTimeSeries(data_folder,save_folder);                      % plot example spiral time series & frame with optical flow
+h1b = plotSpiralSequence(data_folder,save_folder);                         % plot example spiral sequence
+h1d = plotSpiralDuration(T,data_folder,save_folder);                       % plot spiral duration ratio vs scrambled distribution
+h1e = plotSpiralDensityAllSessions(data_folder,save_folder);               % plot spiral desnity map (combine all sessions)
+h1fg = plotSpiralSpeedSummary(T,data_folder,save_folder);                  % plot spiral speeds for all spiral radii
+close all;
+%% Extented Data Fig.1
+save_folder = fullfile(figure_folder, 'FigS1');
+hs1ab = plotExampleOscillation(data_folder,save_folder);                   % plot example horizontal view and time series 
+hs1c = plotPowerSpectrum(T,data_folder,save_folder);                       % plot mean power map across 15 sessions
+[hs1d,hs1e] = plotExampleSpiral2(T,data_folder,save_folder);               % plot LK_0003 example spirals
+[hs1f,hs1g] = plotExampleSpiral3(T,data_folder,save_folder);               % plot ZYE_0067 example spirals
+close all;
+%% Extended Data Fig.2
+save_folder = fullfile(figure_folder, 'FigS2');
+hs2 = plotSpiralDetectionPipeline(T,data_folder,save_folder);              % plot spiral detection pipeline illustration
+close all;
+%% Extended Data Fig.3
+save_folder = fullfile(figure_folder, 'FigS3');
+freq = [2 8];
+hs3ab = plotExampleDataVsFft(T,data_folder,save_folder);                   % plot example epoch of data and 3d-fft
+hs3c = plotMapDataVsFftn(data_folder,save_folder,freq);                    % plot density map (combine all sessions) for data and 3d-fft
+[hs3d,hs3e] = plotScatterDataVsFftn(T,data_folder,save_folder,freq);       % plot peak desnity across sessions for data and 3d-fft
+close all;
+%% Extended Data Fig.4
+save_folder = fullfile(figure_folder, 'FigS4');
+[hs4bc,hs4de] = plotLFPspirals(data_folder, save_folder);                  % plot example spirals in cortical LFP
+close all;
+%% Extended Data Fig.5
+save_folder = fullfile(figure_folder, 'FigS5');
+session_rows = 1:6;                                                        % plot 6/15 sessions in one figure, to avoid crowding
+hs5 = plotSpiralsBySession(T,session_rows,data_folder,save_folder);        % plot visual rf mapping and spiral distribution by session 
+close all;
+%% Extended Data Fig.6
+save_folder = fullfile(figure_folder, 'FigS6');
+hs6ab = plotSpiralDensityByRadius(data_folder,save_folder);                % plot spiral density maps across different radius
+hs6cd = plotSpiralDensityByDuration(data_folder,save_folder);              % plot spiral density maps across different durations
+close all;
+%% Extended Data Fig.7
+save_folder = fullfile(figure_folder, 'FigS7');
+hs7a = plotExampleSpiralTrajectory(T,data_folder,save_folder);             % plot example grouped sprial sequences
+hs7b = plotSpiralDirectionRatio(T,data_folder,save_folder);                % plot CCW spirals ratio across sessions
+hs7cd = plotSpiralDensitySessionsMeanSEM(T,data_folder,save_folder);       % plot spiral density map mean and SEM across sessions
+hs7ef = plotSpiralsSymmetryRatio(T, data_folder, save_folder);             % plot spiral symmetry ratio across sessions
+close all;
+%% Extended Data Fig.8
+save_folder = fullfile(figure_folder, 'FigS8');
+[hs8e, hs8ad,hs8f] = plotSpiralSyncIndex(T, data_folder,save_folder);      % plot example time series and example frame index
+hs8gh = plotMotionEnergyAmpX(T,data_folder,save_folder);                   % plot 2-8Hz amp vs Motion energy relationship
+hs8i = plotAmpIndex(data_folder,save_folder);                              % plot 2-8Hz amp vs index across sessions
+hs8j = plotMotionEnergyIndex(data_folder,save_folder);                     % plot motion energy vs index across sessions
+close all;
+%% Extended Data Fig.9
+save_folder = fullfile(figure_folder, 'FigS9');
+h9af = plotSpiralSpeedExample(data_folder,save_folder);                    % plot example spiral speed calculation illustration
+radius = 50;
+h9gj = plotSpeedForRadius(radius,data_folder,save_folder);               % plot all spiral speeds at 50-pixel radius
+radius = 100;
+h9kn = plotSpeedForRadius(radius,data_folder,save_folder);               % plot all spiral speeds at 100-pixel radius
+close all;
