@@ -43,7 +43,7 @@ for kk = 8:14
     axon_indx{kk} = SSp_indx;
 end
 axon_indx{15} = SSs_indx;
-%% get axon terminals for each cell
+%% get axon terminals for each cell, grouped by sensory regions
 hemi = 1;                                                                  % only look at left hemisphere
 for k = 1:numel(sensory_label)
     iregion = sensory_label(k);

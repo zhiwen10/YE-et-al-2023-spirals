@@ -15,11 +15,9 @@ ss = readNPY(fullfile(ksDir, 'spike_times.npy'));
 st = double(ss)/30000;                                                     % sampling rate: 30k Hz
 spikeTemplates = readNPY(fullfile(ksDir, 'spike_templates.npy'));          % note: zero-indexed
 clu = readNPY(fullfile(ksDir, 'spike_clusters.npy'));
-tempScalingAmps = readNPY(fullfile(ksDir, 'amplitudes.npy'));
 temps = readNPY(fullfile(ksDir, 'templates.npy'));
 winv = readNPY(fullfile(ksDir, 'whitening_mat_inv.npy'));
 
-tempScalingAmps = readNPY(fullfile(ksDir, 'amplitudes.npy'));
 spikeTimes = readNPY(fullfile(ksDir, 'spikeTimes.npy'));
 spikeAmps = readNPY(fullfile(ksDir, 'spikeAmps.npy'));
 spikeDepths = readNPY(fullfile(ksDir, 'spikeDepths.npy'));
@@ -41,8 +39,7 @@ if ~isempty(cgsFile)
         noiseClusters = cids(cgs==0);
 
         st = st(~ismember(clu, noiseClusters));
-        spikeTemplates = spikeTemplates(~ismember(clu, noiseClusters));
-        tempScalingAmps = tempScalingAmps(~ismember(clu, noiseClusters));        
+        spikeTemplates = spikeTemplates(~ismember(clu, noiseClusters));     
         
         if params.loadPCs
             pcFeat = pcFeat(~ismember(clu, noiseClusters), :,:);
@@ -60,7 +57,6 @@ ycoords = coords(:,2); xcoords = coords(:,1);
 spikeStruct.st = st;
 spikeStruct.spikeTemplates = spikeTemplates;
 spikeStruct.clu = clu;
-spikeStruct.tempScalingAmps = tempScalingAmps;
 spikeStruct.cgs = cgs;
 spikeStruct.cids = cids;
 spikeStruct.xcoords = xcoords;
