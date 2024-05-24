@@ -12,9 +12,9 @@ The preprocessing workflows are described in `pipline1/2/3/4.m` files in the roo
 while the figure plotting functions are organized in the `figure1/2/3/4.m` files.
 
 The preprocessing workflows (`pipline1/2/3/4.m`) sometimes take a long time to run. Therefore, the results of the preprocessing steps are saved in data folder, ahead of time.
-The figure ploting functions (`figure1/2/3/4.m`) use preprocessed data to generate final plots within minutes, after specifying the root data folder.
+The figure ploting functions (`figure1/2/3/4.m`) use preprocessed data to generate final plots within minutes if not seconds, after specifying the root data folder.
 
-These `pipline1/2/3/4.m` and `figure1/2/3/4.m` also provide a overview of the code organizing structure. Key algorithms are described in details on top of each function, such as spiral detection algorithm. For extra inforamtion, please refer to the manuscript.
+These `pipline1/2/3/4.m` and `figure1/2/3/4.m` files also provide an overview of the code organizing structure. Key algorithms are described in details on top of each function, such as spiral detection algorithm. For extra inforamtion, please refer to the manuscript.
 
 
 ## Data download
