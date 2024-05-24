@@ -14,14 +14,6 @@ while the figure plotting functions are organized in the `figure1/2/3/4.m` files
 The preprocessing workflows (`pipline1/2/3/4.m`) sometimes take a long time to run. Therefore, the results of the preprocessing steps are saved in data folder, ahead of time.
 The figure ploting functions (`figure1/2/3/4.m`) use preprocessed data to generate final plots within minutes, after specifying the root data folder.
 
-## Spiral detection algorithm
-The main functions for spiral detection are listed in the beginning of `pipeline1_spirals.m`, 
-which are `getSpiralDetection.m` and `getSpiralGrouping.m`.
-
-
-
-![Pipeline](https://github.com/zhiwen10/YE-et-al-2023-spirals/blob/main/images/pipeline.png)
-
 
 ## Data download
 The raw and preprocessed data are shared on figshare.
@@ -35,3 +27,16 @@ After downloading and unzipping both repositories, place all 5 subfolders under 
 `axons`, `ephys`, `spirals`, `spirals_mirror`, `tables`. 
 
 The code here will look for data inputs from these subfolders, after specifying the root data folder.
+
+## Data overview
+We prepared a short script 'data_overview.m' in the root, to help quickly navigate the raw data in the data folder.
+
+
+## Spiral detection algorithm
+The main functions for spiral detection are listed in the beginning of `pipeline1_spirals.m`, 
+which are `getSpiralDetection.m` and `getSpiralGrouping.m`.
+
+
+
+![Pipeline](https://github.com/zhiwen10/YE-et-al-2023-spirals/blob/main/images/pipeline.png)
+
