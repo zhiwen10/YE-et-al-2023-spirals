@@ -13,6 +13,7 @@ while the figure plotting functions are organized in the `figure1/2/3/4.m` files
 
 The preprocessing workflows (`pipline1/2/3/4.m`) sometimes take a long time to run. Therefore, the results of the preprocessing steps are saved in data folder, ahead of time.
 The figure ploting functions (`figure1/2/3/4.m`) use preprocessed data to generate final plots within minutes, after specifying the root data folder.
+These `pipline1/2/3/4.m` and `figure1/2/3/4.m` also provide a overview of the code organizing structure. Key algorithms are described in details on top of each function, such as spiral detection algorithm. For extra inforamtion, please refer to the manuscript.
 
 
 ## Data download
@@ -26,7 +27,7 @@ In total, 2 parts together require 39.2 GB disk space after unzipping.
 After downloading and unzipping both repositories, place all 5 subfolders under a root data folder:
 `axons`, `ephys`, `spirals`, `spirals_mirror`, `tables`. 
 
-The code here will look for data inputs from these subfolders, after specifying the root data folder.
+The code here will look for data inputs from these subfolders, after specifying the root data folder in the beginning of each main script.
 
 ## Data overview
 We prepared a short script 'data_overview.m' in the root, to help quickly navigate the raw data in the data folder.
