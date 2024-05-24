@@ -31,7 +31,7 @@ After downloading and unzipping both repositories, place all 5 subfolders under 
 The code here will look for data inputs from these subfolders, after specifying the root data folder in the beginning of each main script.
 
 ## Data overview
-We prepared a short script 'data_overview.m' in the root, to help quickly navigate the raw data in the data folder.
+We prepared a short script `data_overview.m` in the root, to help quickly navigate the raw data in the data folder.
 
 
 ## Spiral detection algorithm
