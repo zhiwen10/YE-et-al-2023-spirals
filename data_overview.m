@@ -8,12 +8,10 @@ data_folder = 'E:\spiral_data_share\data';                                 % spe
 %% load widefield data
 T = readtable(fullfile(data_folder,'tables','spiralSessions3.xlsx'));      % read the session table
 kk = 1;                                                                    % take a look at first session in the table
-% session info
 mn = T.MouseID{kk};                                                        % mouse name
 tda = T.date(kk);                                                          % session date
 en = T.folder(kk);                                                         % experiment folder
 tdb = datestr(tda,'yyyymmdd');                                             % session date string
-% read svd components (U,V,t) from processed data folder
 subfolder = [mn '_' tdb '_' num2str(en)];                                  % full name identifier for the session
 session_root = fullfile(data_folder,'spirals\svd',subfolder);              % svd data location for the session
 [U,V,t,mimg] = loadUVt1(session_root);                                     % load svd components (U,V,t) from svd data folder
@@ -23,8 +21,6 @@ frames = [200:208];                                                        % let
 trace = U1*dV(1:50,frames);                                                % reconstruct svd data to image space 
 trace = reshape(trace,size(U,1),size(U,2),size(trace,2));                  % reshape images to x*y*t matrix
 trace = trace./mimg;                                                       % normalize by mean intensity, to get df/f
-
-% visualize example frames 
 frameN = numel(frames);
 cmin = min(trace(:)); cmax = max(trace(:));
 fig = figure('Renderer', 'painters', 'Position', [100 100 1000 300]);      
@@ -38,6 +34,7 @@ h = axes(fig,'visible','off');
 c = colorbar(h,'Position',[0.93 0.35 0.01 0.3]);                           % plot color scale bar
 caxis([cmin,cmax]);
 c.Label.String = 'dF/F';
+
 %% load axon morphology data
 load(fullfile(data_folder,'axons\all_cell_with_parents.mat'));             % load singel cell morphology dataset
 load(fullfile(data_folder,'tables',...
@@ -61,6 +58,7 @@ for i = 1:3
         '.', 'Color','r','MarkerSize',12); 
     axis image; axis off;
 end
+
 %% load simultaneous widefield and ephys data 
 T = readtable(fullfile(data_folder, 'tables',...
     'spirals_ephys_sessions.csv'));
@@ -77,7 +75,6 @@ V1 = double(V(1:nVc,~isnan(WF2ephysT1)));
 tt1 = WF2ephysT1(~isnan(WF2ephysT1));
 [MUA_std] = get_MUA_bin(sp,WF2ephysT);                                     % bin spiking data based on widefield T and  sampling rate
 dV1 = double(dV1(1:nVc,~isnan(WF2ephysT1)));                               % now dV1 and MUA_std should have the same length in time dimension
-%
 fig = figure('Renderer', 'painters', 'Position', [100 100 1000 400]); 
 pixelA = [400,250];                                                        % let's look at an example pixel in the left RSP, with 2-8Hz oscillation      
 traceA = squeeze(U(pixelA(1),pixelA(2),1:nVc))'*dV1;                        % reconstruct pixel trace from svd 
