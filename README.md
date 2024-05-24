@@ -2,7 +2,6 @@
 
 ## Description
 This repository contains code for all figures in [Ye et al, 2023b](https://doi.org/10.1101/2023.12.07.570517).
-The core of code is a spiral detection algorithm. 
 
 
 ![Spirals](https://github.com/zhiwen10/YE-et-al-2023-spirals/blob/main/images/spirals.png)
