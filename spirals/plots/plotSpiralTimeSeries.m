@@ -6,7 +6,7 @@ load(fullfile(data_folder,'tables',...
 [maskPath,st] = get_cortex_atlas_path(data_folder);                        % get cortical atlas path and tree
 root1 = '/997/';
 ctx = '/997/8/567/688/';
-%%
+%% load data from an example an session
 mn = 'ZYE_0012';
 td = '2020-10-16';
 tdb = datestr(td,'yyyymmdd');

@@ -1,13 +1,13 @@
 function T = getAxonBiasTable(data_folder,save_folder)
 %% get axon arbor bias for each neuron in sensory region with SVD
-
-% first, define local axon regions, so long range projections are excluded;
+% first, define local axon regions, so that long range projections are excluded;
 % then, do svd on axon terminal positions for each neuron.
 
 % if soma is in VIS or RSP, no restriction;
 % if soma is in auditory cortex, or secondary SS, restrict to within the
 % area, because of cross-modality projections;
-% if soma is in somatosensory cortex, restrict to the large SSp region.
+% if soma is in somatosensory cortex, restrict to the large SSp region, 
+% so that long-range motor projections are excluded.
 %% load singel cell morphology dataset
 load(fullfile(data_folder,'axons\all_cell_with_parents.mat'));
 %% load atlas brain horizontal projection and outline
@@ -19,7 +19,7 @@ av = readNPY(fullfile(data_folder,'tables',...
     'annotation_volume_10um_by_index.npy'));
 BW = logical(projectedAtlas1);
 BW1 = BW(1:8:end,1:8:end);
-%% threshold axon arbor regions by its soma location
+%% define axon arbor search regions by its soma location
 sensory_label = {'VIS','RSP','AUD','TEa','VISa','VISC','VISrl',...
     'SSp-tr','SSp-ll','SSp-ul','SSp-m','SSp-n','SSp-bfd','SSp-un','SSs'};
 sensory_indx = getRegionIndex(sensory_label,st);                           % get all index values in the cortical sensory area

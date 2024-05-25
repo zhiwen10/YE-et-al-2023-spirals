@@ -1,7 +1,8 @@
 function getFFTNSpiralsMap(T,freq,label,data_folder,save_folder)
 %%
 freq_folder = [num2str(freq(1)) '_' num2str(freq(2)) 'Hz'];
-spirals_folder = fullfile(data_folder,'spirals_fftn',freq_folder,label);
+spirals_folder = fullfile(data_folder,'spirals\spirals_fftn',...
+    freq_folder,label);
 %% load atlas brain horizontal projection and outline
 load(fullfile(data_folder,'tables',...
     'isocortex_horizontal_projection_outline.mat'));

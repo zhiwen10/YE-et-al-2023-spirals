@@ -6,7 +6,7 @@ load(fullfile(data_folder,'tables',...
 [maskPath,st] = get_cortex_atlas_path(data_folder);                        % get cortical atlas path and tree
 root1 = '/997/';
 ctx = '/997/8/567/688/';
-%%
+%% load data from an example an session
 mn = 'ZYE_0012';
 td = '2020-10-16';
 tdb = datestr(td,'yyyymmdd');
@@ -43,7 +43,7 @@ Utransformed = Utransformed(1:params.downscale:end,1:params.downscale:end,:);
 mimgtransformed = mimgtransformed(1:params.downscale:end,1:params.downscale:end);
 mimgtransformedRBG = mimgtransformed/max(mimgtransformed(:));
 mimgtransformedRGB = cat(3, mimgtransformedRBG,mimgtransformedRBG,mimgtransformedRBG);
-%%
+%% hilbert transform
 freq = [2,8];
 tStart = 1681; tEnd = 1686; % find spirals between time tStart:tEnd
 frameStart = find(t>tStart,1,'first'); frameEnd = find(t>tEnd,1,'first');
