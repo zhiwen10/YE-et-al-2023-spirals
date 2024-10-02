@@ -1,4 +1,4 @@
-function getTaperPowerMap(T,data_folder,save_folder)
+function getTaperPowerMap2(T,data_folder,save_folder)
 %% load atlas brain horizontal projection and outline
 load(fullfile(data_folder,'tables',...
     'isocortex_horizontal_projection_outline.mat'));                       % 10um resolution
@@ -11,7 +11,8 @@ params.pad=0;
 for kk = 1:size(T,1)
     clearvars -except T formatOut tdAll enAll enexpAll kk ...
         pixSize coords st projectedTemplate2 session_all ...
-        sesion_total folder params projectedTemplate1 data_folder
+        sesion_total folder params projectedTemplate1 ...
+        data_folder save_folder
     mn = T.MouseID{kk};
     tda = T.date(kk);
     en = T.folder(kk);    
@@ -47,7 +48,7 @@ for kk = 1:size(T,1)
     J1 = reshape(J1,size(J1,1),nTaper,nV,trialN);
     J1 = permute(J1,[3,1,2,4]);
     J1 = reshape(J1,nV,numel(f1)*nTaper*trialN);
-    U1 = U(1:8:end,1:8:end,:);
+    U1 = U(1:8:end,1:8:end,:)./mimg(1:8:end,1:8:end);
     Ur = reshape(U1,size(U1,1)*size(U1,2),size(U1,3));
     Jpixel = Ur*J1;
     Spixel = conj(Jpixel).*Jpixel;
@@ -61,9 +62,6 @@ for kk = 1:size(T,1)
     psdxMeanTransformed = imwarp(SpixelMean1,tform,...
         'OutputView',imref2d(size(projectedTemplate1))); 
     freq = f1;
-    imax = max(psdxMeanTransformed(:));
-    imin = min(psdxMeanTransformed(:));
-    plotN = size(psdxMeanTransformed,3);
-    save(fullfile(save_folder,[fname '_fftSpectrum']),...
+    save(fullfile(save_folder,[fname '_fftSpectrum2']),...
         'psdxMeanTransformed','freq');
 end

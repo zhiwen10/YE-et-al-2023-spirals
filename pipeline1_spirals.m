@@ -2,7 +2,7 @@ githubdir = 'C:\Users\Steinmetz lab\Documents\git';                        % fol
 addpath(genpath(fullfile(githubdir, 'npy-matlab')));                       % https://github.com/kwikteam/npy-matlab
 addpath(genpath('C:\Users\Steinmetz lab\Documents\MATLAB\colorcet'));
 addpath(genpath('C:\Users\Steinmetz lab\Documents\MATLAB\cbrewer2'));
-addpath(genpath(fullfile(githubdir, 'YE-et-al-2023-spirals-test')));       % paper repository
+addpath(genpath(fullfile(githubdir, 'YE-et-al-2023-spirals')));       % paper repository
 %% load session table
 data_folder = 'E:\spiral_data_share\data';     
 figure_folder = 'E:\spiral_data_share\figures';
@@ -24,8 +24,8 @@ save_folder = fullfile(data_folder, 'spirals\spirals_density');
 getSpiralDensityMap(T,data_folder,save_folder);                            % calculate spiral density               
 getSpiralsDensityLine(T,data_folder,save_folder);                          % calculate sprial density lines
 %% Extended Data Fig.1c
-save_folder = fullfile(data_folder, 'spirals\spirals_power_spectrum');      
-getTaperPowerMap(T,data_folder,save_folder);                               % calculate tapered power spectrum
+save_folder = fullfile(data_folder, 'spirals\spirals_power_spectrum2');      
+getTaperPowerMap2(T,data_folder,save_folder);                               % calculate tapered power spectrum
 %% Extended Data Fig.3 
 freq = [2,8]; label1 = 'control'; label2 = 'fftn';
 save_folder = fullfile(data_folder, 'spirals\spirals_fftn');

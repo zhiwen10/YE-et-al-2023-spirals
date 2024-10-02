@@ -92,7 +92,8 @@ for k = 1:frames
     
     ax4 = subplottight(4,col,frames+k);
     im_phase = imagesc(tracePhase1(:,:,frame));
-    colormap(ax4,colorcet('C06'))
+    colormap(ax4,colorcet('C06'));
+    
     axis image; axis off;
     set(im_phase, 'AlphaData', BW2, 'AlphaDataMapping', 'scaled');
     hold on;

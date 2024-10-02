@@ -1,4 +1,5 @@
-function getSpiralDensityMap(T,data_folder,save_folder)
+function getSpiralDensityMap_freq(T,freq,data_folder,save_folder)
+freq_folder = [num2str(freq(1)) '_' num2str(freq(2)) 'Hz'];
 %% load atlas brain horizontal projection and outline
 load(fullfile(data_folder,'tables','horizontal_cortex_atlas_50um.mat'));
 load(fullfile(data_folder,'tables',...
@@ -23,8 +24,8 @@ for kk = 1:size(T,1)
     tdb = datestr(tda,'yyyymmdd');
     %%
     fname = [mn '_' tdb '_' num2str(en)];
-    load(fullfile(data_folder,'spirals\spirals_grouping',...
-        [fname '_spirals_group_fftn.mat']));
+    load(fullfile(data_folder,'spirals\spirals_freq\spirals_fftn',...
+        freq_folder,[fname '_spirals_group_fftn.mat']));
     load(fullfile(data_folder,'spirals\rf_tform',[fname '_tform.mat']));
     %%
     t = readNPY(fullfile(data_folder,'spirals\svd',fname,...
@@ -48,4 +49,4 @@ spirals_all = spirals_all(lia,:);
 hist_bin = 40;
 [unique_spirals,scolor,low_color_bound,high_color_bound] = ...
     density_color_plot(spirals_all,hist_bin);
-save(fullfile(save_folder,['histogram_40pixels.mat']), 'unique_spirals');
+save(fullfile(save_folder,['histogram_' freq_folder '.mat']), 'unique_spirals');

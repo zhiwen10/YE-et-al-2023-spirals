@@ -68,13 +68,13 @@ points = [xq',round(vq)'];
 hold on;
 scatter(points(:,1),points(:,2),8,'g','filled');
 % interp histgram counts 
-F = scatteredInterpolant(unique_spirals(:,1),unique_spirals(:,2),unique_spirals_unit );
-xx = 1:1140; yy = 1:1320;
-[xxq,yyq] = meshgrid(xx,yy);
-vq1 = F(xxq,yyq);
-for i = 1:size(points,1)
-    count_sample(i,1) = vq1(points(i,2),points(i,1));
-end
+% F = scatteredInterpolant(unique_spirals(:,1),unique_spirals(:,2),unique_spirals_unit );
+% xx = 1:1140; yy = 1:1320;
+% [xxq,yyq] = meshgrid(xx,yy);
+% vq1 = F(xxq,yyq);
+% for i = 1:size(points,1)
+%     count_sample(i,1) = vq1(points(i,2),points(i,1));
+% end
 subplot(1,2,2);
 points1 = points-points(1,:);
 points_line = vecnorm(points1,2,2);
