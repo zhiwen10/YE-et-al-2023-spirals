@@ -122,5 +122,6 @@ xticks(log_freq_value);
 xticklabels({'0.5','2','4','6','8','10'});
 xlabel('log10(Frequency)');
 ylabel('log10(Power) (df/f^2)');
+%%
 print(h3, fullfile(save_folder,['SSp_fft_mean']),...
     '-dpdf', '-bestfit', '-painters');

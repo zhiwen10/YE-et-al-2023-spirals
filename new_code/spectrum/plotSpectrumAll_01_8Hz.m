@@ -51,6 +51,7 @@ for kk = 1:size(T,1)
         title(nameList2(i),'Interpreter','None');
     end
 end
+%%
 print(h2, fullfile(save_folder,'fft_all'),'-dpdf', '-bestfit', '-painters');
 close all;
 %%

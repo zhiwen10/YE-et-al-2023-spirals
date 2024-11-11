@@ -65,6 +65,7 @@ for radius = 1:10
     end
     ylim([0,2.5]);
 end
+%%
 print(hs3d, fullfile(save_folder,...
     ['FigS3d_spirals_across_session_' freq_name '.pdf']),...
     '-dpdf', '-bestfit', '-painters');
@@ -111,6 +112,7 @@ hold off
 ylim([-100 500]);
 xlabel('Radius');
 ylabel('Percentage change (%)');
+%%
 print(hs3e, fullfile(save_folder,...
     ['FigS3e_spirals_change_across_session_' freq_name '.pdf']), ...
     '-dpdf', '-bestfit', '-painters');

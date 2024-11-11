@@ -163,8 +163,8 @@ scale3 = 5/8;
 lineColor = 'k'; lineColor1 = 'w';
 hemi = 'left';
 hold on;
-plotOutline(maskPath(4),st,atlas1,hemi,scale3,lineColor1);
-plotOutline(maskPath(5),st,atlas1,hemi,scale3,lineColor1);
+plotOutline(maskPath(4),st,atlas1,he
+s1,hemi,scale3,lineColor1);
 plotOutline(maskPath(6:11),st,atlas1,hemi,scale3,lineColor1);
 plotOutline(maskPath(4:11),st,atlas1,hemi,scale3,lineColor);
 set(gca,'Ydir','reverse')

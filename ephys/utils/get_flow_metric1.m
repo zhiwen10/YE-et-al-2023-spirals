@@ -10,6 +10,7 @@ for i = 1:numel(edges)-1
     indx1{i} = a;
     %%
     if not(isempty(a))
+        
         phase_alpha = tracePhase1_raw(indx1{i},:,:);
         phase_alpha(isnan(phase_alpha(:))) = [];
         phase_beta = tracePhase1_pred(indx1{i},:,:);

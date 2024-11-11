@@ -30,5 +30,13 @@ xlim([0,180]);
 xticks =  [0,45,90,135,180];
 xticklabels = {'0','1/4*pi','1/2*pi','3/4*pi','pi'};
 %%
+[angle_diff_real,angle_diff_perm,edges,N1,N_rp] = getAngleHistogramStats(T);
+[h mu ul ll] = circ_mtest(angle_diff_real,deg2rad(90));
+mean_rad = [mu,ll,ul];
+mean_deg = rad2deg(mean_rad);
+% for i = 1:100
+%     [p(i)]=watsons_U2_perm_test(angle_diff_real,angle_diff_perm(i,:),100); % good
+% end
+%%
 print(h2d, fullfile(save_folder,'Fig2d_axon_bias_histogram.pdf'),...
     '-dpdf', '-bestfit', '-painters');

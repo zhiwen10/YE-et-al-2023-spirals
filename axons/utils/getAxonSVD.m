@@ -32,6 +32,7 @@ for icell = 1:cell_n
     S_diag(:,icell) = diag(S);
     axon_vector(icell,:) = [U(1,1),U(2,1)];
     angle1(icell,1) = round(rad2deg(atan(U(2,1)/U(1,1))))+1;
+    angle1(angle1>90) = 90; % one cell came out at 91, let's round it to 90 for color interpolation;
     % plot(soma_center(1),soma_center(2),'.','MarkerFaceColor',color2(angle1,:),'MarkerSize',16)
 end
 polarity = S_diag(1,:)./S_diag(2,:)-1;

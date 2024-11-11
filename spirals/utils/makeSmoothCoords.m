@@ -5,8 +5,8 @@ ii = 1;coordsInd = 1;
 buff = 10;
 while ii<size(c,2)
     n = c(2,ii);
-    % if n>80
-    if n>50
+    if n>80
+    % if n>50
         x = c(1,ii+1:ii+n);
         y = c(2,ii+1:ii+n);
         x = [x(end-buff:end) x x(1:buff)]; % buffer makes ends meet

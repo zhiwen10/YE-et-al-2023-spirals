@@ -157,6 +157,6 @@ xline(sum_dot1);
 text(1,120,num2str(p2));
 text(1,130,num2str(sum_dot1));
 ylim([0,150]);
-
+%%
 print(h2df, fullfile(save_folder,'Fig2df_axon_flow_match.pdf'),...
     '-dpdf', '-bestfit', '-painters');

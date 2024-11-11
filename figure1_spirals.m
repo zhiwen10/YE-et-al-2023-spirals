@@ -19,7 +19,7 @@ close all;
 %% Extented Data Fig.1
 save_folder = fullfile(figure_folder, 'FigS1');
 hs1ab = plotExampleOscillation(data_folder,save_folder);                   % plot example horizontal view and time series 
-hs1c = plotPowerSpectrum(T,data_folder,save_folder);                       % plot mean power map across 15 sessions
+hs1c2 = plotPowerSpectrum2(T,data_folder,save_folder);                       % plot mean power map across 15 sessions
 [hs1d,hs1e] = plotExampleSpiral2(T,data_folder,save_folder);               % plot LK_0003 example spirals
 [hs1f,hs1g] = plotExampleSpiral3(T,data_folder,save_folder);               % plot ZYE_0067 example spirals
 close all;
