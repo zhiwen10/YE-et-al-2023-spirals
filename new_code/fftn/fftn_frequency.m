@@ -18,7 +18,6 @@ getFFTNSpiralsStats(T,freq,label2,data_folder,save_folder);                % spr
 % Extended Data Fig.3
 save_folder = fullfile(figure_folder, 'Fig_fftn');
 hs3c = plotMapDataVsFftn(data_folder,save_folder,freq);                    % plot density map (combine all sessions) for data and 3d-fft
-
 [hs3d,hs3e] = plotScatterDataVsFftn(T,data_folder,save_folder,freq);       % plot peak desnity across sessions for data and 3d-fft
 close all;
 %%
@@ -29,33 +28,6 @@ for ifreq = 1
     save_folder = fullfile(data_folder, ...
         'spirals\spirals_freq\spirals_scrambled',freq_folder);
     getSpiralGroupingScrambled_freq(T,freq,data_folder,save_folder);      
-end
-%%
-freqs = [0.2 0.5;0.5,1;1,2];
-save_folder = fullfile(data_folder,'spirals\spirals_freq','spirals_fftn');
-for ifreq = 1
-    freq = freqs(ifreq,:);
-    freq_folder = [num2str(freq(1)) '_' num2str(freq(2)) 'Hz'];
-    save_folder1 = fullfile(save_folder, freq_folder);
-    mkdir(save_folder1);
-    for kk = 1:size(T,1)
-        mn = T.MouseID{kk};
-        tda = T.date(kk);
-        en = T.folder(kk);
-        td = datestr(tda,'yyyy-mm-dd');
-        tdb = datestr(tda,'yyyymmdd');
-        %% load raw detected spirals
-        fname = [mn '_' tdb '_' num2str(en)];
-        load(fullfile(data_folder,'spirals\spirals_freq\raw',...
-            freq_folder,[fname '_spirals_all.mat']));
-        filteredSpirals = pwAll(pwAll(:,3)>=40,:);                             % only use sprials with radius >40 pixels, based on 3d-fft
-        %% temporal grouping
-        filteredSpirals =unique(filteredSpirals, 'rows');                      % get rid of duplication, in case any
-        filteredSpirals = sortrows(filteredSpirals,5);                         % sort based on frame number
-        [archiveCell,test_stats] = getGroupingAlgorithm(filteredSpirals);       % main grouping algorithm
-        save(fullfile(save_folder1,[fname '_spirals_group_fftn.mat']),...       % save all archived Cells  
-            'archiveCell');
-    end
 end
 %% spirals grouping in frame scrambled data, 10x
 save_folder = fullfile(data_folder, 'spirals\spirals_freq\spirals_duration');
@@ -117,7 +89,7 @@ end
 %% spirals raw vs fftn
 save_folder = fullfile(figure_folder, 'Fig_fftn');
 freqs = [0.1 0.2;0.5 2; 2 8];
-for i = 3
+for i = 1
     freq = freqs(i,:);
     save_folder = fullfile(figure_folder, 'Fig_fftn');
     % hs3c = plotMapDataVsFftn(data_folder,save_folder,freq);                    % plot density map (combine all sessions) for data and 3d-fft

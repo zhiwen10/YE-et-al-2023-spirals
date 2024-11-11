@@ -1,4 +1,4 @@
-function hr1a = plotExamplePlaneWaveSeries2(data_folder,save_folder)
+function hr2a = plotExamplePlaneWaveSeries2(data_folder,save_folder)
 %% load atlas brain horizontal projection and outline
 load(fullfile(data_folder,'tables','horizontal_cortex_atlas_50um.mat'));
 load(fullfile(data_folder,'tables',...
@@ -74,7 +74,7 @@ tracePhase1t = permute(tracePhase1t,[3,1,2]);
 % hold on;
 % plot(0:1/35:(numel(traceAmpt3t)-1)/35,vxy_sync,'k');
 %%
-hr1a = figure('Renderer', 'painters', 'Position', [50 50 900 400]);
+hr2a = figure('Renderer', 'painters', 'Position', [50 50 900 400]);
 frame = 5;
 lineColor = 'k';
 hemi = [];
@@ -152,5 +152,5 @@ for i = 1:10
     ax4(i).Position(4) = ax4(i).Position(4)-0.025;
 end
 %%
-print(hr1a, fullfile(save_folder,'FigR1a_example_plane_wave.pdf'),...
+print(hr2a, fullfile(save_folder,'FigR2a_example_plane_wave.pdf'),...
     '-dpdf', '-bestfit', '-painters');

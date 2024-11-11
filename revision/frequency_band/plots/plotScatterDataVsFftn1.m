@@ -1,4 +1,4 @@
-function [hs3d,hs3e] = plotScatterDataVsFftn(T,data_folder,save_folder,freq)
+function [hr1a,hr1b] = plotScatterDataVsFftn1(T,data_folder,save_folder,freq)
 %%
 freq_name = [num2str(freq(1)) '_' num2str(freq(2)) 'Hz'];
 local_data_folder = fullfile(data_folder,...
@@ -8,9 +8,7 @@ control_data_folder = fullfile(local_data_folder,...
 fftn_data_folder = fullfile(local_data_folder,...
     freq_name,'fftn_stats');
 %%
-% color1 = cbrewer2('seq','Reds',15);
 color1 = 'k';
-%%
 ssp_index = get_ssp_index(data_folder);
 %%
 pixSize = 0.01; % mm/pix
@@ -48,7 +46,7 @@ for kk = 1:size(T,1)
     end
 end
 %%
-hs3d = figure;
+hr1a = figure;
 for radius = 1:10
     subplot(1,10,radius)
     control_all = squeeze(count_sample_control(:,radius));
@@ -69,8 +67,8 @@ for radius = 1:10
     ylim([0,2.5]);
 end
 %%
-print(hs3d, fullfile(save_folder,...
-    ['FigS3d_spirals_across_session_' freq_name '.pdf']),...
+print(hr1a, fullfile(save_folder,...
+    ['FigR1a_spirals_across_session_' freq_name '.pdf']),...
     '-dpdf', '-bestfit', '-painters');
 %%
 for radius = 1:10
@@ -98,7 +96,7 @@ x_point = normrnd(0,0.1,[1,15]);
 scatter_x = repmat([1:10],15,1);
 scatter_x = scatter_x+repmat(x_point',1,10);
 %%
-hs3e = figure;
+hr1b = figure;
 % scatter(scatter_x,percentage_change*100,6,'k','filled');
 for radius = 1:10
     scatter(scatter_x(:,radius),percentage_change(:,radius)*100,6,color1,'filled');
@@ -116,7 +114,7 @@ ylim([-100 500]);
 xlabel('Radius');
 ylabel('Percentage change (%)');
 %%
-print(hs3e, fullfile(save_folder,...
-    ['FigS3e_spirals_change_across_session_' freq_name '.pdf']), ...
+print(hr1b, fullfile(save_folder,...
+    ['FigR1b_spirals_change_across_session_' freq_name '.pdf']), ...
     '-dpdf', '-bestfit', '-painters');
 end

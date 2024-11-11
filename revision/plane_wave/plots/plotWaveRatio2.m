@@ -1,4 +1,4 @@
-function hr1c = plotWaveRatio2(data_folder,save_folder)
+function hr2c = plotWaveRatio2(data_folder,save_folder)
 %% load plane wave index
 load(fullfile(data_folder,'revision','plane_wave','flow_mirror_all.mat'));
 vxy_all = cat(3,vxy_MO_left,vxy_MO_right,vxy_SSp_left,vxy_SSp_right);
@@ -56,7 +56,7 @@ mean_g8b_plane = mean(ratio_new);
 std_g8b_plane = std(ratio_new);
 sem_g8b_plane = std_g8b_plane./sqrt(4);
 %%
-hr1c = figure('Renderer', 'painters', 'Position', [50 50 250 250]);
+hr2c = figure('Renderer', 'painters', 'Position', [50 50 250 250]);
 ax3 = subplot(1,1,1); 
 scatter(ratio(1:11),spiral_peak_ratio(1:11),[],'k');
 hold on;
@@ -88,5 +88,5 @@ yticklabels({'0','4%','8%','12%','16%'});
 [hh1,spiral_p1] = ttest2(spiral_peak_ratio(1:11),spiral_peak_ratio(12:15));
 [hh2,spiral_p2] = ttest2(spiral_peak_ratio(1:11),spiral_peak_ratio_new);
 %%
-print(hr1c, fullfile(save_folder,'FigR1c_wave_ratio.pdf'),...
+print(hr2c, fullfile(save_folder,'FigR2c_wave_ratio.pdf'),...
     '-dpdf', '-bestfit', '-painters');

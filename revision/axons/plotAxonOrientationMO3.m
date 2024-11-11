@@ -1,4 +1,4 @@
-function [hr2,p] = plotAxonOrientationMO3(data_folder,save_folder)
+function [hr3,p] = plotAxonOrientationMO3(data_folder,save_folder)
 %%
 load(fullfile(data_folder,'tables',...
     'isocortex_horizontal_projection_outline.mat'));                       % 10um resolution
@@ -11,7 +11,7 @@ scale1 = 15;
 color1= colorcet('C06','N',12);
 color2= colorcet('C06','N',180);
 %%
-hr2 = figure('Renderer', 'painters', 'Position', [100 100 800 500]);
+hr3 = figure('Renderer', 'painters', 'Position', [100 100 800 500]);
 T1 = readtable(fullfile(data_folder,'Revision','axons','Axon_bias_all_cells_MO2.csv'));
 ax1 = subplot(2,4,1);
 x1 = linspace(-90,90,180);
@@ -240,5 +240,5 @@ for i = 1
     [p(i)]=watsons_U2_perm_test(angle_diff_real,angle_diff_perm(i,:),100); % good
 end
 %%
-print(hr2, fullfile(save_folder,'FigR2_circularbias_MO.pdf'),...
+print(hr3, fullfile(save_folder,'FigR3_circularbias_MO.pdf'),...
     '-dpdf', '-bestfit', '-painters');

@@ -1,4 +1,4 @@
-function hr1d = plotExamplePlaneWave(data_folder,save_folder)
+function hr2d = plotExamplePlaneWave(data_folder,save_folder)
 %% load atlas brain horizontal projection and outline
 load(fullfile(data_folder,'tables','horizontal_cortex_atlas_50um.mat'));
 load(fullfile(data_folder,'tables',...
@@ -53,7 +53,7 @@ Ut = imwarp(U1(:,:,1:50),tform,'OutputView',imref2d(size(BW1)));
 [~,traceAmp1t,tracePhase1t] = spiralPhaseMap_freq(Ut,dV(1:50,epoch),t,params,freq,rate);
 tracePhase1t = permute(tracePhase1t,[3,1,2]);
 %%
-hr1d = figure('Renderer', 'painters', 'Position', [50 50 900 700]);
+hr2d = figure('Renderer', 'painters', 'Position', [50 50 900 700]);
 frame = 11;
 lineColor = 'k';
 hemi = [];
@@ -97,5 +97,5 @@ for kk = 1:4
     set(gca,'Ydir','reverse')
     axis image; axis off;
 end
-print(hr1d, fullfile(save_folder,'FigR1d_wave_symmetry_example.pdf'),...
+print(hr2d, fullfile(save_folder,'FigR2d_wave_symmetry_example.pdf'),...
     '-dpdf', '-bestfit', '-painters');
