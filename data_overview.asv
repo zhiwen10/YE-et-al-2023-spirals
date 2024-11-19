@@ -31,8 +31,9 @@ h = axes(fig,'visible','off');
 c = colorbar(h,'Position',[0.93 0.35 0.01 0.3]);                           % plot color scale bar
 caxis([cmin,cmax]);
 c.Label.String = 'dF/F';
+
 %% load axon morphology data
-load(fullfile(data_folder,'axons','all_cell_with_parents.mat'));             % load singel cell morphology dataset
+load(fullfile(data_folder,'axons\all_cell_with_parents.mat'));             % load singel cell morphology dataset
 load(fullfile(data_folder,'tables',...
     'isocortex_horizontal_projection_outline.mat'));                       % load 10um resolution atlas horizontal view outlines 
 id = [82,806,799];                                                         % let's take a look at these 3 random cells
@@ -96,12 +97,12 @@ load(fullfile(data_folder,'task','task_outcome',...
 load(fullfile(data_folder,'task','task_outcome',...
     [mn '_task_trial_ID.mat']));                                           % load session id idnex for all trials in ZYE_0085
 T_session = readtable(fullfile(data_folder,...
-    'task','sessions',[mn '.xlsx']));                                      % table for all sessions in ZYE_0085
+    'task','sessions',[mn '.xlsx']));                                      % table for all sessions
 T1 = T_session(T_session.label == "task",:);
-T1 = T1((T1.hit_left>0.7 & T1.hit_right>0.7),:);                           % get a list of active task sessions in ZYE_0085
-session = 6;                                                               
-trial_session = trial_all(trial_all.session == session,:);                 % take a look at all trials in session NO.6
-trial_indx = 576;                                                          
-trial_session(trial_indx,:)                                                % take a look at trial 576 in session 6
-h1 = plotWfMapSingleTrial(data_folder,T1,session,trial_indx);              % plot widefield maps of this trial
-h2 = plotWfTraceSingleTrial(data_folder,T1,session,trial_indx);            % plot pixle traces of this trial
+T1 = T1((T1.hit_left>0.7 & T1.hit_right>0.7),:);                           % get a list of active task session
+session = 6;
+trial_session = trial_all(trial_all.session == session,:);
+trial_indx = 576;  
+trial_session(trial_indx,:)
+h1 = plotWfMapSingleTrial(data_folder,T1,session,trial_indx);
+h2 = plotWfTraceSingleTrial(data_folder,T1,session,trial_indx);
