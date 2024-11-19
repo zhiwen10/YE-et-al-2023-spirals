@@ -24,6 +24,8 @@ Part1/3: https://doi.org/10.6084/m9.figshare.25884259
 
 Part2/3: https://doi.org/10.6084/m9.figshare.25884280
 
+Part3/3: https://doi.org/10.6084/m9.figshare.27850542
+
 In total, 3 parts together require 71 GB disk space after unzipping.
 After downloading and unzipping both repositories, place all 7 subfolders under a root data folder:
 `axons`, `ephys`, `revision`, `spirals`, `spirals_mirror`, `tables`, `ephys`, `task`.
