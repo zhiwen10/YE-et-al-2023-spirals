@@ -1,6 +1,6 @@
 %%
 function h1fg = plotSpiralSpeedSummary(T,data_folder,save_folder)
-load(fullfile(data_folder,'spirals\spirals_speed','speed_all.mat'));
+load(fullfile(data_folder,'spirals','spirals_speed','speed_all.mat'));
 %%
 angular_all = [];
 distance_all = [];

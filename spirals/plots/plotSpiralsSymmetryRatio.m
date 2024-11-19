@@ -1,6 +1,6 @@
 function hs7ef = plotSpiralsSymmetryRatio(T, data_folder, save_folder)
 %%
-load(fullfile(data_folder,'spirals\spirals_symmetry','roiSelection.mat'));
+load(fullfile(data_folder,'spirals','spirals_symmetry','roiSelection.mat'));
 for kk = 1:15
     %%
     clear spiralsT 
@@ -11,9 +11,9 @@ for kk = 1:15
     tdb = datestr(tda,'yyyymmdd');
     %%
     fname = [mn '_' tdb '_' num2str(en)];
-    load(fullfile(data_folder,'spirals\spirals_grouping',...
+    load(fullfile(data_folder,'spirals','spirals_grouping',...
         [fname '_spirals_group_fftn.mat']));                               % load spiral centers (>40 pixels radius)
-    load(fullfile(data_folder,'spirals\rf_tform',[fname '_tform.mat']));           % load atlas transformation matrix tform
+    load(fullfile(data_folder,'spirals','rf_tform',[fname '_tform.mat']));           % load atlas transformation matrix tform
     %%
     spiral_duration = cellfun(@(x) size(x,1), archiveCell);
     indx2 = (spiral_duration>=2);

@@ -4,8 +4,8 @@ mn = 'ZYE_0020';
 td = '2021-03-26';
 en = 1; imec = 0; probeName = 'p1';
 % save lowpass filtered and dowsampled LFP data to ops.fproc1
-load(fullfile(data_folder,'spirals\spirals_LFP','params.mat'));
-ops.fproc1 = fullfile(data_folder,'spirals\spirals_LFP',...
+load(fullfile(data_folder,'spirals','spirals_LFP','params.mat'));
+ops.fproc1 = fullfile(data_folder,'spirals','spirals_LFP',...
     'filtered_lfp_imec0.dat');
 % total number of good channels that we will spike sort
 %% check downsampled data with raw ephys data

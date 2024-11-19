@@ -1,6 +1,6 @@
 function h9gj = plotSpeedForRadius(radius,data_folder,save_folder)
 %%
-load(fullfile(data_folder,'spirals\spirals_speed',...
+load(fullfile(data_folder,'spirals','spirals_speed',...
     ['speed_' num2str(radius) 'pixels.mat']));
 %%
 mean_angle = mean(angular_velocity_all);

@@ -37,10 +37,10 @@ V1 = double(V(1:50,~isnan(WF2ephysT1)));
 dV1 = double(dV1(1:50,:));
 %%
 fname = [ops.mn '_' ops.tdb '_' num2str(ops.en)];
-tf = load(fullfile(data_folder,'ephys\rf_tform',[fname '_tform']));
-load(fullfile(data_folder,'ephys\spirals_example',[fname '_mask.mat']));
+tf = load(fullfile(data_folder,'ephys','rf_tform',[fname '_tform']));
+load(fullfile(data_folder,'ephys','spirals_example',[fname '_mask.mat']));
 fname1 = [ops.mn '_' ops.tdb '_' num2str(ops.en) '_tform_4x'];
-tf4 = load(fullfile(data_folder,'ephys\rf_tform_4x',fname1));
+tf4 = load(fullfile(data_folder,'ephys','rf_tform_4x',fname1));
 predict_folder = fullfile(data_folder,'ephys','dv_prediction');
 load(fullfile(predict_folder,[fname '_dv_predict.mat']));
 %%

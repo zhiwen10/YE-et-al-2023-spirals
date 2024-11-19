@@ -86,7 +86,7 @@ BW_empty = zeros(size(projectedAtlas1(1:scale:end,1:scale:end)));
 BW_MO = BW_empty; BW_MO(indexMO) =1;
 BW_SSp = BW_empty; BW_SSp(indexSSp) =1;
 %% MO
-load(fullfile(data_folder,'spirals_mirror\regression_kernels',...
+load(fullfile(data_folder,'spirals_mirror','regression_kernels',...
     'kernelMaps_allSessions_AP.mat'));
 %%
 hs11a = figure('Renderer', 'painters', 'Position', [100 100 600 800]);
@@ -152,7 +152,7 @@ end
 print(hs11a, fullfile(save_folder,'FigS11a_map_AP.pdf'),...
     '-dpdf', '-bestfit', '-painters');
 %% LEFT TO RIGHT
-load(fullfile(data_folder,'spirals_mirror\regression_kernels',...
+load(fullfile(data_folder,'spirals_mirror','regression_kernels',...
     'kernelMaps_allSessions_hemi.mat'));
 hs11b = figure('Renderer', 'painters', 'Position', [100 100 600 800]);
 axx4 = subplot(4,4,1);

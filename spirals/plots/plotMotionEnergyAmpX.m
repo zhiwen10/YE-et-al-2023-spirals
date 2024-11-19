@@ -45,8 +45,8 @@ for kk = [1:6,9:15]
     tdb = datestr(tda,'yyyymmdd');
     fname = [mn '_' tdb '_' num2str(en)];
     %%
-    load(fullfile(data_folder,'spirals\spirals_index',[fname '_amp']));
-    load(fullfile(data_folder,'spirals\spirals_index',[fname '_motion_energy']));
+    load(fullfile(data_folder,'spirals','spirals_index',[fname '_amp']));
+    load(fullfile(data_folder,'spirals','spirals_index',[fname '_motion_energy']));
     tsize = min(size(traceAmp_mean,1), size(image_energy2,1));
     traceAmp_mean = traceAmp_mean(1:tsize,1); 
     image_energy2 = image_energy2(1:tsize,1);

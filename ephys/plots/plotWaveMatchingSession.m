@@ -5,7 +5,7 @@ area{2} = 'STR';
 area{3} = 'CORTEX';
 area{4} = 'MB';
 %%
-rfolder = fullfile(data_folder,'ephys\flow_var');
+rfolder = fullfile(data_folder,'ephys','flow_var');
 %%
 color1 = {'g','r','m'};
 sig_ratio = cell(3,1);

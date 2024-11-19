@@ -5,7 +5,7 @@ load(fullfile(data_folder,'tables',...
 pixSize = 0.01;                                                            % mm/pix
 pixArea = pixSize^2;
 %%
-load(fullfile(data_folder,'spirals\spirals_density_duration',...
+load(fullfile(data_folder,'spirals','spirals_density_duration',...
     'frame_total.mat'));
 radius = 40:10:100;
 hist_bin = 40;
@@ -14,7 +14,7 @@ hs6ab = figure('Renderer', 'painters', 'Position', [100 100 1300 700]);
 for k  = 1:7
     clear unique_spiral_unit
     radius_i = radius(k);
-    load(fullfile(data_folder,'spirals\spirals_density_radius',...
+    load(fullfile(data_folder,'spirals','spirals_density_radius',...
         ['histogram_' num2str(radius_i) 'radius.mat']));                   % load histogtam counts
     unique_spirals_unit = unique_spirals(:,3)/(hist_bin*hist_bin*pixArea); % spiral counts/mm^2
     unique_spirals_unit = unique_spirals_unit./frame_total*35;             % spirals/(mm^2*s)

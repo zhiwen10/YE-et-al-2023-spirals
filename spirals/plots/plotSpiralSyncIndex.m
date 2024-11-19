@@ -11,12 +11,12 @@ td = datestr(tda,'yyyy-mm-dd');
 tdb = datestr(tda,'yyyymmdd');
 fname = [mn '_' tdb '_' num2str(en)];
 subfolder = [mn '_' tdb '_' num2str(en)];
-session_root = fullfile(data_folder,'spirals\svd',subfolder);
+session_root = fullfile(data_folder,'spirals','svd',subfolder);
 [U,V,t,mimg] = loadUVt1(session_root); 
 dV = [zeros(size(V,1),1) diff(V,[],2)];
 %%
-load(fullfile(data_folder,'spirals\rf_tform',[fname '_tform.mat']));               % load atlas transformation matrix tform;
-load(fullfile(data_folder,'spirals\spirals_index',[fname '_motion_energy.mat']));
+load(fullfile(data_folder,'spirals','rf_tform',[fname '_tform.mat']));               % load atlas transformation matrix tform;
+load(fullfile(data_folder,'spirals','spirals_index',[fname '_motion_energy.mat']));
 %%
 sizeTemplate = [1320,1140];
 mimgt = imwarp(mimg,tform,'OutputView',imref2d(sizeTemplate));
@@ -34,9 +34,9 @@ mimgtransformed = mimgtransformed(1:params.downscale:end,1:params.downscale:end)
 BW = logical(projectedAtlas1);
 BW = BW(1:params.downscale:end,1:params.downscale:end);
 %%
-load(fullfile(data_folder,'spirals\spirals_grouping',...
+load(fullfile(data_folder,'spirals','spirals_grouping',...
     [fname '_spirals_group_fftn.mat']));                                   % load spiral centers (>40 pixels radius)
-load(fullfile(data_folder,'spirals\rf_tform',[fname '_tform.mat']));               % load atlas transformation matrix tform
+load(fullfile(data_folder,'spirals','rf_tform',[fname '_tform.mat']));               % load atlas transformation matrix tform
 spiral_duration = cellfun(@(x) size(x,1), archiveCell);
 indx2 = (spiral_duration>=15);
 groupedCells = archiveCell(indx2);

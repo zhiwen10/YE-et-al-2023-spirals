@@ -24,9 +24,9 @@ area{2} = 'STR';
 area{3} = 'CORTEX';
 area{4} = 'MB';
 %%
-prediction_folder = fullfile(data_folder,'ephys\dv_prediction');
-roi_folder = fullfile(data_folder,'ephys\roi');
-regist_folder = fullfile(data_folder,'ephys\rf_tform_4x');
+prediction_folder = fullfile(data_folder,'ephys','dv_prediction');
+roi_folder = fullfile(data_folder,'ephys','roi');
+regist_folder = fullfile(data_folder,'ephys','rf_tform_4x');
 %%
 scale = 1;
 scale3 = 5/scale;

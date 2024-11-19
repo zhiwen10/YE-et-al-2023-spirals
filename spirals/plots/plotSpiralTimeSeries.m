@@ -12,7 +12,7 @@ td = '2020-10-16';
 tdb = datestr(td,'yyyymmdd');
 en = 5;
 subfolder = [mn '_' tdb '_' num2str(en)];
-session_root = fullfile(data_folder,'spirals\svd',subfolder);
+session_root = fullfile(data_folder,'spirals','svd',subfolder);
 [U,V,t,mimg] = loadUVt1(session_root);                                     % load U,V, t
 dV = [zeros(size(V,1),1) diff(V,[],2)];
 load(fullfile(data_folder,'tables','mask_ZYE12.mat'));

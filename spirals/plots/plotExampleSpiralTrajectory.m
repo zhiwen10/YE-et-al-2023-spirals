@@ -44,8 +44,8 @@ td = datestr(tda,'yyyy-mm-dd');
 tdb = datestr(tda,'yyyymmdd');
 fname = [mn '_' tdb '_' num2str(en)];
 
-load(fullfile(data_folder,'spirals\rf_tform',[fname '_tform.mat']));
-load(fullfile(data_folder,'spirals\spirals_grouping',...
+load(fullfile(data_folder,'spirals','rf_tform',[fname '_tform.mat']));
+load(fullfile(data_folder,'spirals','spirals_grouping',...
     [fname '_spirals_group_fftn.mat']));
 %%
 clear indx2 groupedCells

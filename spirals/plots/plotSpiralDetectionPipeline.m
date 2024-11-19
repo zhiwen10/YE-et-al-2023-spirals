@@ -8,14 +8,14 @@ td = datestr(tda,'yyyy-mm-dd');
 tdb = datestr(tda,'yyyymmdd');
 %% load SVD data
 subfolder = [mn '_' tdb '_' num2str(en)];
-session_root = fullfile(data_folder,'spirals\svd',subfolder);
+session_root = fullfile(data_folder,'spirals','svd',subfolder);
 [U,V,t,mimg] = loadUVt1(session_root);
 dV = [zeros(size(V,1),1) diff(V,[],2)];
 %% set params for spiral detection
 freq = [2,8];                                                              % data filtering frequency range
 params = setSpiralDetectionParams(U,t);                                    % set detection parameters
 fname1 = [mn '_' tdb '_' num2str(en) '_roi'];                              % apply mask, this helps speed up spiral detection later
-load(fullfile(data_folder,'spirals\full_roi', [fname1 '.mat']));
+load(fullfile(data_folder,'spirals','full_roi', [fname1 '.mat']));
 tf = inROI(roi,params.xx(:),params.yy(:));
 params.xxRoi = params.xx(tf); 
 params.yyRoi = params.yy(tf);

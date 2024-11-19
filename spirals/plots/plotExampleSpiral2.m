@@ -16,14 +16,14 @@ td = datestr(tda,'yyyy-mm-dd');
 tdb = datestr(tda,'yyyymmdd');
 fname = [mn '_' tdb '_' num2str(en)];
 subfolder = [mn '_' tdb '_' num2str(en)];
-session_root = fullfile(data_folder,'spirals\svd',subfolder);
+session_root = fullfile(data_folder,'spirals','svd',subfolder);
 [U,V,t,mimg] = loadUVt1(session_root);                                     % load U,V, t
 dV = [zeros(size(V,1),1) diff(V,[],2)];
 load(fullfile(data_folder,'tables','mask_ZYE12.mat'));
 %% registration
 fname = [mn '_' tdb '_' num2str(en)];
-load(fullfile(data_folder,'spirals\rf_tform',[fname '_tform.mat']));               % load atlas transformation matrix tform;
-load(fullfile(data_folder,'spirals\spirals_example',[fname '_mask.mat']));
+load(fullfile(data_folder,'spirals','rf_tform',[fname '_tform.mat']));               % load atlas transformation matrix tform;
+load(fullfile(data_folder,'spirals','spirals_example',[fname '_mask.mat']));
 %%
 scale = 1;
 hist_bin = 40; % pixels

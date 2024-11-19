@@ -13,11 +13,11 @@ tdb = datestr(td,'yyyymmdd');
 en = 5;
 fname = [mn '_' tdb '_' num2str(en)];
 subfolder = [mn '_' tdb '_' num2str(en)];
-session_root = fullfile(data_folder,'spirals\svd',subfolder);
+session_root = fullfile(data_folder,'spirals','svd',subfolder);
 [U,V,t,mimg] = loadUVt1(session_root);                                     % load U,V, t
 dV = [zeros(size(V,1),1) diff(V,[],2)];
 %%
-load(fullfile(data_folder,'spirals\spirals_grouping',...
+load(fullfile(data_folder,'spirals','spirals_grouping',...
     [fname '_spirals_group_fftn.mat']));                                   % load spiral centers (>40 pixels radius)
 spiral_duration = cellfun(@(x) size(x,1), archiveCell);
 indx2 = (spiral_duration>=2);                                              % sprial length > = 2 frames

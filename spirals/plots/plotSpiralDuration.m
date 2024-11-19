@@ -9,7 +9,7 @@ for kk = 1:size(T,1)
     tdb = datestr(tda,'yyyymmdd');
     %%
     fname = [mn '_' tdb '_' num2str(en) '.mat'];
-    filename = fullfile(data_folder,'spirals\spirals_duration',fname);
+    filename = fullfile(data_folder,'spirals','spirals_duration',fname);
     load(filename);
     %%
     N_ratio_scramble_all(:,kk) = mean(N_ratio_scramble,2);
