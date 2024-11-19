@@ -8,7 +8,7 @@ td = '2021-12-18';
 tdb = datestr(td,'yyyymmdd');
 en = 2;
 subfolder = [mn '_' tdb '_' num2str(en)];
-session_root = fullfile(data_folder,'spirals',svd',subfolder);
+session_root = fullfile(data_folder,'spirals','svd',subfolder);
 [U,V,t,mimg] = loadUVt1(session_root);                                     % load U,V, t
 dV = [zeros(size(V,1),1) diff(V,[],2)];
 %%

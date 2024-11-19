@@ -7,6 +7,8 @@ en = 1; imec = 0; probeName = 'p1';
 load(fullfile(data_folder,'spirals','spirals_LFP','params.mat'));
 ops.fproc1 = fullfile(data_folder,'spirals','spirals_LFP',...
     'filtered_lfp_imec0.dat');
+ops.chanMap = fullfile(data_folder,'ephys','config_files',...
+    'NPtype24_hStripe_botRow0_ref1.mat')
 % total number of good channels that we will spike sort
 %% check downsampled data with raw ephys data
 epochT = [1215,1220];

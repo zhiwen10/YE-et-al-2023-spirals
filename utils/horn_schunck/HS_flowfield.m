@@ -1,14 +1,16 @@
 function [vxRaw,vyRaw] = HS_flowfield(tracePhase,useGPU)
 %% frameN in the first dimension
 frameN = size(tracePhase,1);
-if useGPU
-    tracePhase = gpuArray(tracePhase);
-end
 
 vxRaw = zeros(frameN-1,size(tracePhase,2),size(tracePhase,3));
 vyRaw = zeros(frameN-1,size(tracePhase,2),size(tracePhase,3));
-vxRaw = gpuArray(vxRaw);
-vyRaw = gpuArray(vyRaw);
+
+if useGPU
+    tracePhase = gpuArray(tracePhase);
+    vxRaw = gpuArray(vxRaw);
+    vyRaw = gpuArray(vyRaw);
+end
+
 for k = 1:(frameN-1)
     tic
     A1 = squeeze(tracePhase(k,:,:));
