@@ -18,7 +18,10 @@ These `pipline1/2/3/4/5.m` and `figure1/2/3/4/5.m` files also provide an overvie
 
 
 ## Data download
-The raw and preprocessed data are shared on figshare.
+The raw and preprocessed data are divided into 3 parts, and shared on figshare.
+They are all listed on this page with DOI: https://doi.org/10.6084/m9.figshare.27850707
+
+You can also find the 3 parts seperately below.
 
 Part1/3: https://doi.org/10.6084/m9.figshare.25884259
 
