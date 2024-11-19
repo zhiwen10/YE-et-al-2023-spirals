@@ -47,7 +47,7 @@ for i = [1,2,4]
     count1 = count1+1;
 end    
 %% power ratio vs sprial density regression
-load(fullfile(data_folder,'spirals\spirals_density',...
+load(fullfile(data_folder,'spirals','spirals_density',...
     'spiralDensityLinePerSession.mat'))
 count_sample(count_sample<0) = 0;
 max_density = max(count_sample,[],1);

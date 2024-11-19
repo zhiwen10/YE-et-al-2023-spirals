@@ -16,7 +16,7 @@ for kk = 1:size(T,1)
     tdb = datestr(tda,'yyyymmdd');
     %%
     fname = [mn '_' tdb '_' num2str(en)];
-    T2 = readtable(fullfile(data_folder,'spirals\spirals_raw',...
+    T2 = readtable(fullfile(data_folder,'spirals','spirals_raw',...
         [fname '_spirals_all.csv']));                                      % load all spirals
     pwAll = table2array(T2);            
     pwAll = pwAll(pwAll(:,3)>=40,:);                                       % only use spirals >=40pixels radius, based on fftn

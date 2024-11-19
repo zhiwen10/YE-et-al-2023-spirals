@@ -1,7 +1,7 @@
 function getFFTNSpiralsStats(T,freq,label,data_folder,save_folder)
  %%
 freq_folder = [num2str(freq(1)) '_' num2str(freq(2)) 'Hz'];
-spirals_folder = fullfile(data_folder,'spirals\spirals_fftn',...
+spirals_folder = fullfile(data_folder,'spirals','spirals_fftn',...
     freq_folder,label);
 %% load atlas brain horizontal projection and outline
 load(fullfile(data_folder,'tables',...
@@ -23,7 +23,7 @@ for kk = 1:size(T,1)
     tdb = datestr(tda,'yyyymmdd');
     %% load data
     fname = [mn '_' tdb '_' num2str(en)];   
-    load(fullfile(data_folder,'spirals\rf_tform',[fname '_tform.mat']));   % load atlas transformation matrix tform
+    load(fullfile(data_folder,'spirals','rf_tform',[fname '_tform.mat']));   % load atlas transformation matrix tform
     %%    
     load(fullfile(spirals_folder,[fname '.mat']));
     [spiralsT(:,1),spiralsT(:,2)] = transformPointsForward(tform,pwAll1(:,1),pwAll1(:,2));

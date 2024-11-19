@@ -22,12 +22,12 @@ for kk = 1:size(T,1)
     tdb = datestr(tda,'yyyymmdd');
     fname = [mn '_' tdb '_' num2str(en)];
     subfolder = [mn '_' tdb '_' num2str(en)];
-    session_root = fullfile(data_folder,'spirals\svd',subfolder);
+    session_root = fullfile(data_folder,'spirals','svd',subfolder);
     [U,V,t,mimg] = loadUVt1(session_root);                                 % load U,V, t
     dV = [zeros(size(V,1),1) diff(V,[],2)];
     load(fullfile(data_folder,'tables','mask_ZYE12.mat'));
     %% registration
-    load(fullfile(data_folder,'spirals\rf_tform',...
+    load(fullfile(data_folder,'spirals','rf_tform',...
         [fname '_tform.mat']));                                            % load atlas transformation matrix tform;
     %%
     clear trialV trialVel1 trialT trialVel

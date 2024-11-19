@@ -9,7 +9,7 @@ for kk = 1:size(T,1)
     tdb = datestr(tda,'yyyymmdd');
     %% get spiral ratio sorted by the spiral sequence length
     fname = [mn '_' tdb '_' num2str(en)];
-    load(fullfile(data_folder,'spirals\spirals_freq\spirals_fftn',...
+    load(fullfile(data_folder,'spirals','spirals_freq','spirals_fftn',...
         freq_folder,[fname '_spirals_group_fftn.mat']));                               % load grouped spiral centers (>40 pixels radius)
     indx2 = cellfun(@(x) size(x,1), archiveCell);
     spirals_total = size(cell2mat(archiveCell),1);
@@ -24,7 +24,7 @@ for kk = 1:size(T,1)
     N_ratio_scramble = [];
     for ii = 1:10
         clear indx_scramble
-        filename = fullfile(data_folder,'spirals\spirals_freq\spirals_scrambled',...
+        filename = fullfile(data_folder,'spirals','spirals_freq','spirals_scrambled',...
             freq_folder,fname,[fname '_scramble_group_' num2str(ii)]);
         load(filename);                                                    % load each scrambled spiral group (10 in total)
         indx_scramble = cellfun(@(x) size(x,1), archiveCell);

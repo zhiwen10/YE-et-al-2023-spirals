@@ -29,13 +29,13 @@ for kk = 1:15
     tdb = datestr(tda,'yyyymmdd');
     fname = [mn '_' tdb '_' num2str(en)];
     subfolder = [mn '_' tdb '_' num2str(en)];
-    session_root = fullfile(data_folder,'spirals\svd',subfolder);
+    session_root = fullfile(data_folder,'spirals','svd',subfolder);
     [U,V,t,mimg] = loadUVt1(session_root);                                 % load U,V, t
     dV = [zeros(size(V,1),1) diff(V,[],2)];
     %% registration
     fname = [mn '_' tdb '_' num2str(en)];
-    load(fullfile(data_folder,'spirals\rf_tform',[fname '_tform.mat']));   % load atlas transformation matrix tform;    
-    load(fullfile(data_folder,'spirals\spirals_grouping',...
+    load(fullfile(data_folder,'spirals','rf_tform',[fname '_tform.mat']));   % load atlas transformation matrix tform;    
+    load(fullfile(data_folder,'spirals','spirals_grouping',...
         [fname '_spirals_group_fftn.mat']));
     %%
     indx2 = cellfun(@(x) size(x,1), archiveCell);

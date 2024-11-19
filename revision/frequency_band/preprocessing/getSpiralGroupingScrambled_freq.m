@@ -17,7 +17,7 @@ for kk = 1:size(T,1)
     tdb = datestr(tda,'yyyymmdd');
     %%
     fname = [mn '_' tdb '_' num2str(en)];
-    load(fullfile(data_folder,'spirals/spirals_freq/raw',...
+    load(fullfile(data_folder,'spirals','spirals_freq','raw',...
         freq_folder,[fname '_spirals_all.mat']));                          % load all spirals            
     pwAll = pwAll(pwAll(:,3)>=40,:);                                       % only use spirals >=40pixels radius, based on fftn
     mkdir(fullfile(save_folder,fname));

@@ -21,10 +21,10 @@ load(fullfile(data_folder,'tables',...
     'isocortex_horizontal_projection_outline.mat'));                       % 10um resolution
 [maskPath,st] = get_cortex_atlas_path(data_folder);                        % get cortical atlas path and tree
 %%
-raw_folder = fullfile(data_folder,'ephys\spirals_raw_fftn');
-predict_folder = fullfile(data_folder,'ephys\spirals_predict_permute');
-reg_folder = fullfile(data_folder,'ephys\rf_tform');
-amp_folder = fullfile(data_folder,'ephys\amplitude');
+raw_folder = fullfile(data_folder,'ephys','spirals_raw_fftn');
+predict_folder = fullfile(data_folder,'ephys','spirals_predict_permute');
+reg_folder = fullfile(data_folder,'ephys','rf_tform');
+amp_folder = fullfile(data_folder,'ephys','amplitude');
 %% get index for left and right hemisphere 
 scale = 1;
 BW = logical(projectedAtlas1);

@@ -37,13 +37,13 @@ for kk = 1:size(T,1)
     td = datestr(tda,'yyyy-mm-dd');
     tdb = datestr(td,'yyyymmdd');
     subfolder = [mn '_' tdb '_' num2str(en)];
-    session_root = fullfile(data_folder,'spirals\svd',subfolder);
+    session_root = fullfile(data_folder,'spirals','svd',subfolder);
     [U,V,t,mimg] = loadUVt1(session_root);                                     % load U,V, t
     dV = [zeros(size(V,1),1) diff(V,[],2)];
     dV = dV(1:50,:);
     %% registration
     fname = [mn '_' tdb '_' num2str(en)];
-    load(fullfile(data_folder,'spirals\rf_tform',[fname '_tform.mat']));
+    load(fullfile(data_folder,'spirals','rf_tform',[fname '_tform.mat']));
     %%
     sizeTemplate = [1320,1140];
     mimgt = imwarp(mimg,tform,'OutputView',imref2d(sizeTemplate));

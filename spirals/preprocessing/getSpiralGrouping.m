@@ -12,7 +12,7 @@ for kk = 1:size(T,1)
     tdb = datestr(tda,'yyyymmdd');
     %% load raw detected spirals
     fname = [mn '_' tdb '_' num2str(en)];
-    T2 = readtable(fullfile(data_folder,'spirals\spirals_raw',...
+    T2 = readtable(fullfile(data_folder,'spirals','spirals_raw',...
         [fname '_spirals_all.csv']));
     pwAll = table2array(T2);
     filteredSpirals = pwAll(pwAll(:,3)>=40,:);                             % only use sprials with radius >40 pixels, based on 3d-fft

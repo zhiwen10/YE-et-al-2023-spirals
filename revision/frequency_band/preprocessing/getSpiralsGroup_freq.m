@@ -13,7 +13,7 @@ for ifreq = 1:3
         tdb = datestr(tda,'yyyymmdd');
         %% load raw detected spirals
         fname = [mn '_' tdb '_' num2str(en)];
-        load(fullfile(data_folder,'spirals\spirals_freq\raw',...
+        load(fullfile(data_folder,'spirals','spirals_freq','raw',...
             freq_folder,[fname '_spirals_all.mat']));
         filteredSpirals = pwAll(pwAll(:,3)>=40,:);                             % only use sprials with radius >40 pixels, based on 3d-fft
         %% temporal grouping

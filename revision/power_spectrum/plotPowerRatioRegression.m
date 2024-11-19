@@ -10,7 +10,7 @@ freq2 = 201; % index of 10Hz
 % load power ratio
 load(fullfile(data_folder,'spirals','spirals_power_spectrum2','power_ratio_all_sessions.mat'));
 % power ratio vs sprial density regression
-load(fullfile(data_folder,'spirals\spirals_density',...
+load(fullfile(data_folder,'spirals','spirals_density',...
     'spiralDensityLinePerSession.mat'))
 count_sample(count_sample<0) = 0;
 max_density = max(count_sample,[],1);

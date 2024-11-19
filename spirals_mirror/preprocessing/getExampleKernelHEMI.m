@@ -25,7 +25,7 @@ for kk = 1:15
     tdb = datestr(tda,'yyyymmdd');
     fname = [mn '_' tdb '_' num2str(en)];
     fname1 = [fname '-hemi.mat'];
-    load(fullfile(data_folder,'spirals_mirror\regression_hemi',fname1),...
+    load(fullfile(data_folder,'spirals_mirror','regression_hemi',fname1),...
         'kernel_full2');
     %% loop through 8 example points
     for kkk = 1:8

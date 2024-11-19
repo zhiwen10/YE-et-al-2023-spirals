@@ -9,7 +9,7 @@ function T = getAxonBiasTable(data_folder,save_folder)
 % if soma is in somatosensory cortex, restrict to the large SSp region, 
 % so that long-range motor projections are excluded.
 %% load singel cell morphology dataset
-load(fullfile(data_folder,'axons\all_cell_with_parents.mat'));
+load(fullfile(data_folder,'axons','all_cell_with_parents.mat'));
 %% load atlas brain horizontal projection and outline
 load(fullfile(data_folder,'tables','horizontal_cortex_atlas_50um.mat'));
 load(fullfile(data_folder,'tables',...

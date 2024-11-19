@@ -29,10 +29,10 @@ for kk = 1:15                                                                   
     td = datestr(tda,'yyyy-mm-dd');
     tdb = datestr(tda,'yyyymmdd');
     fname = [mn '_' tdb '_' num2str(en)];
-    load(fullfile(data_folder,'spirals\rf_tform',[fname '_tform.mat']));               % load atlas transformation matrix tform
+    load(fullfile(data_folder,'spirals','rf_tform',[fname '_tform.mat']));               % load atlas transformation matrix tform
     %% read svd components (U,V,t) from processed data folder
     subfolder = [mn '_' tdb '_' num2str(en)];
-    session_root = fullfile(data_folder,'spirals\svd',subfolder);
+    session_root = fullfile(data_folder,'spirals','svd',subfolder);
     mimg = readNPY(fullfile(session_root, 'meanImage.npy')); 
     fname1 = [fname '-AP.mat'];
     load(fullfile(ffolder,fname1));
@@ -67,10 +67,10 @@ for kk = 1:15                                                                   
     tdb = datestr(tda,'yyyymmdd');
     %%
     fname = [mn '_' tdb '_' num2str(en)];
-    load(fullfile(data_folder,'spirals\rf_tform',[fname '_tform.mat']));               % load atlas transformation matrix tform
+    load(fullfile(data_folder,'spirals','rf_tform',[fname '_tform.mat']));               % load atlas transformation matrix tform
     %% read svd components (U,V,t) from processed data folder
     subfolder = [mn '_' tdb '_' num2str(en)];
-    session_root = fullfile(data_folder,'spirals\svd',subfolder);
+    session_root = fullfile(data_folder,'spirals','svd',subfolder);
     mimg = readNPY(fullfile(session_root, 'meanImage.npy')); 
     fname1 = [fname '-hemi.mat'];
     load(fullfile(ffolder,fname1));

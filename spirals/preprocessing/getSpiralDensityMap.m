@@ -23,11 +23,11 @@ for kk = 1:size(T,1)
     tdb = datestr(tda,'yyyymmdd');
     %%
     fname = [mn '_' tdb '_' num2str(en)];
-    load(fullfile(data_folder,'spirals\spirals_grouping',...
+    load(fullfile(data_folder,'spirals','spirals_grouping',...
         [fname '_spirals_group_fftn.mat']));
-    load(fullfile(data_folder,'spirals\rf_tform',[fname '_tform.mat']));
+    load(fullfile(data_folder,'spirals','rf_tform',[fname '_tform.mat']));
     %%
-    t = readNPY(fullfile(data_folder,'spirals\svd',fname,...
+    t = readNPY(fullfile(data_folder,'spirals','svd',fname,...
         'svdTemporalComponents_corr.timestamps.npy'));                     % read how many total frames
     nframe = numel(t);   
     %%

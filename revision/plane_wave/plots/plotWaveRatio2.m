@@ -10,7 +10,7 @@ for i = 1:15
     ratio(i,1) = sum(amp_temp>0.4)./numel(amp_temp);
 end
 %% load spiral wave peak density
-load(fullfile(data_folder,'spirals\spirals_density',...
+load(fullfile(data_folder,'spirals','spirals_density',...
     'spiralDensityLinePerSession.mat'))
 count_sample(count_sample<0) = 0;
 max_density = max(count_sample,[],1);

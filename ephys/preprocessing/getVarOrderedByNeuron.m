@@ -37,7 +37,7 @@ for kk = 1:size(T,1)
     end        
     %%
     reg_name = [ops.mn '_' ops.tdb '_' num2str(ops.en) '_tform_4x.mat'];
-    reg_fullname =fullfile(data_folder,'ephys\rf_tform_4x',reg_name);
+    reg_fullname =fullfile(data_folder,'ephys','rf_tform_4x',reg_name);
     load(reg_fullname);
     sizeTemplate = size(projectedTemplate1);
     var_reg = imwarp(explained_var_all,tform,'OutputView',imref2d(sizeTemplate));

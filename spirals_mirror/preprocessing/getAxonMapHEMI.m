@@ -12,7 +12,7 @@ spath = string(st.structure_id_path);
 ctx = '/997/8/567/688/';
 cortexMask = create3dMask(ctx,st,atlas);
 %%
-dataFolder = fullfile(data_folder,'spirals_mirror\AxonProjectionVolumn');
+dataFolder = fullfile(data_folder,'spirals_mirror','AxonProjectionVolumn');
 nameList = ["SSp_bfd"; "SSp_n"; "SSp_m"; "SSp_ll";...
     "SSp_ul"; "SSp_tr"; "RSP"; "VISp"];
 nameList1 = strcat(nameList, '_coronal'); 

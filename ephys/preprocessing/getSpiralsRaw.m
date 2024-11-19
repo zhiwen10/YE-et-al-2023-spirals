@@ -5,7 +5,7 @@ for kk = 1:size(T,1)
     ops = get_session_info2(T,kk,data_folder);
     fname = [ops.mn '_' ops.tdb '_' num2str(ops.en)];
     subfolder = [ops.mn '_' ops.tdb '_' num2str(ops.en)];
-    session_root = fullfile(data_folder,'ephys\svd_spikes',subfolder);
+    session_root = fullfile(data_folder,'ephys','svd_spikes',subfolder);
     [U,V,t,mimg] = loadUVt1(session_root);                                 % load U,V, t
     dV = [zeros(size(V,1),1) diff(V,[],2)];                                % get derivative of V
     %% set params for detection
@@ -14,7 +14,7 @@ for kk = 1:size(T,1)
     params = setSpiralDetectionParams(U,t);                                % set detection parameters
     %%
     fname1 = [fname '_roi'];
-    load(fullfile(data_folder,'ephys\roi',[fname1 '.mat']));               % only detect spirals within ROI
+    load(fullfile(data_folder,'ephys','roi',[fname1 '.mat']));               % only detect spirals within ROI
     tf = inROI(roi,params.xx(:),params.yy(:));
     params.xxRoi = params.xx(tf);                                          % only use the grids that inside the roi to save time
     params.yyRoi = params.yy(tf);                                          % only use the grids that inside the roi to save time

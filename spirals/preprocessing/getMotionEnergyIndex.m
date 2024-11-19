@@ -25,13 +25,13 @@ for kk = [1:6,9:15]                                                        % no 
     fname = [mn '_' tdb '_' num2str(en)];
     %%
     subfolder = [mn '_' tdb '_' num2str(en)];
-    session_root = fullfile(data_folder,'spirals\svd',subfolder);
+    session_root = fullfile(data_folder,'spirals','svd',subfolder);
     [U,V,t,mimg] = loadUVt1(session_root); 
     dV = [zeros(size(V,1),1) diff(V,[],2)];
     %% load data
-    load(fullfile(data_folder,'spirals\rf_tform',[fname '_tform.mat']));   % load atlas transformation matrix tform;
-    load(fullfile(data_folder,'spirals\spirals_index',[fname '_amp.mat']));
-    load(fullfile(data_folder,'spirals\spirals_index',...
+    load(fullfile(data_folder,'spirals','rf_tform',[fname '_tform.mat']));   % load atlas transformation matrix tform;
+    load(fullfile(data_folder,'spirals','spirals_index',[fname '_amp.mat']));
+    load(fullfile(data_folder,'spirals','spirals_index',...
         [fname '_motion_energy.mat']));
     %%
     sizeTemplate = [1320,1140];

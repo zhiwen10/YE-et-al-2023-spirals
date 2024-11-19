@@ -58,10 +58,10 @@ for kk = 1:15
     fname = [mn '_' tdb '_' num2str(en)];
     %% load SVD
     subfolder = [mn '_' tdb '_' num2str(en)];
-    session_root = fullfile(data_folder,'spirals\svd',subfolder);
+    session_root = fullfile(data_folder,'spirals','svd',subfolder);
     [U,V,t,mimg] = loadUVt1(session_root);                                 % load U,V, t
     dV = [zeros(size(V,1),1) diff(V,[],2)];                                % get derivative of V
-    load(fullfile(data_folder,'spirals\rf_tform',[fname '_tform.mat']));
+    load(fullfile(data_folder,'spirals','rf_tform',[fname '_tform.mat']));
     %%
     Utransformed = imwarp(U,tform,...
         'OutputView',imref2d(size(projectedTemplate1)));

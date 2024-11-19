@@ -24,11 +24,11 @@ td = datestr(tda,'yyyy-mm-dd');
 tdb = datestr(tda,'yyyymmdd');
 fname = [mn '_' tdb '_' num2str(en)];
 subfolder = [mn '_' tdb '_' num2str(en)];
-session_root = fullfile(data_folder,'spirals\svd',subfolder);
+session_root = fullfile(data_folder,'spirals','svd',subfolder);
 [U,V,t,mimg] = loadUVt1(session_root); 
 dV = [zeros(size(V,1),1) diff(V,[],2)];
 % registration
-load(fullfile(data_folder,'spirals\rf_tform_8x',[fname '_tform_8x.mat']));   % load atlas transformation matrix tform;
+load(fullfile(data_folder,'spirals','rf_tform_8x',[fname '_tform_8x.mat']));   % load atlas transformation matrix tform;
 % get flow field from unregistered frame frist, then transform to
 % registered, to avoid interpolation problem with circular phase 
 U1 = U(1:params.downscale:end,1:params.downscale:end,:);

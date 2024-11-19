@@ -25,12 +25,12 @@ for kk = 1:15
     tdb = datestr(tda,'yyyymmdd');
     fname = [mn '_' tdb '_' num2str(en)];
     %%
-    t = readNPY(fullfile(data_folder,'spirals\svd',fname,...
+    t = readNPY(fullfile(data_folder,'spirals','svd',fname,...
         'svdTemporalComponents_corr.timestamps.npy'));                     % read how many total frames
     nframe = numel(t);  
     %%
-    load(fullfile(data_folder,'spirals\rf_tform',[fname '_tform.mat']));
-    load(fullfile(data_folder,'spirals\spirals_grouping',...
+    load(fullfile(data_folder,'spirals','rf_tform',[fname '_tform.mat']));
+    load(fullfile(data_folder,'spirals','spirals_grouping',...
         [fname '_spirals_group_fftn.mat']));
     %%
     spiral_duration = cellfun(@(x) size(x,1), archiveCell);
