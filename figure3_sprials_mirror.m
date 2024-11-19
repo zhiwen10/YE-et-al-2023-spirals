@@ -1,8 +1,5 @@
 githubdir = 'C:\Users\Steinmetz lab\Documents\git';                        % folder where repositories are hosted 
-addpath(genpath(fullfile(githubdir, 'npy-matlab')));                       % https://github.com/kwikteam/npy-matlab
-addpath(genpath('C:\Users\Steinmetz lab\Documents\MATLAB\colorcet'));
-addpath(genpath('C:\Users\Steinmetz lab\Documents\MATLAB\cbrewer2'));
-addpath(genpath(fullfile(githubdir, 'YE-et-al-2023-spirals-test')));       % paper repository
+addpath(genpath(fullfile(githubdir, 'YE-et-al-2023-spirals')));            % paper repository
 %% load session table
 data_folder = 'E:\spiral_data_share\data';   
 figure_folder = 'E:\spiral_data_share\figures';

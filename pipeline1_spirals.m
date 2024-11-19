@@ -1,13 +1,9 @@
 githubdir = 'C:\Users\Steinmetz lab\Documents\git';                        % folder where repositories are hosted
-addpath(genpath(fullfile(githubdir, 'npy-matlab')));                       % https://github.com/kwikteam/npy-matlab
-addpath(genpath('C:\Users\Steinmetz lab\Documents\MATLAB\colorcet'));
-addpath(genpath('C:\Users\Steinmetz lab\Documents\MATLAB\cbrewer2'));
-addpath(genpath(fullfile(githubdir, 'YE-et-al-2023-spirals')));       % paper repository
+addpath(genpath(fullfile(githubdir, 'YE-et-al-2023-spirals')));            % paper repository
 %% load session table
 data_folder = 'E:\spiral_data_share\data';     
 figure_folder = 'E:\spiral_data_share\figures';
 T = readtable(fullfile(data_folder,'tables','spiralSessions3.xlsx'));
-T1 = T(1,:);
 %% spiral detection algorithm 
 save_folder = fullfile(data_folder,'spirals\spirals_raw');                 % run time estimate: 1h for each session
 getSpiralDetection(T1,data_folder, save_folder);
@@ -23,9 +19,12 @@ getSpiralDurationRatio(T,data_folder,save_folder);                         % rat
 save_folder = fullfile(data_folder, 'spirals\spirals_density');
 getSpiralDensityMap(T,data_folder,save_folder);                            % calculate spiral density               
 getSpiralsDensityLine(T,data_folder,save_folder);                          % calculate sprial density lines
-%% Extended Data Fig.1c
-save_folder = fullfile(data_folder, 'spirals\spirals_power_spectrum2');      
-getTaperPowerMap2(T,data_folder,save_folder);                               % calculate tapered power spectrum
+%% Extended Data Fig.1c,d,e,f, revision
+save_folder = fullfile(data_folder, 'spirals\spirals_power_spectrum2');    % power spectrum map for each pixel in each session  
+getTaperPowerMap3(T,data_folder,save_folder);                              % calculate tapered power spectrum
+getExamplePixelTrace_005_8Hz(T,data_folder,save_folder);
+getPowerBandRatio(T,data_folder,save_folder);
+setAlphaThreshold;
 %% Extended Data Fig.3 
 freq = [2,8]; label1 = 'control'; label2 = 'fftn';
 save_folder = fullfile(data_folder, 'spirals\spirals_fftn');
@@ -35,6 +34,17 @@ getFFTNSpiralsMap(T,freq,label1,data_folder,save_folder);                  % spi
 getFFTNSpiralsStats(T,freq,label1,data_folder,save_folder);                % spiral stats in raw data
 getFFTNSpiralsMap(T,freq,label2,data_folder,save_folder);                  % spiral maps in fftn data
 getFFTNSpiralsStats(T,freq,label2,data_folder,save_folder);                % sprial stats in fftn data
+%% Extended Data Fig.3 revision: different frequency bands
+save_folder = fullfile(data_folder,'spirals\spirals_freq','spirals_fftn');
+getSpiralsGroup_freq(T, data_folder,save_folder);
+save_folder = fullfile(data_folder, 'spirals\spirals_freq\spirals_scrambled');
+getSpiralsScrambled_freq(T,data_folder,save_folder);
+save_folder = fullfile(data_folder, 'spirals\spirals_freq\spirals_duration');
+getDurationFreq(T,data_folder,save_folder);
+save_folder = fullfile(data_folder, 'spirals\spirals_freq\spirals_density_line');
+getSpiralDensityLine_all(T,data_folder,save_folder);
+save_folder = fullfile(data_folder, 'spirals\spirals_fftn');
+getSpiralsFFTnFreq(T, data_folder, save_folder);
 %% Extended Data Fig.6
 save_folder = fullfile(data_folder, 'spirals\spirals_density_duration');
 getSpiralDensityByDuration(T,data_folder,save_folder);                     % spiral maps across durations

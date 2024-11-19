@@ -59,7 +59,7 @@ for kk = 1:size(T,1)
     end
     pixel_copy = round(pixel_copy/params.downscale);
     %%
-    load(fullfile(data_folder,'spirals','spectrum','alpha_threshold',...
+    load(fullfile(data_folder,'spirals','spirals_power_spectrum2','alpha_threshold',...
         [fname '_alpha_threshold.mat']));
     %%
     alpha_ratio_all(kk,1) = alpha_ratio;
@@ -122,12 +122,19 @@ psdx_alpha = mean(psdx_alpha_mean_all,2);
 psdx_nonalpha = mean(psdx_nonalpha_mean_all,2);
 psdx_alpha_sem = std(log10(psdx_alpha_mean_all),[],2)./sqrt(15);
 psdx_nonalpha_sem = std(log10(psdx_nonalpha_mean_all),[],2)./sqrt(15);
-hr4d = figure('Renderer', 'painters', 'Position', [100 100 400 400]);
-subplot(1,1,1);
+%%
+mean_alpha_ratio = mean(alpha_ratio_all);
+sem_alpha_ratio = std(alpha_ratio_all)./sqrt(15);
+mean_median_duration = mean(median_all);
+sem_median_duration = std(median_all)./sqrt(15);
+mean_mean_duration = mean(mean_all);
+sem_mean_duration = std(mean_all)./sqrt(15);
+%%
+hr4d = figure('Renderer', 'painters', 'Position', [100 100 600 400]);
+subplot(1,3,[1,2]);
 freq_value = [0.5,2,4,6,8,10];
 log_freq_value = log10(freq_value);
 freqN = 21;
-
 shadedErrorBar(log10(freq1(2:freqN)),log10(psdx_alpha(2:freqN)),psdx_alpha_sem(2:freqN), 'lineprops', '-r');
 % plot(log10(freq1(2:freqN)),log10(psdx_alpha(2:freqN)),'r');
 hold on;
@@ -138,13 +145,16 @@ xticks(log_freq_value);
 xticklabels({'0.5','2','4','6','8','10'});
 xlabel('log10(Frequency)');
 ylabel('log10(Power) (df/f^2)');
-%%
-mean_alpha_ratio = mean(alpha_ratio_all);
-sem_alpha_ratio = std(alpha_ratio_all)./sqrt(15);
-mean_median_duration = mean(median_all);
-sem_median_duration = std(median_all)./sqrt(15);
-mean_mean_duration = mean(mean_all);
-sem_mean_duration = std(mean_all)./sqrt(15);
+subplot(1,3,3);
+scatter(ones(15,1),alpha_ratio_all,'k');
+hold on;
+bar(1,mean_alpha_ratio);
+hold on;
+errorbar(1,mean_alpha_ratio,sem_alpha_ratio,'linewidth',2,'LineStyle','None','Marker','_');
+ylim([0,0.5]);
+yticks([0:0.1:0.5]);
+yticklabels(num2cell([0:0.1:0.5]));
+ylabel('2-8Hz epoch ratio');
 %%
 print(hr4d, fullfile(save_folder,'FigR4d_alpha_bump'),...
     '-dpdf', '-bestfit', '-painters');

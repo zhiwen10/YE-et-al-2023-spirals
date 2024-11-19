@@ -12,7 +12,7 @@ area{4} = 'MB';
 %%
 match_all = [];
 match_perm = [];
-for kk = 1:29
+for kk = 1:size(T,1)
     clear match1 match2 match_temp
     left_temp = spiral_left_match_all{kk};
     match1 = left_temp(:,11);
@@ -46,15 +46,19 @@ for kk = [1,2,4] % 'THAL', 'STR'; 'MB'
     ratio_all{count1} = match_all_temp;
     ratio_perm{count1} = match_perm_temp;
     subplot(1,3,count1);
-    scatter(1,match_all_temp(:,2),18,color2{kk},'filled');
+    scatter(ones(size(match_all_temp(:,2))),match_all_temp(:,2),18,color2{kk},'filled');
     hold on;
-    scatter(2,match_perm_temp(:,2),18,'k','filled');
+    scatter(2*ones(size(match_perm_temp(:,2))),match_perm_temp(:,2),18,'k','filled');
     hold on;
     plot([ones(size(match_all_temp(:,2))),2*ones(size(match_perm_temp(:,2)))]',[match_all_temp(:,2),match_perm_temp(:,2)]','k');
     hold on;
     yline(0.5,'--k');
     ylim([0.3,0.9]);
     [ha2(count1),pa2(count1)] = ttest(match_all_temp(:,2),match_perm_temp(:,2));
+    mean_all(count1,1) = mean(match_all_temp(:,2));
+    sem_all(count1,1) = std(match_all_temp(:,2))./sqrt(size(match_perm_temp,1));
+    mean_perm(count1,1) = mean(match_perm_temp(:,2));
+    sem_perm(count1,1) = std(match_perm_temp(:,2))./sqrt(size(match_perm_temp,1));
     xlabel('Spiral counts');
     ylabel('Spiral matching ratio');
     text(1.5,0.7,['p =' num2str(pa2(count1))]);

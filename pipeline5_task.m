@@ -1,8 +1,5 @@
 %% pipeline task
 githubdir = 'C:\Users\Steinmetz lab\Documents\git';                        % folder where repositories are hosted
-addpath(genpath(fullfile(githubdir, 'npy-matlab')));                       % https://github.com/kwikteam/npy-matlab
-addpath(genpath('C:\Users\Steinmetz lab\Documents\MATLAB\colorcet'));
-addpath(genpath('C:\Users\Steinmetz lab\Documents\MATLAB\cbrewer2'));
 addpath(genpath(fullfile(githubdir, 'YE-et-al-2023-spirals')));            % paper repository
 %% load session table
 data_folder = 'E:\spiral_data_share\data';     
@@ -14,7 +11,10 @@ getTaskTrialOutcome(data_folder, save_folder);                             % get
 %% get mean maps for different trial types
 save_folder = fullfile(data_folder,'task','task_mean_maps');
 getMeanMapSession(data_folder, save_folder);                               % get mean map for all contrast and trial types across sessions
-getMeanMapsAll(data_folder,save_folder);                                   % average mean maps at [-2,2]s around stim onset for 3 trial types    
+getMeanMapsAll(data_folder,save_folder);                                   % average mean maps at [-2,2]s around stim onset for 3 trial types 
+%% get sprials for different trial types
+save_folder = fullfile(data_folder,'task','spirals');
+getCorrectSpiralDensity(data_folder,save_folder);
 %% get phase and amplitude around stim onset in VISp
 freq1 = [0.05,2];
 getTaskOnsetPhase(data_folder,save_folder,freq1);                          % get phase and amplitude around onset time

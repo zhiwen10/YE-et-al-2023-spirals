@@ -59,6 +59,9 @@ for iplot = 1:3
                 pointRaw = csvread(pointcsv);
                 pointRaw = round(pointRaw/2);
                 pointRaw = pointRaw(:,[2,1,3]);
+                if current_area==4 & kk>=5
+                    pointRaw(:,1) = 228-pointRaw(:,1);
+                end
                 [m,p,s] = best_fit_line(pointRaw(:,1), pointRaw(:,2), pointRaw(:,3));
                 % ensure proper orientation: want 0 at the top of the brain
                 % and positive distance goes down into the brain

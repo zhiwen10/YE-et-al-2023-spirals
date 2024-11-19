@@ -1,4 +1,4 @@
-function [hs1f,hs1g] = plotExampleSpiral3(T,data_folder,save_folder)
+function [hs1i,hs1j] = plotExampleSpiral3(T,data_folder,save_folder)
 %% load atlas brain horizontal projection and outline
 load(fullfile(data_folder,'tables','horizontal_cortex_atlas_50um.mat'));
 load(fullfile(data_folder,'tables',...
@@ -57,6 +57,7 @@ pixel(4,:) = [520,850]; % SSp-ll
 pixel(5,:) = [480,920]; % SSp-m
 pixel(6,:) = [550,960]; % SSp-n
 pixel(7,:) = [682,950]; % SSp-bfd
+pixel(:,2) = 1140-pixel(:,2);
 pixel = round(pixel/params.downscale);
 %%
 trace_filt = zeros(7,size(trace2d1,3));
@@ -87,7 +88,7 @@ rows = 1;
 raw_min =-2; raw_max = 2;
 % raw_min = min(dff(:)); raw_max = max(dff(:));
 phase_min = -pi; phase_max = pi;
-hs1g = figure('Renderer', 'painters', 'Position', [100 100 1000 400]);
+hs1j = figure('Renderer', 'painters', 'Position', [100 100 1000 400]);
 frame_count = 1;
 subplotn = 10;
 for k = 1:subplotn
@@ -134,8 +135,8 @@ for k = 1:subplotn
     frame_count = frame_count+1;
 end
 frameS = frameStart+first_frame;
-print(hs1g,fullfile(save_folder,...
-    ['FigS1g_' fname '_' num2str(frameS)]),...
+print(hs1j,fullfile(save_folder,...
+    ['FigS1j_' fname '_' num2str(frameS)]),...
     '-dpdf', '-bestfit', '-painters');
 %%
 rate1 = 0.1;
@@ -171,7 +172,7 @@ last_frame_to_plot1 = find(qt-t1b>0,1, 'first');
 raw_min = min(dff(:)); raw_max = max(dff(:));
 phase_min = -pi; phase_max = pi;
 
-hs1f = figure('Renderer', 'painters', 'Position', [100 100 700 500]);
+hs1i = figure('Renderer', 'painters', 'Position', [100 100 700 500]);
 ax1 = subplot(1,2,1);
 im1= imshow(mimgtransformedRGB);
 set(im1, 'AlphaData', BW, 'AlphaDataMapping', 'scaled');
@@ -213,6 +214,6 @@ line_ax1 = xline(qt(first_frame_to_plot1),'--');
 line_ax2 = xline(qt(last_frame_to_plot1),'--');
 hold on;
 plot([t1(1)+0.5,t1(1)+0.5],[0,2],'r');
-print(hs1f, fullfile(save_folder,...
-    ['FigS1f_' fname '_' num2str(frameS) '_cet_c6.pdf']),...
+print(hs1i, fullfile(save_folder,...
+    ['FigS1i_' fname '_' num2str(frameS) '_cet_c6.pdf']),...
     '-dpdf', '-bestfit', '-painters');

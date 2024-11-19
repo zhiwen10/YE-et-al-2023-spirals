@@ -110,7 +110,7 @@ positions = roi.Position;
 positions(end+1,:) = positions(1,:);
 plot(positions(:,1),positions(:,2),'r','lineWidth',2);
 %%
-load(fullfile(data_folder,'revision','plane_wave','angle_mean_all2.mat'));
+load(fullfile(data_folder,'revision','plane_wave','angle_mean_all3.mat'));
 traceAmp_mean1 = traceAmp_mean;
 angle_mean1 = angle(vxy_all);
 amp_mean1 = abs(vxy_all);
@@ -134,5 +134,5 @@ polarhistogram('BinEdges',edges,'BinCounts',N_mean-N_sem,'FaceColor',[0.2,0.2,0.
 ax = gca;
 ax.ThetaDir = 'clockwise';
 %%
-print(hr2f, fullfile(save_folder,'FigR2f_border_planar_wave.pdf'),...
+print(hr2f, fullfile(save_folder,'FigR2f_border_planar_wave2.pdf'),...
     '-dpdf', '-bestfit', '-painters');

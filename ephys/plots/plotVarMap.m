@@ -54,6 +54,7 @@ for areai = [1,2,4]
         axis image; axis off;
         cmap1 = inferno;
         colormap(ax2,cmap1);
+        
         hold on;
         plotOutline(maskPath(1:3),st,atlas1,hemi,scale3);
         plotOutline(maskPath(4),st,atlas1,[],scale3);
@@ -63,7 +64,7 @@ for areai = [1,2,4]
     end
     count1 = count1+1;
 end
-ax3 = subplottight(3,12,32);
+ax3 = subplottight(3,12,35);
 hold off;
 im2 = imagesc(mean_var_t);
 set(im2, 'AlphaData', BW, 'AlphaDataMapping', 'scaled');

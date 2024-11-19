@@ -51,20 +51,20 @@ subjs2 = subjs2(:);
 hit_rates = hit_rates(:);    
 contrast_matrix = contrast_matrix(:);
 voltage_label = voltage_label(:);
-pp_hit = anovan(hit_rates,{contrast_matrix, voltage_label,subjs2},...
-    'model',2,'random',3,'varnames',{'contrast','label','subj'});
+% pp_hit = anovan(hit_rates,{contrast_matrix, voltage_label,subjs2},...
+%     'model',2,'random',3,'varnames',{'contrast','label','subj'});
 %%
 hit_rate_change = hit_rate_high-hit_rate_low;
 miss_rate_change = miss_rate_high-miss_rate_low;
 hit_rate_change_mean = mean(hit_rate_change,2);
 hit_rate_change_sem = std(hit_rate_change,[],2)./sqrt(6);
-% one way repeated anova (wrong test, one group is significantly differently than all the rest)
-tbl = array2table(hit_rate_change','VariableNames',{'A','B','C','D','E'});
-withinDesign = table([1 2 3 4 5]', 'VariableNames', {'Contrast'});
-withinDesign.Contrast = categorical(withinDesign.Contrast);
-% Fit the linear model
-rm = fitrm(tbl,'A-E~1','WithinDesign', withinDesign);
-ranova(rm, 'WithinModel', 'Contrast')
+% % one way repeated anova (wrong test, one group is significantly differently than all the rest)
+% tbl = array2table(hit_rate_change','VariableNames',{'A','B','C','D','E'});
+% withinDesign = table([1 2 3 4 5]', 'VariableNames', {'Contrast'});
+% withinDesign.Contrast = categorical(withinDesign.Contrast);
+% % Fit the linear model
+% rm = fitrm(tbl,'A-E~1','WithinDesign', withinDesign);
+% ranova(rm, 'WithinModel', 'Contrast')
 %%
 h5jk = figure('Renderer', 'painters', 'Position', [100 100 600 300]);
 subplot(1,2,1);

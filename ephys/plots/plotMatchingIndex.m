@@ -91,7 +91,7 @@ for current_area = [1,2,4]
 end
 %%
 color2 = {'g','r','c','m'};
-h4h = figure('Renderer', 'painters', 'Position', [100 100 900 600]);
+h4i = figure('Renderer', 'painters', 'Position', [100 100 900 600]);
 count1 = 1;
 for current_area = [1,2,4]
     subplot(1,3,count1);
@@ -148,7 +148,7 @@ for current_area = [1,2,4]
     count1 = count1+1;
 end
 %%
-print(h4h, fullfile(save_folder,'Fig4h_flow_matchingIndex.pdf'),...
+print(h4i, fullfile(save_folder,'Fig4i_flow_matchingIndex.pdf'),...
     '-dpdf', '-bestfit', '-painters');
 %%
 count2  =1;
@@ -179,7 +179,7 @@ for current_area = [1,2,4]
 end
 %%
 color2 = {'g','r','c','m'};
-h4i = figure('Renderer', 'painters', 'Position', [100 100 900 600]);
+h4h = figure('Renderer', 'painters', 'Position', [100 100 900 600]);
 count1 = 1;
 for current_area = [1,2,4]
     subplot(1,3,count1);
@@ -235,5 +235,5 @@ for current_area = [1,2,4]
     count1 = count1+1;
 end
 %%
-print(h4i, fullfile(save_folder,'Fig4i_phase_matchingIndex.pdf'),...
+print(h4h, fullfile(save_folder,'Fig4h_phase_matchingIndex.pdf'),...
     '-dpdf', '-bestfit', '-painters');

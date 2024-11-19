@@ -1,13 +1,9 @@
 githubdir = 'C:\Users\Steinmetz lab\Documents\git';                        % folder where repositories are hosted
-addpath(genpath(fullfile(githubdir, 'npy-matlab')));                       % https://github.com/kwikteam/npy-matlab
-addpath(genpath('C:\Users\Steinmetz lab\Documents\MATLAB\colorcet'));
-addpath(genpath('C:\Users\Steinmetz lab\Documents\MATLAB\cbrewer2'));
-addpath(genpath(fullfile(githubdir, 'YE-et-al-2023-spirals-test')));       % paper repository
+addpath(genpath(fullfile(githubdir, 'YE-et-al-2023-spirals')));            % paper repository
 %% load session table
 data_folder = 'E:\spiral_data_share\data';     
 figure_folder = 'E:\spiral_data_share\figures';
 T = readtable(fullfile(data_folder,'tables','spiralSessions3.xlsx'));
-T1 = T(1,:);
 %% Figure 1.
 save_folder = fullfile(figure_folder, 'Fig1');
 h1ac = plotSpiralTimeSeries(data_folder,save_folder);                      % plot example spiral time series & frame with optical flow
@@ -19,9 +15,12 @@ close all;
 %% Extented Data Fig.1
 save_folder = fullfile(figure_folder, 'FigS1');
 hs1ab = plotExampleOscillation(data_folder,save_folder);                   % plot example horizontal view and time series 
-hs1c2 = plotPowerSpectrum2(T,data_folder,save_folder);                       % plot mean power map across 15 sessions
-[hs1d,hs1e] = plotExampleSpiral2(T,data_folder,save_folder);               % plot LK_0003 example spirals
-[hs1f,hs1g] = plotExampleSpiral3(T,data_folder,save_folder);               % plot ZYE_0067 example spirals
+hs1c = plotPowerSpectrum4(T,data_folder,save_folder);                      % plot mean power map across 15 sessions
+hs1d = plotExamplePowerSpectrum2(T,data_folder,save_folder);
+hs1e = plotPowerRatio3(data_folder,save_folder);
+hs1f = plotPowerRatioRegression2(data_folder,save_folder);
+[hs1g,hs1h] = plotExampleSpiral2(T,data_folder,save_folder);               % plot LK_0003 example spirals
+[hs1i,hs1j] = plotExampleSpiral3(T,data_folder,save_folder);               % plot ZYE_0067 example spirals
 close all;
 %% Extended Data Fig.2
 save_folder = fullfile(figure_folder, 'FigS2');
@@ -33,6 +32,8 @@ freq = [2 8];
 hs3ab = plotExampleDataVsFft(T,data_folder,save_folder);                   % plot example epoch of data and 3d-fft
 hs3c = plotMapDataVsFftn(data_folder,save_folder,freq);                    % plot density map (combine all sessions) for data and 3d-fft
 [hs3d,hs3e] = plotScatterDataVsFftn(T,data_folder,save_folder,freq);       % plot peak desnity across sessions for data and 3d-fft
+[hs3f,hs3g] = plotScatterDataVsFftn_Freq2(T,data_folder,save_folder);
+hs3h = plotSpiralDensity_freq2(data_folder,save_folder);
 close all;
 %% Extended Data Fig.4
 save_folder = fullfile(figure_folder, 'FigS4');

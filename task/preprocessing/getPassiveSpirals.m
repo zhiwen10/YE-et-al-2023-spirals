@@ -33,7 +33,7 @@ for m = 1:4
         %% load data and block 
         fname = [mn '_' tdb '_' num2str(en)];
         session_root = fullfile(data_folder,'task','task_svd',fname);
-        [U,V,t,mimg] = loadUVt1(session_root);                                 % load U,V, t
+        [U,V,t,mimg] = loadUVt2(session_root);                                 % load U,V, t
         dV = [zeros(size(V,1),1) diff(V,[],2)];                                % get derivative of V
         expDir = dir(fullfile(session_root,'*_Block.mat'));
         load(fullfile(expDir.folder,expDir.name));

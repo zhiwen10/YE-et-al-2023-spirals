@@ -9,54 +9,11 @@ pixArea = pixSize^2;
 %%
 spiral_folder = fullfile(data_folder,'task','spirals');
 fnames = {'ZYE_0085','ZYE_0088','ZYE_0090','ZYE_0091'};
-%%
 labels = {"correct","incorrect","miss"};
 frames_pre = 62:68; frames_post = 76:82;
-framesN = numel(frames_pre);
-trialN = zeros(3,1);
-spiral_temp_pre_all = cell(3,1);
-spiral_temp_post_all = cell(3,1);
-for kk = 1:4
-    %%
-    mn = fnames{kk};
-    load(fullfile(spiral_folder,[mn '_spirals_task_sort.mat']),'spiral_all','T_all');
-    for j = 1:3
-        clear indx spiral_temp spiral_temp1 
-        if j ==1
-            indx = (T_all.label == labels{j} & (T_all.left_contrast-T_all.right_contrast)>0);
-        else
-            indx = (T_all.label == labels{j}& abs(T_all.left_contrast-T_all.right_contrast)>0);
-        end
-        spiral_temp = spiral_all(indx,:);    
-        spiral_temp1 = getConcatTrials(spiral_temp);
-        spiral_temp_pre = cat(1,spiral_temp1{frames_pre});
-        spiral_temp_post = cat(1,spiral_temp1{frames_post});
-        %%
-        spiral_temp_pre_all{j} = [spiral_temp_pre_all{j};spiral_temp_pre];
-        spiral_temp_post_all{j} = [spiral_temp_post_all{j};spiral_temp_post];
-        trialN(j,1) = trialN(j,1)+sum(indx);
-    end
-end
-
-spiral_temp_pre_all2 = cell(3,1);
-spiral_temp_post_all2 = cell(3,1);
-for j = 1:3
-    spiral_temp_pre_all1 = spiral_temp_pre_all{j};
-    spiral_temp_pre_all2{j} = spiral_temp_pre_all1(...
-        spiral_temp_pre_all1(:,3)==100 &spiral_temp_pre_all1(:,4)>=-2,:);
-    %%
-    spiral_temp_post_all1 = spiral_temp_post_all{j};
-    spiral_temp_post_all2{j} = spiral_temp_post_all1(...
-        spiral_temp_post_all1(:,3)==100 &spiral_temp_post_all1(:,4)>=-2,:);
-end
-
 hist_bin = 40;
-unique_spirals_pre = cell(3,1);
-unique_spirals_post = cell(3,1);
-for j = 1:3
-    unique_spirals_pre{j,1} = density_color_plot2(spiral_temp_pre_all2{j},hist_bin);
-    unique_spirals_post{j,1} = density_color_plot2(spiral_temp_post_all2{j},hist_bin);
-end
+framesN = numel(frames_pre);
+load(fullfile(spiral_folder,'spiral_density_map_trial_types.mat'));
 %%
 labels_all = {'Correct pre-stim','Correct post-stim','Incorrect pre-stim','Incorrect post-stim',...
     'Miss pre-stim','Miss post-stim'};

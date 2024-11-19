@@ -23,7 +23,7 @@ tdb = datestr(tda,'yyyymmdd');
 % load data and block 
 fname = [mn '_' tdb '_' num2str(en)];
 session_root = fullfile(data_folder,'task','task_svd',fname);
-[U,V,t,mimg] = loadUVt1(session_root);                                 % load U,V, t
+[U,V,t,mimg] = loadUVt2(session_root);                                 % load U,V, t
 %% load atlas registration
 downscale = 8;
 load(fullfile(data_folder,'task','rfmap',[fname '.mat']));

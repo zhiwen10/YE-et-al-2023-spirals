@@ -2,21 +2,17 @@ function hr4a = plotPowerSpectrum3(T,data_folder,save_folder)
 %% load atlas brain horizontal projection and outline
 load(fullfile(data_folder,'tables',...
     'isocortex_horizontal_projection_outline.mat'));                       % 10um resolution
-%% load tapered power sprectrum for all sessions
-psdxAllNorm = zeros(1320,1140,29,15);
-for kk = 1:size(T,1)
-    mn = T.MouseID{kk};
-    tda = T.date(kk);
-    en = T.folder(kk);    
-    td = datestr(tda,'yyyy-mm-dd');
-    tdb = datestr(tda,'yyyymmdd');
-    fname = [mn '_' tdb '_' num2str(en)];
-    load(fullfile(data_folder,'spirals\spirals_power_spectrum2',...
-        [fname '_fftSpectrum2.mat']));
-    psdxAllNorm(:,:,:,kk) = psdxMeanTransformed;
-end
 %%
-BW = logical(projectedAtlas1);
+pixel(1,:) = [845,835]; % VISp
+pixel(2,:) = [775,650]; % RSP
+% pixel(3,:) = [590,750]; % SSp-ul
+pixel(3,:) = [520,850]; % SSp-ll
+pixel(4,:) = [290,700]; % MOs
+scale = 8;
+pixel = round(pixel/scale);
+%% load tapered power sprectrum for all sessions
+load(fullfile(data_folder,'spirals','spirals_power_spectrum2','fftSpectrumAllNew2.mat'));
+BW = logical(projectedAtlas1(1:scale:end,1:scale:end));
 powerRatio1 = zeros(size(BW,1),size(BW,2),size(T,1));
 for kk = 1:size(T,1)
     psdxAllNormMean = squeeze(psdxAllNorm(:,:,:,kk));
@@ -29,14 +25,13 @@ for kk = 1:size(T,1)
     powerRatio(powerRatio(:)<0) = nan;
     powerRatio1(:,:,kk) = reshape(powerRatio,size(BW));
 end
-%%
 powerRatio2 = mean(powerRatio1,3,'omitnan');
 %%
 [~,indx1] = min(abs(freq-2));
 [~,indx2] = min(abs(freq-8));
 psdxAllNormMean = squeeze(mean(psdxAllNorm,4));
 % sum power between 2-8Hz
-scale = 1;
+
 powerAlpha = sum(psdxAllNormMean(:,:,indx1:indx2),3);
 hr4a = figure('Renderer', 'painters', 'Position', [100 100 900 300]);
 subplot(1,2,1);
@@ -48,6 +43,10 @@ hold on;
 overlayOutlines(coords,scale,'w');
 axis off; axis image;
 cb1 = colorbar;
+for i = 1:4
+    hold on;
+    scatter(pixel(i,2),pixel(i,1),12,'k','filled');
+end
 %
 subplot(1,2,2);
 im1 = imagesc(powerRatio2);
@@ -57,6 +56,10 @@ colorbar;
 set(im1, 'AlphaData', BW, 'AlphaDataMapping', 'scaled');
 hold on;
 overlayOutlines(coords,scale,'w');
+for i = 1:4
+    hold on;
+    scatter(pixel(i,2),pixel(i,1),12,'k','filled');
+end
 axis off; axis image;
 caxis([0,0.4]);
 cb2 = colorbar;

@@ -28,7 +28,7 @@ tdb = datestr(tda,'yyyymmdd');
 %% load data and block 
 fname = [mn '_' tdb '_' num2str(en)];
 session_root = fullfile(data_folder,'task','task_svd',fname);
-[U,V,t,mimg] = loadUVt1(session_root);                                 % load U,V, t
+[U,V,t,mimg] = loadUVt2(session_root);                                 % load U,V, t
 dV = [zeros(size(V,1),1) diff(V,[],2)];                                % get derivative of V
 expDir = dir(fullfile(session_root,'*_Block.mat'));
 load(fullfile(expDir.folder,expDir.name));
@@ -38,10 +38,12 @@ load(fullfile(expDir.folder,expDir.name));
 allPD2 = getPhotodiodeTime(session_root,win);
 %% rotaryEncoder
 sigName = 'rotaryEncoder';
-tlFile = fullfile(session_root, [sigName '.raw.npy']); 
-pd = readNPY(tlFile);
-tlFile = fullfile(session_root, [sigName '.timestamps_Timeline.npy']);
-tlTimes = readNPY(tlFile);
+load(fullfile(session_root,[sigName '_raw.mat']));                      % load pd
+load(fullfile(session_root,[sigName '_timestamps_Timeline.mat']));         % load tlTimes
+% tlFile = fullfile(session_root, [sigName '.raw.npy']); 
+% pd = readNPY(tlFile);
+% tlFile = fullfile(session_root, [sigName '.timestamps_Timeline.npy']);
+% tlTimes = readNPY(tlFile);
 tt = tsToT(tlTimes, numel(pd));  
 fs1 = 1/mean(diff(tt));
 wh = correctCounterDiscont(pd);

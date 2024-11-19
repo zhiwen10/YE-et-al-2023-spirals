@@ -20,6 +20,8 @@ epoch = 21000:31500;
 useGPU = 1;
 load(fullfile(data_folder,'revision','plane_wave','border_roi2.mat'));
 %%
+vxy_all = [];
+traceAmp_mean = [];
 for kk = 1:15
     tic
     mn = T.MouseID{kk};
@@ -60,7 +62,7 @@ for kk = 1:15
     vxyt2  = reshape(vxyt,size(vxyt,1)*size(vxyt,2),size(vxyt,3));
     vxyt3 = vxyt2(logical(bwroi(:)),:);  
     % vxyt3 = vxyt3./abs(vxyt3);                                                 % normalize to unit vector
-    vxy_all(kk,:) = sum(vxyt3,1)./abs(vxyt3,1);                                        % get sync index
+    vxy_all(kk,:) = sum(vxyt3,1)./sum(abs(vxyt3),1);                                        % get sync index
 end
-%%
-save(fullfile(save_folder,'angle_mean_all2.mat'),'vxy_all','traceAmp_mean');
+%
+save(fullfile(save_folder,'angle_mean_all3.mat'),'vxy_all','traceAmp_mean');

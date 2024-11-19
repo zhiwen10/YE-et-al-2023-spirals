@@ -1,6 +1,6 @@
 function getMeanMapSession(data_folder,save_folder)
 %% define params
-save_folder1 = fullifle(save_folder, 'individual');
+save_folder1 = fullfile(save_folder, 'individual');
 win = [0,5000];
 trialWin = [-4,4];
 downscale = 16;
@@ -43,7 +43,7 @@ for i = 1:4
             % load data and block 
             fname = [mn '_' tdb '_' num2str(en)];
             session_root = fullfile(data_folder,'task','task_svd',fname);
-            [U,V,t,mimg] = loadUVt1(session_root);                                 % load U,V, t
+            [U,V,t,mimg] = loadUVt2(session_root);                                 % load U,V, t
             dV = [zeros(size(V,1),1) diff(V,[],2)];                                % get derivative of V
             expDir = dir(fullfile(session_root,'*_Block.mat'));
             load(fullfile(expDir.folder,expDir.name));

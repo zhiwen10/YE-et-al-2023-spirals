@@ -1,15 +1,17 @@
-function [wheel_onset] = getWheelOnsetTime(serverRoot,block)
+function [wheel_onset] = getWheelOnsetTime(session_root,block)
 % get photodiode time
 win = [0,5000];
-allPD2 = getPhotodiodeTime(serverRoot,win);
+allPD2 = getPhotodiodeTime(session_root,win);
 ntrial = numel(block.events.endTrialValues);
 allPD2 = allPD2(1:ntrial);
 %% rotaryEncoder
 sigName = 'rotaryEncoder';
-tlFile = fullfile(serverRoot, [sigName '.raw.npy']); 
-pd = readNPY(tlFile);
-tlFile = fullfile(serverRoot, [sigName '.timestamps_Timeline.npy']);
-tlTimes = readNPY(tlFile);
+% tlFile = fullfile(session_root, [sigName '.raw.npy']); 
+% pd = readNPY(tlFile);
+% tlFile = fullfile(session_root, [sigName '.timestamps_Timeline.npy']);
+% tlTimes = readNPY(tlFile);
+load(fullfile(session_root,[sigName '_raw.mat']));                         % load pd
+load(fullfile(session_root,[sigName '_timestamps_Timeline.mat']));         % load tlTimes
 tt = tsToT(tlTimes, numel(pd));  
 wh = correctCounterDiscont(pd);
 %% wheel onset time

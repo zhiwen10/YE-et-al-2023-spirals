@@ -1,6 +1,7 @@
 function [hr4e,hr4f] = plotPowerSpectrumParams(T,data_folder,save_folder)
 %% plot all power spectrum
-data_folder1 =  fullfile(data_folder, 'spirals\spectrum\example_traces_005_8Hz');
+data_folder1 =  fullfile(data_folder, 'spirals','spirals_power_spectrum2',...
+    'example_traces_005_8Hz');
 nameList = {'VISp','RSP','SSp_ul','SSp_ll','SSp_m','SSp_n','SSp_bfd','MOs'};
 nameList2 = {'VISp','RSP','SSp','MOs'};
 freq_value = [0.05,0.1,0.2,0.5,1,2,4,6,8,10];
@@ -39,7 +40,7 @@ for kk = 1:size(T,1)
 end
 y_ratio_mean = mean(y_ratio_all,1);
 y_ratio_sem = std(y_ratio_all,[],1)/sqrt(15);
-%%
+%
 shadedErrorBar(x,y_ratio_mean,y_ratio_sem, 'lineprops', '-r');
 freq_value = [0.5,2,4,6,8,10];
 log_freq_value = log10(freq_value);
@@ -47,6 +48,7 @@ xticks(log_freq_value);
 xticklabels({'0.5','2','4','6','8','10'});
 xline(log_freq_value(3),'k--');
 xlim([log10(0.5),log10(10)]);
+%%
 print(hr4e, fullfile(save_folder,'FigR4e_power_diff'),'-dpdf', '-bestfit', '-painters');
 %%
 freqb = freq1(11:freq2);

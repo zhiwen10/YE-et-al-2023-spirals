@@ -1,6 +1,6 @@
 function hr2c = plotWaveRatio2(data_folder,save_folder)
 %% load plane wave index
-load(fullfile(data_folder,'revision','plane_wave','flow_mirror_all.mat'));
+load(fullfile(data_folder,'revision','plane_wave','flow_mirror_all2.mat'));
 vxy_all = cat(3,vxy_MO_left,vxy_MO_right,vxy_SSp_left,vxy_SSp_right);
 vxy_all2 = sum(vxy_all,3)./4;
 angle_all = angle(vxy_all2);
@@ -16,7 +16,7 @@ count_sample(count_sample<0) = 0;
 max_density = max(count_sample,[],1);
 spiral_peak_ratio = max_density./35;
 %% load plane wave index new sessions
-load(fullfile(data_folder,'revision','spirals_new','flow_mirror_all_newsession.mat'));
+load(fullfile(data_folder,'revision','plane_wave','flow_mirror_all_newsession2.mat'));
 vxy_all_new = cat(3,vxy_MO_left,vxy_MO_right,vxy_SSp_left,vxy_SSp_right);
 vxy_all2_new = sum(vxy_all_new,3)./4;
 angle_all = angle(vxy_all2_new);
@@ -26,7 +26,7 @@ for i = 1:4
     ratio_new(i,1) = sum(amp_temp>0.4)./numel(amp_temp);
 end
 %% load spiral wave peak density new sessions
-load(fullfile(data_folder,'revision','spirals_new',...
+load(fullfile(data_folder,'revision','plane_wave',...
     'spiralDensityLinePerSession_new.mat'))
 count_sample(count_sample<0) = 0;
 max_density_new = max(count_sample,[],1);
@@ -74,19 +74,24 @@ hold on;
 errorbar(mean_g8b_plane,mean_g8b_spiral,sem_g8b_spiral,sem_g8b_spiral,sem_g8b_plane,sem_g8b_plane,...
 'marker','None','lineWidth',1.5,'color','b');
 
+xlim([0.1,0.4]);
 ylim([0,0.16]);
 xlabel('Plane wave ratio');
 ylabel('Spiral wave ratio');
-xticks([0:0.1:0.3]);
-xticklabels({'0','10%','20%','30%'});
+xticks([0:0.1:0.4]);
+xticklabels({'0','10%','20%','30%','40%'});
 yticks([0:0.04:0.16]);
 yticklabels({'0','4%','8%','12%','16%'});
 
 %%
+[hh,pp] = ttest(ratio(12:15),spiral_peak_ratio(12:15)');
+%%
 [hh1,plane_p1] = ttest2(ratio(1:11),ratio(12:15));
 [hh2,plane_p2] = ttest2(ratio(1:11),ratio_new);
+[hh3,plane_p3] = ttest2(ratio(12:15),ratio_new);
 [hh1,spiral_p1] = ttest2(spiral_peak_ratio(1:11),spiral_peak_ratio(12:15));
 [hh2,spiral_p2] = ttest2(spiral_peak_ratio(1:11),spiral_peak_ratio_new);
+[hh3,spiral_p3] = ttest2(spiral_peak_ratio(12:15),spiral_peak_ratio_new);
 %%
 print(hr2c, fullfile(save_folder,'FigR2c_wave_ratio.pdf'),...
     '-dpdf', '-bestfit', '-painters');

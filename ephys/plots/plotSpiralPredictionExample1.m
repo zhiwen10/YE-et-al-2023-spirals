@@ -23,7 +23,7 @@ scale3 = 5;
 lineColor = 'k'; lineColor1 = 'k';
 hemi = [];
 %% get original and predicted dV by kernel regression.
-kk = 10; % zye60
+kk = 10; % zye41
 ops = get_session_info2(T,kk,data_folder);
 %%
 [U,V,t,mimg] = loadUVt1(ops.session_root);                                 % load U,V, t

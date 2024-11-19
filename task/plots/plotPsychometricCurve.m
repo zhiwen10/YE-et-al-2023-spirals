@@ -77,4 +77,16 @@ for m = 1:4
     set(gca,'box','off')
 end
 %%
+left_choice_mean_100 = mean(left_choice_all_mean(11,:));
+left_choice_sem_100 = std(left_choice_all_mean(11,:))./sqrt(4);
+left_choice_mean_6 = mean(left_choice_all_mean(7,:));
+left_choice_sem_6 = std(left_choice_all_mean(7,:))./sqrt(4);
+[h1,p1] = ttest(left_choice_all_mean(11,:),left_choice_all_mean(7,:));
+
+rt_mean_100 = mean(rt_median_all_mean(11,:));
+rt_sem_100 = std(rt_median_all_mean(11,:))./sqrt(4);
+rt_mean_6 = mean(rt_median_all_mean(7,:));
+rt_sem_6 = std(rt_median_all_mean(7,:))./sqrt(4);
+[h2,p2] = ttest(rt_median_all_mean(11,:),rt_median_all_mean(7,:));
+%%
 print(hs14a, fullfile(save_folder,['FigS14a_Psychometric_curve_all_mice.pdf']),'-dpdf', '-bestfit', '-painters');

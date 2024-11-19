@@ -1,4 +1,4 @@
-%% load atlas brain horizontal projection and outline
+%% manually set and check threshold for each session
 load(fullfile(data_folder,'tables','horizontal_cortex_atlas_50um.mat'));
 load(fullfile(data_folder,'tables',...
     'isocortex_horizontal_projection_outline.mat'));                       % 10um resolution

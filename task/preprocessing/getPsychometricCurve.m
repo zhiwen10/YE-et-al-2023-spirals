@@ -6,6 +6,7 @@ left_choice_all_mean = nan(11,4); left_choice_all_sem = nan(11,4);
 right_choice_all_mean = nan(11,4); right_choice_all_sem = nan(11,4);
 no_go_all_mean = nan(11,4); no_go_all_sem = nan(11,4);
 T_trial_counts_all = {};
+%%
 for m = 1:4
     %%
     clearvars -except rt_median_all_mean rt_median_all_sem left_choice_all_mean...
@@ -19,6 +20,7 @@ for m = 1:4
     left_choice_all = nan(11,sessions);
     right_choice_all = nan(11,sessions);
     no_go_all = nan(11,sessions);
+    %%
     for kk = 1:sessions
         %%
         clearvars -except T_session T1 sessions T_trial_counts_all kk m...
