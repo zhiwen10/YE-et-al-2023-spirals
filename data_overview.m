@@ -1,7 +1,7 @@
-githubdir = 'C:\Users\Steinmetz lab\Documents\git';                        % folder where repositories are hosted
+githubdir = '/Users/zhiwenye/Documents/git';                               % folder where repositories are hosted
 addpath(genpath(fullfile(githubdir, 'YE-et-al-2023-spirals')));            % paper repository
-%%
-data_folder = 'E:\spiral_data_share\data';                                 % specify data folder location after unzipping from figshare 
+%% load session table
+data_folder = '/Users/zhiwenye/Documents/data';                            % https://doi.org/10.6084/m9.figshare.27850707
 %% load widefield data
 T = readtable(fullfile(data_folder,'tables','spiralSessions3.xlsx'));      % read the session table
 kk = 1;                                                                    % take a look at first session in the table
@@ -10,7 +10,7 @@ tda = T.date(kk);                                                          % ses
 en = T.folder(kk);                                                         % experiment folder
 tdb = datestr(tda,'yyyymmdd');                                             % session date string
 subfolder = [mn '_' tdb '_' num2str(en)];                                  % full name identifier for the session
-session_root = fullfile(data_folder,'spirals\svd',subfolder);              % svd data location for the session
+session_root = fullfile(data_folder,'spirals','svd',subfolder);              % svd data location for the session
 [U,V,t,mimg] = loadUVt1(session_root);                                     % load svd components (U,V,t) from svd data folder
 dV = [zeros(size(V,1),1) diff(V,[],2)];                                    % take derivative of the V components
 U1 = reshape(U(:,:,1:50),size(U,1)*size(U,2),50);                          % only use 50 components (>99% variance), and reshape to 2d matrix
