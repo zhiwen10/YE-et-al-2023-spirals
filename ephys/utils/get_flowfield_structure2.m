@@ -7,7 +7,7 @@ params.lowpass = 0;
 params.gsmooth = 0;
 rate = 1;
 t = [0,1/35,2/35];
-useGPU = 1;
+useGPU = 0;
 frameStart = epochs(1); frameEnd = epochs(end);
 frameTemp = frameStart-35:frameEnd+35; % extra 2*35 frames before filter data 
 dV_raw_epoch = dV1(1:50,frameTemp);

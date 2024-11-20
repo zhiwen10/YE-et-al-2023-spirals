@@ -14,7 +14,7 @@ labels ={'correct','incorrect', 'miss'};
 %% plot correct mean maps
 data_folder1 = fullfile(data_folder,'task','task_mean_maps');
 load(fullfile(data_folder1,'task_mean_maps_all_mice.mat'));
-load('data_folder,'tables','task_mask_all_mice.mat');
+load(fullfile(data_folder,'tables','task_mask_all_mice.mat'));
 downscale = 16;
 BW2 = BW2(1:downscale:end,1:downscale:end);
 cmax = prctile(trace_mean_all(:),99.98); 

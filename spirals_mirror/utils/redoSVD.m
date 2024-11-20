@@ -44,7 +44,7 @@ totalVar = sum(diag(COV));
 % nSVD = min(size(COV,1)-2, nSVD);
 %% svd for COV matrix to get new Ua
 nSVD = 2000;
-useGPU = 1;
+useGPU = 0;
 if nSVD<1000 || size(COV,1)>1e4
     [Va, Sv]          = eigs(double(COV), nSVD);
 else

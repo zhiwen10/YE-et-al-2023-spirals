@@ -5,8 +5,8 @@ load(fullfile(data_folder,'tables',...
     'isocortex_horizontal_projection_outline.mat'));                       % 10um resolution
 [maskPath,st] = get_cortex_atlas_path(data_folder);                        % get cortical atlas path and tree
 %% only select cortex in the atlas
-tv = readNPY(fullfile(data_folder,'tables',...
-    'template_volume_10um.npy'));                                          % grey-scale "background signal intensity" 
+% tv = readNPY(fullfile(data_folder,'tables',...
+%     'template_volume_10um.npy'));                                          % grey-scale "background signal intensity" 
 av = readNPY(fullfile(data_folder,'tables',...
     'annotation_volume_10um_by_index.npy'));                               % the number at each pixel labels the area, see note below
 spath = string(st.structure_id_path);
@@ -17,16 +17,17 @@ st1  = st(spath2,:);
 projectedAtlas1(~Lia) = 0; 
 projectedTemplate1(~Lia) = 0;
 %%
-template1 =zeros(1320,1140);
-for k1 = 1:1320
-    for k2 = 1:1140
-        secondIndex = find(av(k1,:,k2)>1,60,'first');
-        if not(isempty(secondIndex))
-            template1(k1,k2) = tv(k1,secondIndex(end),k2);
-        end
-    end
-end
-template2 = template1(1:8:end,1:8:end);
+% template1 =zeros(1320,1140);
+% for k1 = 1:1320
+%     for k2 = 1:1140
+%         secondIndex = find(av(k1,:,k2)>1,60,'first');
+%         if not(isempty(secondIndex))
+%             template1(k1,k2) = tv(k1,secondIndex(end),k2);
+%         end
+%     end
+% end
+% template2 = template1(1:8:end,1:8:end);
+template2 = projectedTemplate1(1:8:end,1:8:end);
 %%
 point(8,:) = [115 105]; %% VISp
 point(7,:) = [97 79]; %% RSP
@@ -163,8 +164,7 @@ scale3 = 5/8;
 lineColor = 'k'; lineColor1 = 'w';
 hemi = 'left';
 hold on;
-plotOutline(maskPath(4),st,atlas1,he
-s1,hemi,scale3,lineColor1);
+plotOutline(maskPath(4),st,atlas1,hemi,scale3,lineColor1);
 plotOutline(maskPath(6:11),st,atlas1,hemi,scale3,lineColor1);
 plotOutline(maskPath(4:11),st,atlas1,hemi,scale3,lineColor);
 set(gca,'Ydir','reverse')

@@ -1,12 +1,13 @@
-githubdir = 'C:\Users\Steinmetz lab\Documents\git';                        % folder where repositories are hosted 
+githubdir = '/Users/zhiwenye/Documents/git';                               % folder where repositories are hosted
 addpath(genpath(fullfile(githubdir, 'YE-et-al-2023-spirals')));            % paper repository
 %% load session table
-data_folder = 'E:\spiral_data_share\data';   
-figure_folder = 'E:\spiral_data_share\figures';
+data_folder = '/Users/zhiwenye/Documents/data';                            % https://doi.org/10.6084/m9.figshare.27850707
+figure_folder = '/Users/zhiwenye/Documents/data/figures';                  % specify a folder to save figures
 %% load session table
 T = readtable(fullfile(data_folder,'tables','spiralSessions3.xlsx'));      % load session info
 %% Figure 3.
 save_folder = fullfile(figure_folder,'Fig3');
+mkdir(save_folder);
 h3b = plotCortexDivision(data_folder,save_folder);                         % plot division (AP, hemi)
 h3c = plotVarianceExplained(T,data_folder,save_folder);                    % plot variance explained from regression
 h3df = plotExampleKernelHEMI(data_folder,save_folder);                     % plot example hemi regression kernel
@@ -18,5 +19,6 @@ h3k = plotMatchingIndexAP(data_folder,save_folder);                        % plo
 close all;
 %% Extented Data Fig.11
 save_folder = fullfile(figure_folder,'FigS11');
+mkdir(save_folder);
 [hs11a, hs11b] = plotMapsSession(T,data_folder,save_folder);               % plot kernel maps across sessions
 close all;

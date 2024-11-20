@@ -60,12 +60,16 @@ Utr = reshape(UtDown,size(UtDown,1)*size(UtDown,2),size(UtDown,3));
 %% prepare regressor and signal for regression
 regressor1 = zscore(Vleft,[],2);
 regressor = regressor1(:,1:58000);
-Vregressor_GPU =gpuArray(regressor);
-
 signal1 = Uright*Vright(:,1:58000);
-signal_GPU = gpuArray(signal1);
 %% regression
-kk1 = gather(Vregressor_GPU'\signal_GPU');    
+useGPU = 0;   
+if useGPU ==1
+    Vregressor_GPU =gpuArray(regressor);
+    signal_GPU = gpuArray(signal1);
+    kk1 = gather(Vregressor_GPU'\signal_GPU'); 
+else
+    kk1 = regressor'\signal1';
+end
 k1_real = Uleft*kk1;
 %% prepare test regressor 
 data = UselectedLeft*V(:,78000:end);    

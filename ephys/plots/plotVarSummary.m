@@ -32,7 +32,7 @@ Ta1 = array2table(p1,...
 Ta1.name = {'thal vs str'; 'thal vs mb'; 'str vs mb'};
 Ta1 = [Ta1(:,3),Ta1(:,1:2)];
 %% neuron counts
-data_folder1 = fullfile(data_folder,'ephys\var_ordered');
+data_folder1 = fullfile(data_folder,'ephys','var_ordered');
 count1 = 1;
 numVar_all = {};
 for current_area = [1,2,4]

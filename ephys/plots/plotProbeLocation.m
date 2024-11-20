@@ -1,5 +1,5 @@
 function h4f = plotProbeLocation(T,data_folder,save_folder)
-mainfolder  = fullfile(data_folder,'ephys\probe_location');
+mainfolder  = fullfile(data_folder,'ephys','probe_location');
 [atlas, metaAVGT] = nrrdread(fullfile(data_folder,'tables',...
     'annotation_50.nrrd'));
 [maskPath,st] = get_cortex_atlas_path(data_folder);                        % get cortical atlas path and tree
@@ -53,7 +53,7 @@ for iplot = 1:3
             ops = get_session_info2(current_T,kk,data_folder);
             fname = [ops.mn '_' ops.tdb '_' num2str(ops.en)];
             probefolder_full = fullfile(mainfolder,fname);
-            pointDir = dir([probefolder_full '\*.csv']);
+            pointDir = dir(fullfile(probefolder_full, '*.csv'));
             for j = 1:numel(pointDir)
                 pointcsv = fullfile(probefolder_full,pointDir(j).name);
                 pointRaw = csvread(pointcsv);

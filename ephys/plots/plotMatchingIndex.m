@@ -127,7 +127,7 @@ for current_area = [1,2,4]
     edges_matrix3 = edges_matrix3(not(isnan(flow_2way2)));
     permute_id_matrix3  = permute_id_matrix3(not(isnan(flow_2way2)));
     pp2 = anovan(flow_2way3,{edges_matrix3 permute_id_matrix3},...
-        'model',2,'varnames',{'amp','permute'});
+        'model',2,'varnames',{'amp','permute'},'display','off');
     pp_all_area(:,count1) = pp2;
     %%
     % indx1 = not(isnan(flow_var1(1,:)));
@@ -216,7 +216,7 @@ for current_area = [1,2,4]
     edges_matrix3 = edges_matrix3(not(isnan(phase_2way2)));
     permute_id_matrix3  = permute_id_matrix3(not(isnan(phase_2way2)));
     pp2 = anovan(phase_2way3,{edges_matrix3 permute_id_matrix3},...
-        'model',2,'varnames',{'amp','permute'});
+        'model',2,'varnames',{'amp','permute'},'display','off');
     pp_all_area(:,count1) = pp2;
     
     h = []; p = [];
