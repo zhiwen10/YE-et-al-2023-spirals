@@ -74,7 +74,7 @@ hold on;
 errorbar(mean_g8b_plane,mean_g8b_spiral,sem_g8b_spiral,sem_g8b_spiral,sem_g8b_plane,sem_g8b_plane,...
 'marker','None','lineWidth',1.5,'color','b');
 
-xlim([0.1,0.4]);
+xlim([0,0.4]);
 ylim([0,0.16]);
 xlabel('Plane wave ratio');
 ylabel('Spiral wave ratio');
