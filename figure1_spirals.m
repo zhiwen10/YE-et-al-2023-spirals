@@ -20,7 +20,7 @@ hs1ab = plotExampleOscillation(data_folder,save_folder);                   % plo
 hs1c = plotPowerSpectrum4(T,data_folder,save_folder);                      % plot mean power map across 15 sessions
 hs1d = plotExamplePowerSpectrum2(T,data_folder,save_folder);
 hs1e = plotPowerRatio3(data_folder,save_folder);
-hs1f = plotPowerRatioRegression2(data_folder,save_folder);
+hs1f = plotPowerRatioRegression3(T,data_folder,save_folder);
 [hs1g,hs1h] = plotExampleSpiral2(T,data_folder,save_folder);               % plot LK_0003 example spirals
 [hs1i,hs1j] = plotExampleSpiral3(T,data_folder,save_folder);               % plot ZYE_0067 example spirals
 close all;
