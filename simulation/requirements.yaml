@@ -11,3 +11,4 @@ dependencies:
   - scikit-learn
   - scipy
   - tqdm
+  - pandas

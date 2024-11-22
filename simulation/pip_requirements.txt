@@ -1,0 +1,9 @@
+colorcet 
+matplotlib 
+notebook 
+scikit-learn 
+scipy 
+tqdm
+jupyter
+ipython
+pandas
