@@ -47,3 +47,18 @@ which are `getSpiralDetection.m` and `getSpiralGrouping.m`.
 
 ![Pipeline](https://github.com/zhiwen10/YE-et-al-2023-spirals/blob/main/images/pipeline.png)
 
+## Spiral simulation with coupled oscillators
+We provide example python scripts for isotropic model, circular bias model and mirror symmetry model.
+
+Instructions
+```bash
+# locate to folders with code
+cd root/simulation
+# Create new virtual environment
+conda env create --file requirements.yaml
+# Activate the environment
+conda activate spiralSim
+# open jupyter notebook and navitage to spiral_examples.ipynb
+jupyter notebook
+```
+
