@@ -28,8 +28,7 @@ Part1/2: https://doi.org/10.6084/m9.figshare.25884259
 Part2/2: https://doi.org/10.6084/m9.figshare.25884280
 
 In total, 2 parts together require 51 GB disk space after unzipping.
-After downloading and unzipping all repositories, place all 6 subfolders under a root data folder:
-`axons`, `ephys`, `revision`, `spirals`, `spirals_mirror`, `tables`.
+After downloading and unzipping all repositories, place all 6 subfolders under a root data folder.
 
 The code here will look for data inputs from these subfolders, after specifying the root data folder in the beginning of each main script.
 
