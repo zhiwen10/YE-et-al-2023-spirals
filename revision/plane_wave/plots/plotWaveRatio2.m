@@ -1,4 +1,4 @@
-function hr2c = plotWaveRatio2(data_folder,save_folder)
+function hs8m = plotWaveRatio2(data_folder,save_folder)
 %% load plane wave index
 load(fullfile(data_folder,'revision','plane_wave','flow_mirror_all2.mat'));
 vxy_all = cat(3,vxy_MO_left,vxy_MO_right,vxy_SSp_left,vxy_SSp_right);
@@ -40,10 +40,6 @@ mean_g8_spiral = mean(spiral_peak_ratio(12:15));
 std_g8_spiral = std(spiral_peak_ratio(12:15));
 sem_g8_spiral = std_g8_spiral./sqrt(4);
 
-mean_g8b_spiral = mean(spiral_peak_ratio_new);
-std_g8b_spiral = std(spiral_peak_ratio_new);
-sem_g8b_spiral = std_g8b_spiral./sqrt(4);
-
 mean_g7_plane = mean(ratio(1:11));
 std_g7_plane = std(ratio(1:11));
 sem_g7_plane = std_g7_plane./sqrt(11);
@@ -51,18 +47,12 @@ sem_g7_plane = std_g7_plane./sqrt(11);
 mean_g8_plane = mean(ratio(12:15));
 std_g8_plane = std(ratio(12:15));
 sem_g8_plane = std_g8_plane./sqrt(4);
-
-mean_g8b_plane = mean(ratio_new);
-std_g8b_plane = std(ratio_new);
-sem_g8b_plane = std_g8b_plane./sqrt(4);
 %%
-hr2c = figure('Renderer', 'painters', 'Position', [50 50 250 250]);
+hs8m = figure('Renderer', 'painters', 'Position', [50 50 250 250]);
 ax3 = subplot(1,1,1); 
 scatter(ratio(1:11),spiral_peak_ratio(1:11),[],'k');
 hold on;
 scatter(ratio(12:15),spiral_peak_ratio(12:15),[],'r');
-hold on;
-scatter(ratio_new,spiral_peak_ratio_new,[],'b');
 
 hold on;
 errorbar(mean_g7_plane,mean_g7_spiral,sem_g7_spiral,sem_g7_spiral,sem_g7_plane,sem_g7_plane,...
@@ -70,9 +60,7 @@ errorbar(mean_g7_plane,mean_g7_spiral,sem_g7_spiral,sem_g7_spiral,sem_g7_plane,s
 hold on;
 errorbar(mean_g8_plane,mean_g8_spiral,sem_g8_spiral,sem_g8_spiral,sem_g8_plane,sem_g8_plane,...
 'marker','None','lineWidth',1.5,'color','r');
-hold on;
-errorbar(mean_g8b_plane,mean_g8b_spiral,sem_g8b_spiral,sem_g8b_spiral,sem_g8b_plane,sem_g8b_plane,...
-'marker','None','lineWidth',1.5,'color','b');
+
 
 xlim([0,0.4]);
 ylim([0,0.16]);
@@ -87,11 +75,7 @@ yticklabels({'0','4%','8%','12%','16%'});
 [hh,pp] = ttest(ratio(12:15),spiral_peak_ratio(12:15)');
 %%
 [hh1,plane_p1] = ttest2(ratio(1:11),ratio(12:15));
-[hh2,plane_p2] = ttest2(ratio(1:11),ratio_new);
-[hh3,plane_p3] = ttest2(ratio(12:15),ratio_new);
 [hh1,spiral_p1] = ttest2(spiral_peak_ratio(1:11),spiral_peak_ratio(12:15));
-[hh2,spiral_p2] = ttest2(spiral_peak_ratio(1:11),spiral_peak_ratio_new);
-[hh3,spiral_p3] = ttest2(spiral_peak_ratio(12:15),spiral_peak_ratio_new);
 %%
-print(hr2c, fullfile(save_folder,'FigR2c_wave_ratio.pdf'),...
+print(hs8m, fullfile(save_folder,'FigS8m_wave_ratio.pdf'),...
     '-dpdf', '-bestfit', '-painters');

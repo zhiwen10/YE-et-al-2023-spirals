@@ -1,4 +1,4 @@
-function hr2b = plotWaveIndexAmp(data_folder,save_folder)
+function hs8l = plotWaveIndexAmp(data_folder,save_folder)
 %%
 load(fullfile(data_folder,'revision','plane_wave','flow_mirror_all.mat'));
 load(fullfile(data_folder,'revision','plane_wave','flow_mirror_amp_all.mat'));
@@ -25,7 +25,7 @@ for kk = 1:15
 end
 sync_amp_bins_mean = mean(sync_amp_bins,2,'omitnan');
 sync_amp_bins_sem = std(sync_amp_bins,[],2,'omitnan')./sqrt(15);
-hr2b = figure('Renderer', 'painters', 'Position', [50 50 250 350]);
+hs8l = figure('Renderer', 'painters', 'Position', [50 50 250 350]);
 errorbar(edges(1,1:8)*100,sync_amp_bins_mean(1:8),sync_amp_bins_sem(1:8),'k');
 xticks([0,0.5,1]);
 xticklabels({'0','0.5','1'});
@@ -35,5 +35,5 @@ xlim([0,1]);
 ylim([0.2,0.6]);
 yticks([0.2:0.1:0.6]);
 yticklabels({'0.2','0.3','0.4','0.5','0.6'});
-print(hr2b, fullfile(save_folder,'FigR2b_planewave_index_vs_amp.pdf'),...
+print(hs8l, fullfile(save_folder,'FigS8l_planewave_index_vs_amp.pdf'),...
     '-dpdf', '-bestfit', '-painters');

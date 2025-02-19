@@ -36,8 +36,6 @@ freq = [2 8];
 hs3ab = plotExampleDataVsFft(T,data_folder,save_folder);                   % plot example epoch of data and 3d-fft
 hs3c = plotMapDataVsFftn(data_folder,save_folder,freq);                    % plot density map (combine all sessions) for data and 3d-fft
 [hs3d,hs3e] = plotScatterDataVsFftn(T,data_folder,save_folder,freq);       % plot peak desnity across sessions for data and 3d-fft
-[hs3f,hs3g] = plotScatterDataVsFftn_Freq2(T,data_folder,save_folder);
-hs3h = plotSpiralDensity_freq2(data_folder,save_folder);
 close all;
 %% Extended Data Fig.4
 save_folder = fullfile(figure_folder, 'FigS4');
@@ -72,6 +70,12 @@ mkdir(save_folder);
 hs8gh = plotMotionEnergyAmpX(T,data_folder,save_folder);                   % plot 2-8Hz amp vs Motion energy relationship
 hs8i = plotAmpIndex(data_folder,save_folder);                              % plot 2-8Hz amp vs index across sessions
 hs8j = plotMotionEnergyIndex(data_folder,save_folder);                     % plot motion energy vs index across sessions
+hs8k = plotExamplePlaneWaveSeries2(data_folder,save_folder);               % plot example plane wave
+hs8l = plotWaveIndexAmp(data_folder,save_folder);                          % plot plane wave index vs 2-8 Hz amp
+hs8m = plotWaveRatio2(data_folder,save_folder);                            % plot plane wave vs sprial wave ratio
+hs8n = plotExamplePlaneWave(data_folder,save_folder);                      % plot example plane wave symmetry 
+hs8o = plotSymmetry4(data_folder,save_folder);                             % plot plane wave angle distribution across frames
+hs8p = plotBorderPlaneWave(data_folder,save_folder);                       % plot plane wave angle distribution on the border
 close all;
 %% Extended Data Fig.9
 save_folder = fullfile(figure_folder, 'FigS9');

@@ -1,4 +1,4 @@
-function hr2e = plotSymmetry4(data_folder,save_folder)
+function hs8o = plotSymmetry4(data_folder,save_folder)
 load(fullfile(data_folder,'revision','plane_wave','flow_mirror_all.mat'));
 vxy_all = cat(3,vxy_MO_left,vxy_MO_right,vxy_SSp_left,vxy_SSp_right);
 angle_all = angle(vxy_all);
@@ -29,7 +29,7 @@ end
 ratioM_mean = mean(ratioM,1);
 ratioM_sem = std(ratioM,1)./sqrt(15);
 %%
-hr2e = figure('Renderer', 'painters', 'Position', [50 50 700 300]);
+hs8o = figure('Renderer', 'painters', 'Position', [50 50 700 300]);
 subplot(1,2,1);
 angle_all1 = squeeze(angle_all(:,:,4));
 angle_all1 = angle_all1(:);
@@ -70,5 +70,5 @@ ylim([-pi,pi]);
 yticks([-pi:pi/2:pi]);
 yticklabels({'-\pi','-\pi/2','0','\pi/2','\pi'});
 %%
-print(hr2e, fullfile(save_folder,'FigR2e_wave_symmetry.pdf'),...
+print(hs8o, fullfile(save_folder,'FigS8o_wave_symmetry.pdf'),...
     '-dpdf', '-bestfit', '-painters');

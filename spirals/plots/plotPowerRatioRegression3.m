@@ -1,4 +1,4 @@
-function hr5beh = plotPowerRatioRegression2(T, data_folder,save_folder)
+function hs1f = plotPowerRatioRegression2(T, data_folder,save_folder)
 %%
 nameList = {'VISp','RSP','SSp_ul','SSp_ll','SSp_m','SSp_n','SSp_bfd','MOs'};
 nameList2 = {'VISp','RSP','SSp','MOs'};
@@ -71,7 +71,7 @@ sem_alpha_ratio_all = std(alpha_ratio_all)./sqrt(15);
 [h1,p1] = ttest2(power_ratio_ssp(1:11),power_ratio_ssp(12:15));
 [h2,p2] = ttest2(alpha_ratio_all(1:11),alpha_ratio_all(12:15));
 %%
-hr5beh = figure('Renderer', 'painters', 'Position', [100 100 1200 300]);
+hs1f = figure('Renderer', 'painters', 'Position', [100 100 1200 300]);
 ax1 = subplot(1,4,1);
 scatter(max_density(1:11),power_ratio_ssp(1:11),'k','filled');
 hold on;
@@ -156,4 +156,4 @@ xlim([log10(0.5),log10(10)]);
 xlabel('log10(frequency)');
 ylabel('log10(power) (dF/F2)');
 %%
-print(hr5beh, fullfile(save_folder,'FigR5beh_spiral_density_vs_power2'),'-dpdf', '-bestfit', '-painters');
+print(hs1f, fullfile(save_folder,'FigS1f_spiral_density_vs_power2'),'-dpdf', '-bestfit', '-painters');

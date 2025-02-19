@@ -1,7 +1,7 @@
-githubdir = '/Users/zhiwenye/Documents/git';                               % folder where repositories are hosted
+githubdir = 'C:\Users\Steinmetz lab\Documents\git';                        % folder where repositories are hosted
 addpath(genpath(fullfile(githubdir, 'YE-et-al-2023-spirals')));            % paper repository
 %% load session table
-data_folder = '/Users/zhiwenye/Documents/data';                            % https://doi.org/10.6084/m9.figshare.27850707
+data_folder = 'E:\spiral_data_share\data';                                 % https://doi.org/10.6084/m9.figshare.27850707
 %% load widefield data
 T = readtable(fullfile(data_folder,'tables','spiralSessions3.xlsx'));      % read the session table
 kk = 1;                                                                    % take a look at first session in the table
@@ -89,19 +89,3 @@ plot(tt1,MUA_sum+1.5,'k');                                                 % plo
 xlim([390,410]);                                                           % let's zoom in on 20 seconds
 legend({'widefield','MUA'})
 xlabel('Time (s)');
-%% load task data
-mn = 'ZYE_0085';
-load(fullfile(data_folder,'task','task_outcome',...
-    [mn '_task_outcome.mat']));                                            % load task outcome for all trials in ZYE_0085
-load(fullfile(data_folder,'task','task_outcome',...
-    [mn '_task_trial_ID.mat']));                                           % load session id idnex for all trials in ZYE_0085
-T_session = readtable(fullfile(data_folder,...
-    'task','sessions',[mn '.xlsx']));                                      % table for all sessions in ZYE_0085
-T1 = T_session(T_session.label == "task",:);
-T1 = T1((T1.hit_left>0.7 & T1.hit_right>0.7),:);                           % get a list of active task sessions in ZYE_0085
-session = 6;                                                               
-trial_session = trial_all(trial_all.session == session,:);                 % take a look at all trials in session NO.6
-trial_indx = 576;                                                          
-trial_session(trial_indx,:)                                                % take a look at trial 576 in session 6
-h1 = plotWfMapSingleTrial(data_folder,T1,session,trial_indx);              % plot widefield maps of this trial
-h2 = plotWfTraceSingleTrial(data_folder,T1,session,trial_indx);            % plot pixle traces of this trial
