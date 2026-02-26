@@ -1,0 +1,14 @@
+name: spiralSim
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python == 3.11
+  - colorcet
+  - matplotlib
+  - notebook
+  - numpy
+  - scikit-learn
+  - scipy
+  - tqdm
+  - pandas

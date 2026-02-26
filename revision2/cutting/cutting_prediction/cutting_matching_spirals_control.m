@@ -1,0 +1,180 @@
+githubdir2 = 'C:\Users\Steinmetz lab\Documents\git';
+addpath(genpath(fullfile(githubdir2, 'YE-et-al-2023-spirals')));            % paper repository
+%% load atlas brain horizontal projection and outline
+data_folder = 'E:\spiral_data_share\data'; 
+load(fullfile(data_folder,'tables','horizontal_cortex_atlas_50um.mat'));
+load(fullfile(data_folder,'tables',...
+    'isocortex_horizontal_projection_outline.mat'));                       % 10um resolution
+[maskPath,st] = get_cortex_atlas_path(data_folder);                        % get cortical atlas path and tree
+root1 = '/997/';
+ctx = '/997/8/567/688/';
+% area_index:{MO_L_index,MO_R_index,SSp_L_index,SSp_R_index};
+area_index = getAreaIndex(data_folder);
+BW = logical(projectedAtlas1);
+%%
+data_folder = 'E:\task2';
+list_folder = 'C:\Users\Steinmetz lab\Documents\git\YE-et-al-2023-spirals\revision2\cutting';
+T1 = readtable(fullfile(list_folder,'cutting_session_list.xlsx'));
+T2 = T1(ismember(T1.area,'SSp') & ismember(T1.hemisphere,'bilateral'),:);
+sessions = unique(T2.session_id);
+%%
+folder1 = 'E:\task2';
+spiral_folder = 'E:\task2\spirals\spirals_grouping';
+spiral_folder_predicted = 'E:\manipulation_prediction\cutting_prediction\spirals\spirals_grouping';
+svd_predict_folder = 'E:\manipulation_prediction\cutting_prediction\prediction_svd';
+%%
+i = 3;
+%% load raw image with cutting
+Ti = T2(T2.session_id == sessions(i) & strcmp(T2.label,'cutting'),:);
+mn = Ti.MouseID{1};
+tda = Ti.date(1);
+en = Ti.folder(1);
+tdb = datestr(tda,'yyyymmdd');
+fname = [mn '_' tdb '_' num2str(en)];
+session_root = fullfile(folder1,'task_svd',fname);
+[U1,V1,t1,mimg1] = loadUVt2(session_root); 
+dV1 = [zeros(size(V1,1),1) diff(V1,[],2)];
+dV1 = dV1(1:50,:);
+load(fullfile(session_root, 'meanImage.mat')); %mimg
+load(fullfile(folder1,'rfmap',mn,[fname '.mat']));
+mimgt1 = imwarp(mimg1,tform,'OutputView',imref2d(size(projectedAtlas1)));
+%% load raw spirals
+clear archiveCell spirals_raw
+load(fullfile(spiral_folder,[fname '_spirals_group_fftn.mat']));
+spirals_raw = transformGroupedSprials(archiveCell,tform);
+spirals_grouped_raw = [];
+for k = 1:4
+    clear brain_index_temp liaL locbL
+    brain_index_temp = area_index{k}; 
+    [liaL,locbL] = ismember(spirals_raw(:,1:2),brain_index_temp,'rows');
+    spirals_grouped_raw{k} = spirals_raw(liaL,:);
+end
+%% load raw svd
+params.downscale = 8; params.lowpass = 0; params.gsmooth = 0;
+rate = 1; freq = [2,8];
+U1d = U1(1:8:end,1:8:end,1:50); 
+[trace2d_raw,~,tracePhase_raw] = spiralPhaseMap_freq(U1d,dV1,t1,params,freq,rate);
+%%
+% U_predict = U1d;
+% U_predict = imtranslate(U_predict,[0,5]);
+% dV_predict = dV1;
+% [trace2d1,~,tracePhase_predict] = spiralPhaseMap_freq(U_predict,dV_predict,t1,params,freq,rate);
+%%
+spirals_predict = spirals_raw;
+figure;
+hist_bin = 40;
+pixSize = 0.01; % mm/pix
+pixArea = pixSize^2;
+frame_all = numel(t1);
+ax1 = subplot(1,1,1);
+[unique_spirals,scolor,low_color_bound,high_color_bound] = density_color_plot(spirals_predict,hist_bin);
+unique_spirals_unit = unique_spirals(:,3)/(hist_bin*hist_bin*pixArea); % spiral counts/mm^2
+unique_spirals_unit = unique_spirals_unit./frame_all*35; % spirals/(mm^2*s)
+[ax1,cb1]= plotDesnity(ax1,unique_spirals,unique_spirals_unit,coords,maskPath,BW,st,atlas1);
+caxis([0,2]);
+axis on;
+%%
+clear index
+sprials_temp = spirals_predict;
+index1 = (sprials_temp(:,1)>350 & sprials_temp(:,1)<450 &...
+    sprials_temp(:,2)>400 & sprials_temp(:,2)<500 );
+
+index2 = (sprials_temp(:,1)>400 & sprials_temp(:,1)<550 &...
+    sprials_temp(:,2)>250 & sprials_temp(:,2)<350);
+
+index3 = (sprials_temp(:,1)>750 & sprials_temp(:,1)<850 &...
+    sprials_temp(:,2)>400 & sprials_temp(:,2)<500 );
+
+index4 = (sprials_temp(:,1)>650 & sprials_temp(:,1)<800 &...
+    sprials_temp(:,2)>250 & sprials_temp(:,2)<350);
+ 
+index = any([index1,index2,index3,index4],2);
+
+% MO_index = cat(1,area_index{1},area_index{2});
+% [index,b] = ismember(spirals_predict(:,1:2),MO_index,'rows');
+% spirals_predict1 = spirals_predict(index,:);
+%%
+mimg1d = imtranslate(mimg1,[0,5*8]); 
+% mimg1d = mimg1;
+[centers1,radius1] = getCraniotomyROI(mimg1d);
+centers1 = centers1/8;
+radius1 = radius1/8;
+%%
+figure;
+subplot(1,2,1); imagesc(mimg0); axis image;
+subplot(1,2,2); imagesc(mimg1); axis image;
+%%
+tracePhase_predict = tracePhase_raw;
+tracePhase_predict = imtranslate(tracePhase_predict,[0,5]);
+
+th2 = 1:5:360; 
+h1 = figure('Renderer', 'painters', 'Position', [100 100 600 300]);
+ax1 = subplot(1,2,1);
+frame_select = unique(spirals_predict(:,5));
+tracePhase_predict1 = tracePhase_predict(:,:,frame_select);
+tracePhase_raw1 = tracePhase_raw(:,:,frame_select);
+phase_diff = angdiff(tracePhase_predict1,tracePhase_raw1);
+ra = circ_r(phase_diff, [], [], 3);
+imagesc(1-ra);
+hold on;
+for kk = 1:2
+    px1 = centers1(kk,1);
+    py1 = centers1(kk,2);
+    r = radius1(kk,1);
+    cx2 = r*cosd(th2)+px1;
+    cy2 = r*sind(th2)+py1;
+    hold on;
+    plot([cx2 cx2(1)],[cy2 cy2(1)],'k','LineWidth',1);          % draw the circle at max radius
+end
+axis image; axis off;
+% colormap(ax1,'hot');
+colormap(ax1,'parula');
+caxis([0,0.6]);
+colorbar;
+title('Angular variance');
+
+tracePhase_predict = tracePhase_raw;
+tracePhase_predict = imtranslate(tracePhase_predict,[0,-5]);
+ax1 = subplot(1,2,2);
+frame_select = unique(spirals_predict(:,5));
+tracePhase_predict1 = tracePhase_predict(:,:,frame_select);
+tracePhase_raw1 = tracePhase_raw(:,:,frame_select);
+phase_diff = angdiff(tracePhase_predict1,tracePhase_raw1);
+rb = circ_r(phase_diff, [], [], 3);
+imagesc(1-rb);
+hold on;
+for kk = 1:2
+    px1 = centers1(kk,1);
+    py1 = centers1(kk,2);
+    r = radius1(kk,1);
+    cx2 = r*cosd(th2)+px1;
+    cy2 = r*sind(th2)+py1;
+    hold on;
+    plot([cx2 cx2(1)],[cy2 cy2(1)],'k','LineWidth',1);          % draw the circle at max radius
+end
+axis image; axis off;
+% colormap(ax1,'hot');
+colormap(ax1,'parula');
+caxis([0,0.6]);
+colorbar;
+title('Angular variance');
+%%
+ra1 = imtranslate(ra,[0,-2.5]);
+rb1 = imtranslate(rb,[0,2.5]);
+rc1 = ra1-rb1;
+h1 = figure('Renderer', 'painters', 'Position', [100 100 600 300]);
+ax1 = subplot(1,2,1);
+imagesc(rc1);
+axis image; axis off;
+% colormap(ax1,'hot');
+colormap(ax1,'parula');
+caxis([0,0.6]);
+colorbar;
+
+ax1 = subplot(1,2,2);
+imagesc(1-rb1);
+axis image; axis off;
+% colormap(ax1,'hot');
+colormap(ax1,'parula');
+caxis([0,0.6]);
+colorbar;
