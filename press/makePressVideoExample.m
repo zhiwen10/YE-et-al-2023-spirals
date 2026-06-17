@@ -80,9 +80,11 @@ axis(ax3,'image'); axis(ax3,'off');
 set(ax3,'YDir','reverse');
 hold(ax3,'on');
 
-plotOutline(maskPath(1:11), st, atlas1, hemi, scale3, lineColor);
+[area1] = plotOutline2(maskPath(1:11), st, atlas1, hemi, scale3, lineColor);
 set(findobj(ax3,'Type','line'),'LineWidth',lineW);
 BW3 = logical(imresize(BW2,[imgH,imgW]));
+BW4 = imresize(area1,[imgH,imgW]);
+BW3 = BW3 & BW4;
 set(im_phase,'AlphaData',BW3,'AlphaDataMapping','scaled');
 
 mgn = round(0.05*imgW);
