@@ -13,7 +13,7 @@ subfolder    = [mn '_' tdb '_' num2str(en)];
 session_root = fullfile(data_folder,'spirals','svd',subfolder);
 [U,V,t,mimg] = loadUVt1(session_root);
 dV = [zeros(size(V,1),1) diff(V,[],2)];
-load(fullfile(data_folder,'tables','mask_ZYE12_3.mat'));
+load(fullfile(data_folder,'tables','mask_ZYE12.mat'));
 
 %% registration
 fname = [mn '_' tdb '_' num2str(en)];
