@@ -16,6 +16,7 @@ h1b = plotSpiralSequence3(data_folder,save_folder);                        % plo
 h1d = plotSpiralDuration(T,data_folder,save_folder);                       % plot spiral duration ratio vs scrambled distribution
 h1e = plotSpiralDensityAllSessions(data_folder,save_folder);               % plot spiral desnity map (combine all sessions)
 h1fg = plotSpiralSpeedSummary(T,data_folder,save_folder);                  % plot spiral speeds for all spiral radii
+makePressVideoExample(data_folder, save_folder);
 close all;
 %% Extended Data Fig.1
 save_folder = fullfile(figure_folder, 'FigS1');
