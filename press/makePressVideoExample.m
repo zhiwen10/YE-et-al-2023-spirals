@@ -1,5 +1,7 @@
 function makePressVideoExample(data_folder, save_folder)
-%% atlas
+%% atlas (use same sources as original video for exact registration match)
+load('C:\Users\Steinmetz lab\OneDrive - UW\Documents\MATLAB\widefield_DIY\phase\atlasMaskArea\segmentationCode\projectedOutlineAtlas.mat');
+[projectedAtlas1,projectedTemplate1] = filterProjectedAtlas(projectedAtlas,projectedTemplate);
 load(fullfile(data_folder,'tables','horizontal_cortex_atlas_50um.mat'));
 load(fullfile(data_folder,'tables','isocortex_horizontal_projection_outline.mat'));
 [maskPath,st] = get_cortex_atlas_path(data_folder);
@@ -15,9 +17,10 @@ session_root = fullfile(data_folder,'spirals','svd',subfolder);
 dV = [zeros(size(V,1),1) diff(V,[],2)];
 load(fullfile(data_folder,'tables','mask_ZYE12.mat'));
 
-%% registration
-fname = [mn '_' tdb '_' num2str(en)];
-load(fullfile(data_folder,'tables',[fname '_tform_2.mat']));
+%% registration (use original tform, not tform_2)
+regist_folder = 'C:\Users\Steinmetz lab\OneDrive - UW\Documents\MATLAB\widefield_DIY\phase\reducedRankRegression\registration';
+fname = [mn '_' tdb '_' num2str(en) '_tform'];
+load(fullfile(regist_folder, fname));
 
 %% parameters
 params.downscale = 4;
