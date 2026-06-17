@@ -1,5 +1,5 @@
 function [projectedAtlas1,projectedTemplate1] = filterProjectedAtlas(projectedAtlas,projectedTemplate)
-dfolder = 'C:\Users\Steinmetz lab\Documents\git\allenCCF-Zhiwen\AllenCCFMap';
+dfolder = 'C:\Users\Steinmetz lab\OneDrive - UW\Documents\git\allenCCF-Zhiwen\AllenCCFMap';
 st = loadStructureTree(fullfile(dfolder,'structure_tree_safe_2017.csv')); % a table of what all the labels mean
 spath = string(st.structure_id_path);
 % only select cortex in the atlas

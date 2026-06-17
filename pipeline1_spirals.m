@@ -1,4 +1,4 @@
-githubdir = 'C:\Users\Steinmetz lab\Documents\git';                        % folder where repositories are hosted
+githubdir = 'C:\Users\Steinmetz lab\OneDrive - UW\Documents\git';                        % folder where repositories are hosted
 addpath(genpath(fullfile(githubdir, 'YE-et-al-2023-spirals')));            % paper repository
 %% load session table
 data_folder = 'E:\spiral_data_share\data';     
