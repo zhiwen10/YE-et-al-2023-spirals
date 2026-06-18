@@ -89,7 +89,7 @@ set(im_phase,'AlphaData',BW3,'AlphaDataMapping','scaled');
 
 mgn = round(0.05*imgW);
 xR  = imgW - mgn;
-xL  = xR - barLen_px;1
+xL  = xR - barLen_px;
 yB  = imgH - 45;
 line(ax3,[xL xR],[yB yB],'Color',textColor,'LineWidth',3);
 text(ax3,(xL+xR)/2,yB+5,'2 mm','Color',textColor,'FontSize',18,...
