@@ -29,7 +29,7 @@ params.gsmooth   = 0;
 rate      = 0.1;
 % tStart    = 1680.92; tEnd = 1681.92;
 tStart    = 1681.44; tEnd = 1681.88;
-outScale  = 1;
+outScale  = 1.5;
 frameRate = 30;
 lineW     = 3.5;
 textColor = 'k';
@@ -38,7 +38,7 @@ lineColor = 'k';
 hemi      = [];
 ffmpegExe = 'ffmpeg';
 gifStride = 2;
-gifScale  = 0.1;
+gifScale  = 0.5;
 
 %% warp to atlas and downscale
 Utransformed    = imwarp(U,tform,'OutputView',imref2d(size(projectedAtlas1)));
