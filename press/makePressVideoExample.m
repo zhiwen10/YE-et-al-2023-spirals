@@ -68,8 +68,10 @@ um_per_pix = 10 * params.downscale;
 barLen_px  = 2000 / um_per_pix;
 
 %% figure (axes fills frame, no padding)
+figW = 2*round(imgW*outScale/2);
+figH = 2*round(imgH*outScale/2);
 ha = figure('Renderer','painters','Color','w','Units','pixels', ...
-            'Position',[100 100 2*round(imgW*outScale/2) 2*round(imgH*outScale/2)]);
+            'Position',[100 100 figW figH]);
 ha.MenuBar = 'none'; ha.ToolBar = 'none'; ha.Resize = 'off';
 ax3 = axes('Parent',ha,'Position',[0 0 1 1]);
 
@@ -106,7 +108,8 @@ open(v);
 for i = 1:nFrames
     set(im_phase,'CData',tracePhase1(:,:,i));
     text_ts.String = sprintf('%.1f s',qt1(i));
-    writeVideo(v,getframe(ha));
+    fr = getframe(ha);
+    writeVideo(v, imresize(fr.cdata, [figH figW]));
 end
 close(v);
 
