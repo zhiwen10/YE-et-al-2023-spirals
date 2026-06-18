@@ -136,7 +136,7 @@ end
 %% small gif (~1/4 dimensions) for sharing (<1 MB)
 gifSmall = [video_name '_small.gif'];
 palSmall = [video_name '_palette_small.png'];
-vfSmall  = sprintf('fps=%g,scale=trunc(iw*0.5/2)*2:-2:flags=lanczos',gifFps);
+vfSmall  = sprintf('fps=%g,scale=trunc(iw*0.75/2)*2:-2:flags=lanczos',gifFps);
 cmds1 = sprintf('%s -y -i "%s" -vf "%s,palettegen=stats_mode=diff" "%s"',...
                 ffmpegExe,mp4File,vfSmall,palSmall);
 cmds2 = sprintf(['%s -y -i "%s" -i "%s" -lavfi '...
