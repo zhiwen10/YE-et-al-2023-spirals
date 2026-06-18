@@ -69,7 +69,7 @@ barLen_px  = 2000 / um_per_pix;
 
 %% figure (axes fills frame, no padding)
 ha = figure('Renderer','painters','Color','w','Units','pixels', ...
-            'Position',[100 100 imgW*outScale imgH*outScale]);
+            'Position',[100 100 2*round(imgW*outScale/2) 2*round(imgH*outScale/2)]);
 ha.MenuBar = 'none'; ha.ToolBar = 'none'; ha.Resize = 'off';
 ax3 = axes('Parent',ha,'Position',[0 0 1 1]);
 
@@ -115,7 +115,7 @@ mp4File = [video_name '.mp4'];
 gifFile = [video_name '.gif'];
 palFile = [video_name '_palette.png'];
 gifFps  = frameRate / gifStride;
-vf = sprintf('fps=%g,scale=iw*%g:-1:flags=lanczos',gifFps,gifScale);
+vf = sprintf('fps=%g,scale=trunc(iw*%g/2)*2:-2:flags=lanczos',gifFps,gifScale);
 cmd1 = sprintf('%s -y -i "%s" -vf "%s,palettegen=stats_mode=diff" "%s"',...
                ffmpegExe,mp4File,vf,palFile);
 cmd2 = sprintf(['%s -y -i "%s" -i "%s" -lavfi '...
