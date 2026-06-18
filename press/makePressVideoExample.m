@@ -29,16 +29,16 @@ params.gsmooth   = 0;
 rate      = 0.1;
 % tStart    = 1680.92; tEnd = 1681.92;
 tStart    = 1681.44; tEnd = 1681.88;
-outScale  = 2;
+outScale  = 1;
 frameRate = 30;
-lineW     = 3.0;
+lineW     = 3.5;
 textColor = 'k';
 scale3    = 5 / params.downscale;
 lineColor = 'k';
 hemi      = [];
 ffmpegExe = 'ffmpeg';
 gifStride = 2;
-gifScale  = 0.75;
+gifScale  = 0.1;
 
 %% warp to atlas and downscale
 Utransformed    = imwarp(U,tform,'OutputView',imref2d(size(projectedAtlas1)));
@@ -89,13 +89,13 @@ set(im_phase,'AlphaData',BW3,'AlphaDataMapping','scaled');
 
 mgn = round(0.05*imgW);
 xR  = imgW - mgn;
-xL  = xR - barLen_px;
-yB  = imgH - 22;
+xL  = xR - barLen_px;1
+yB  = imgH - 45;
 line(ax3,[xL xR],[yB yB],'Color',textColor,'LineWidth',3);
-text(ax3,(xL+xR)/2,yB+4,'2 mm','Color',textColor,'FontSize',14,...
+text(ax3,(xL+xR)/2,yB+5,'2 mm','Color',textColor,'FontSize',18,...
      'HorizontalAlignment','center','VerticalAlignment','top');
 text_ts = text(ax3,0.03,0.95,sprintf('%.1f s',qt1(1)),...
-    'Units','normalized','FontSize',18,'FontWeight','bold','Color',textColor);
+    'Units','normalized','FontSize',26,'FontWeight','bold','Color',textColor);
 
 %% write mp4
 video_name = fullfile(save_folder,[subfolder '_' num2str(tStart) '-' num2str(tEnd)]);
