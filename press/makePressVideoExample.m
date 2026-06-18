@@ -127,7 +127,7 @@ mp4File = [video_name '.mp4'];
 gifFile = [video_name '.gif'];
 palFile = [video_name '_palette.png'];
 gifFps  = frameRate / gifStride;
-vf = sprintf('fps=%g,scale=trunc(iw*%g/2)*2:-2:flags=lanczos',gifFps,gifScale);
+vf = sprintf('fps=%g,scale=trunc(iw/2)*2:-2:flags=lanczos',gifFps);
 cmd1 = sprintf('%s -y -i "%s" -vf "%s,palettegen=stats_mode=diff" "%s"',...
                ffmpegExe,mp4File,vf,palFile);
 cmd2 = sprintf(['%s -y -i "%s" -i "%s" -lavfi '...
