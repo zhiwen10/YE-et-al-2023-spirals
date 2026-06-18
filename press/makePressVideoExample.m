@@ -110,12 +110,12 @@ for i = 1:nFrames
 end
 close(v);
 
-%% rescale mp4 to native image dimensions (imgW x imgH)
+%% rescale mp4 to match gif output dimensions (imgW x imgH x gifScale)
 mp4Raw  = [video_name '_raw.mp4'];
 mp4File = [video_name '.mp4'];
 movefile(mp4File, mp4Raw);
-tgtW = imgW - mod(imgW,2);
-tgtH = imgH - mod(imgH,2);
+tgtW = 2*floor(imgW*gifScale);
+tgtH = 2*floor(imgH*gifScale);
 cmdScale = sprintf('%s -y -i "%s" -vf "scale=%d:%d:flags=lanczos" -c:v libx264 -crf 18 -pix_fmt yuv420p "%s"', ...
     ffmpegExe, mp4Raw, tgtW, tgtH, mp4File);
 [sr,or] = system(cmdScale);
