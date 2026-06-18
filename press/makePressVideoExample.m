@@ -132,3 +132,21 @@ else
     if s2 ~= 0, warning('ffmpeg paletteuse failed:\n%s',o2); end
     if exist(palFile,'file'), delete(palFile); end
 end
+
+%% small gif (~1/4 dimensions) for sharing (<1 MB)
+gifSmall = [video_name '_small.gif'];
+palSmall = [video_name '_palette_small.png'];
+vfSmall  = sprintf('fps=%g,scale=trunc(iw*0.25/2)*2:-2:flags=lanczos',gifFps);
+cmds1 = sprintf('%s -y -i "%s" -vf "%s,palettegen=stats_mode=diff" "%s"',...
+                ffmpegExe,mp4File,vfSmall,palSmall);
+cmds2 = sprintf(['%s -y -i "%s" -i "%s" -lavfi '...
+                 '"%s[x];[x][1:v]paletteuse=dither=bayer:bayer_scale=3" "%s"'],...
+                ffmpegExe,mp4File,palSmall,vfSmall,gifSmall);
+[ss1,os1] = system(cmds1);
+if ss1 ~= 0
+    warning('ffmpeg small gif palettegen failed:\n%s',os1);
+else
+    [ss2,os2] = system(cmds2);
+    if ss2 ~= 0, warning('ffmpeg small gif paletteuse failed:\n%s',os2); end
+    if exist(palSmall,'file'), delete(palSmall); end
+end
