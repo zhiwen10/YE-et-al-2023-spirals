@@ -110,6 +110,18 @@ for i = 1:nFrames
 end
 close(v);
 
+%% rescale mp4 to native image dimensions (imgW x imgH)
+mp4Raw  = [video_name '_raw.mp4'];
+mp4File = [video_name '.mp4'];
+movefile(mp4File, mp4Raw);
+tgtW = imgW - mod(imgW,2);
+tgtH = imgH - mod(imgH,2);
+cmdScale = sprintf('%s -y -i "%s" -vf "scale=%d:%d:flags=lanczos" -c:v libx264 -crf 18 -pix_fmt yuv420p "%s"', ...
+    ffmpegExe, mp4Raw, tgtW, tgtH, mp4File);
+[sr,or] = system(cmdScale);
+if sr ~= 0, warning('ffmpeg rescale failed:\n%s',or); end
+delete(mp4Raw);
+
 %% gif via ffmpeg (two-pass palette)
 mp4File = [video_name '.mp4'];
 gifFile = [video_name '.gif'];
