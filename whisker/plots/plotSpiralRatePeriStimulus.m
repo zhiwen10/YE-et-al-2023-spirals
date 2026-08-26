@@ -9,7 +9,7 @@ scale = 1;
 [row,col] = find(BW);
 brain_index = [col,row];
 %%
-T = readtable(fullfile(data_folder,'tables','whisker_stim_all2.xlsx'));
+% T = readtable(fullfile(data_folder,'tables','whisker_stim_all2.xlsx'));
 load(fullfile(data_folder,'whisker','spirals_peri_stim','Whisker_spirals_peri_stimulus.mat'));
 %%
 ylim2 = 12;

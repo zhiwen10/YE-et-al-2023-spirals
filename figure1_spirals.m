@@ -1,9 +1,8 @@
-githubdir = 'C:\Users\Steinmetz lab\OneDrive - UW\Documents\git';                        % folder where repositories are hosted
+githubdir = 'C:\Users\dell\Documents\git';                        % folder where repositories are hosted
 addpath(genpath(fullfile(githubdir, 'YE-et-al-2023-spirals')));            % paper repository
-% addpath(genpath(fullfile(githubdir, 'matplotlib'))); 
 %% load session table
-data_folder = 'E:\spiral_data_share\data';                                 % https://doi.org/10.6084/m9.figshare.27850707
-figure_folder = 'E:\spiral_data_share\figures';                            % specify a folder to save figures
+data_folder = 'D:\data';                                 % https://doi.org/10.6084/m9.figshare.27850707
+figure_folder = 'D:\data\figures';                            % specify a folder to save figures
 T = readtable(fullfile(data_folder,'tables','spiralSessions3.xlsx'));      % load session table
 %% Figure 1.
 save_folder = fullfile(figure_folder, 'Fig1');
@@ -14,7 +13,7 @@ h1a = plotSpiralTimeSeries3d(data_folder,save_folder);                    % plot
 h1c = plotSpiralTimeSeries(data_folder,save_folder);                      % plot example spiral frame
 h1b = plotSpiralSequence3(data_folder,save_folder);                        % plot example spiral sequence
 h1d = plotSpiralDuration(T,data_folder,save_folder);                       % plot spiral duration ratio vs scrambled distribution
-h1e = plotSpiralDensityAllSessions(data_folder,save_folder);               % plot spiral desnity map (combine all sessions)
+h1e = plotSpiralDensityAllSessions(data_folder,save_folder);               % plot spiral density map (combine all sessions)
 h1fg = plotSpiralSpeedSummary(T,data_folder,save_folder);                  % plot spiral speeds for all spiral radii
 makePressVideoExample(data_folder, save_folder);
 close all;

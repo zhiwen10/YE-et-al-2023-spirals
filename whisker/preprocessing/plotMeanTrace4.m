@@ -1,7 +1,6 @@
-function [h1] = plotMeanTrace4(mimgtransformed,wf_mean2)
+function [h1] = plotMeanTrace4(mimgtransformed,wf_mean2,data_folder,code_folder)
 %%
-data_folder = 'E:\spiral_data_share\data';  
-load(fullfile(data_folder,'tables','horizontal_cortex_atlas_25um_ssp_bfd.mat'));
+load(fullfile(code_folder,'data_plus','horizontal_cortex_atlas_25um_ssp_bfd.mat'));
 atlas2 = atlas1;
 load(fullfile(data_folder,'tables','horizontal_cortex_atlas_50um.mat'));   % atlas1
 load(fullfile(data_folder,'tables',...
@@ -12,7 +11,7 @@ ctx = '/997/8/567/688/';
 BW = logical(projectedAtlas1);
 BW2 = BW(1:8:end,1:8:end);
 %%
-st2 = readtable(fullfile(data_folder,'tables',...
+st2 = readtable(fullfile(code_folder,'data_plus',...
     'structures_ssp_bfd.csv'));                                      % a table of what all the labels mean
 maskPath{1} = '/997/8/567/688/695/315/500/985/'; % MOp
 maskPath{2} = '/997/8/567/688/695/315/500/993/'; % MOs

@@ -1,8 +1,8 @@
-githubdir = 'C:\Users\Steinmetz lab\Documents\git';                        % folder where repositories are hosted
+githubdir = 'C:\Users\dell\Documents\git';                        % folder where repositories are hosted
 addpath(genpath(fullfile(githubdir, 'YE-et-al-2023-spirals')));       % paper repository
 %% load session table
-data_folder = 'E:\spiral_data_share\data';     
-figure_folder = 'E:\spiral_data_share\figures';
+data_folder = 'D:\data';     
+figure_folder = 'D:\data\figures';
 T = readtable(fullfile(data_folder,'tables','spiralSessions3.xlsx'));
 %% Figure 3c
 save_folder = fullfile(data_folder, 'spirals_mirror','regression_ap');

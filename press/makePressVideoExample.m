@@ -1,6 +1,6 @@
 function makePressVideoExample(data_folder, save_folder)
 %% atlas (use same sources as original video for exact registration match)
-load('C:\Users\Steinmetz lab\OneDrive - UW\Documents\MATLAB\widefield_DIY\phase\atlasMaskArea\segmentationCode\projectedOutlineAtlas.mat');
+load(fullfile(data_folder,'tables','projectedOutlineAtlas.mat'));
 [projectedAtlas1,projectedTemplate1] = filterProjectedAtlas(projectedAtlas,projectedTemplate);
 load(fullfile(data_folder,'tables','horizontal_cortex_atlas_50um.mat'));
 load(fullfile(data_folder,'tables','isocortex_horizontal_projection_outline.mat'));
@@ -18,9 +18,8 @@ dV = [zeros(size(V,1),1) diff(V,[],2)];
 load(fullfile(data_folder,'tables','mask_ZYE12.mat'));
 
 %% registration (use original tform, not tform_2)
-regist_folder = 'C:\Users\Steinmetz lab\OneDrive - UW\Documents\MATLAB\widefield_DIY\phase\reducedRankRegression\registration';
 fname = [mn '_' tdb '_' num2str(en) '_tform'];
-load(fullfile(regist_folder, fname));
+load(fullfile(data_folder,'tables',fname));
 
 %% parameters
 params.downscale = 4;
@@ -113,40 +112,40 @@ for i = 1:nFrames
 end
 close(v);
 
-%% gif via ffmpeg (two-pass palette)
-mp4File = [video_name '.mp4'];
-gifFile = [video_name '.gif'];
-palFile = [video_name '_palette.png'];
-gifFps  = frameRate / gifStride;
-vf = sprintf('fps=%g',gifFps);
-cmd1 = sprintf('%s -y -i "%s" -vf "%s,palettegen=stats_mode=diff" "%s"',...
-               ffmpegExe,mp4File,vf,palFile);
-cmd2 = sprintf(['%s -y -i "%s" -i "%s" -lavfi '...
-                '"%s[x];[x][1:v]paletteuse=dither=bayer:bayer_scale=3" "%s"'],...
-               ffmpegExe,mp4File,palFile,vf,gifFile);
-[s1,o1] = system(cmd1);
-if s1 ~= 0
-    warning('ffmpeg palettegen failed (is ffmpeg on PATH?):\n%s',o1);
-else
-    [s2,o2] = system(cmd2);
-    if s2 ~= 0, warning('ffmpeg paletteuse failed:\n%s',o2); end
-    if exist(palFile,'file'), delete(palFile); end
-end
-
-%% small gif (~1/4 dimensions) for sharing (<1 MB)
-gifSmall = [video_name '_small.gif'];
-palSmall = [video_name '_palette_small.png'];
-vfSmall  = sprintf('fps=%g,scale=trunc(iw*0.1875/2)*2:-2:flags=lanczos',gifFps);
-cmds1 = sprintf('%s -y -i "%s" -vf "%s,palettegen=stats_mode=diff" "%s"',...
-                ffmpegExe,mp4File,vfSmall,palSmall);
-cmds2 = sprintf(['%s -y -i "%s" -i "%s" -lavfi '...
-                 '"%s[x];[x][1:v]paletteuse=dither=bayer:bayer_scale=3" "%s"'],...
-                ffmpegExe,mp4File,palSmall,vfSmall,gifSmall);
-[ss1,os1] = system(cmds1);
-if ss1 ~= 0
-    warning('ffmpeg small gif palettegen failed:\n%s',os1);
-else
-    [ss2,os2] = system(cmds2);
-    if ss2 ~= 0, warning('ffmpeg small gif paletteuse failed:\n%s',os2); end
-    if exist(palSmall,'file'), delete(palSmall); end
-end
+% %% gif via ffmpeg (two-pass palette)
+% mp4File = [video_name '.mp4'];
+% gifFile = [video_name '.gif'];
+% palFile = [video_name '_palette.png'];
+% gifFps  = frameRate / gifStride;
+% vf = sprintf('fps=%g',gifFps);
+% cmd1 = sprintf('%s -y -i "%s" -vf "%s,palettegen=stats_mode=diff" "%s"',...
+%                ffmpegExe,mp4File,vf,palFile);
+% cmd2 = sprintf(['%s -y -i "%s" -i "%s" -lavfi '...
+%                 '"%s[x];[x][1:v]paletteuse=dither=bayer:bayer_scale=3" "%s"'],...
+%                ffmpegExe,mp4File,palFile,vf,gifFile);
+% [s1,o1] = system(cmd1);
+% if s1 ~= 0
+%     warning('ffmpeg palettegen failed (is ffmpeg on PATH?):\n%s',o1);
+% else
+%     [s2,o2] = system(cmd2);
+%     if s2 ~= 0, warning('ffmpeg paletteuse failed:\n%s',o2); end
+%     if exist(palFile,'file'), delete(palFile); end
+% end
+% 
+% %% small gif (~1/4 dimensions) for sharing (<1 MB)
+% gifSmall = [video_name '_small.gif'];
+% palSmall = [video_name '_palette_small.png'];
+% vfSmall  = sprintf('fps=%g,scale=trunc(iw*0.1875/2)*2:-2:flags=lanczos',gifFps);
+% cmds1 = sprintf('%s -y -i "%s" -vf "%s,palettegen=stats_mode=diff" "%s"',...
+%                 ffmpegExe,mp4File,vfSmall,palSmall);
+% cmds2 = sprintf(['%s -y -i "%s" -i "%s" -lavfi '...
+%                  '"%s[x];[x][1:v]paletteuse=dither=bayer:bayer_scale=3" "%s"'],...
+%                 ffmpegExe,mp4File,palSmall,vfSmall,gifSmall);
+% [ss1,os1] = system(cmds1);
+% if ss1 ~= 0
+%     warning('ffmpeg small gif palettegen failed:\n%s',os1);
+% else
+%     [ss2,os2] = system(cmds2);
+%     if ss2 ~= 0, warning('ffmpeg small gif paletteuse failed:\n%s',os2); end
+%     if exist(palSmall,'file'), delete(palSmall); end
+% end

@@ -1,8 +1,8 @@
-githubdir = 'C:\Users\Steinmetz lab\Documents\git';                        % folder where repositories are hosted 
+githubdir = 'C:\Users\dell\Documents\git';                        % folder where repositories are hosted 
 addpath(genpath(fullfile(githubdir, 'YE-et-al-2023-spirals')));            % paper repository
 %% load widefield session table
-data_folder = 'E:\spiral_data_share\data';                                 % https://doi.org/10.6084/m9.figshare.27850707
-figure_folder = 'E:\spiral_data_share\figures';                            % specify a folder to save figures
+data_folder = 'D:\data';                                 % https://doi.org/10.6084/m9.figshare.27850707
+figure_folder = 'D:\data\figures';                            % specify a folder to save figures
 T = readtable(fullfile(data_folder,'tables','spiralSessions3.xlsx'));      % load session info
 %% Figure 2.
 save_folder = fullfile(figure_folder,'Fig2');

@@ -1,7 +1,7 @@
-githubdir = 'C:\Users\Steinmetz lab\Documents\git';                        % folder where repositories are hosted 
+githubdir = 'C:\Users\dell\Documents\git';                        % folder where repositories are hosted 
 addpath(genpath(fullfile(githubdir, 'YE-et-al-2023-spirals')));            % paper repository
 %% data folders 
-data_folder = 'E:\spiral_data_share\data'; 
+data_folder = 'D:\data'; 
 T = readtable(fullfile(data_folder,'tables','spiralSessions3.xlsx'));
 %% Figure 2c,e
 save_folder = fullfile(data_folder,'axons');

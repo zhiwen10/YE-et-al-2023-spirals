@@ -11,7 +11,7 @@ params.downscale = 8;
 params.lowpass = 0;
 params.gsmooth = 0;
 %% load mean map across 5 animals
-T = readtable(fullfile(data_folder,'tables','whisker_stim_all2.xlsx'));
+% T = readtable(fullfile(data_folder,'tables','whisker_stim_all2.xlsx'));
 load(fullfile(data_folder,'whisker','whisker_mean_maps','whisker_spirals_mean_all.mat'));
 wf_mean3 = imresize(wf_mean2,[660,570]);
 % load detected sprials                                              

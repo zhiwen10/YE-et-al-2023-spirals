@@ -1,6 +1,6 @@
 function hs8j = plotMotionEnergyIndex(data_folder,save_folder)
 load(fullfile(data_folder,'spirals','spirals_index',...
-    'energy_sync_bin_0_0.01_all2.mat'));
+    'energy_sync_bin_0_0.01_all.mat'));
 %%
 hs8j = figure;
 for i = 1:9

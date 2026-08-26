@@ -15,10 +15,10 @@ subfolder = [mn '_' tdb '_' num2str(en)];
 session_root = fullfile(data_folder,'spirals','svd',subfolder);
 [U,V,t,mimg] = loadUVt1(session_root);                                     % load U,V, t
 dV = [zeros(size(V,1),1) diff(V,[],2)];
-load(fullfile(data_folder,'tables','mask_ZYE12_3.mat'));
+load(fullfile(data_folder,'tables','mask_ZYE12.mat'));
 %% registration
 fname = [mn '_' tdb '_' num2str(en)];
-load(fullfile(data_folder,'tables',[fname '_tform_2.mat']));                 % load atlas transformation matrix tform;
+load(fullfile(data_folder,'tables',[fname '_tform.mat']));                 % load atlas transformation matrix tform;
 %%
 sizeTemplate = [1320,1140];
 mimgt = imwarp(mimg,tform,'OutputView',imref2d(sizeTemplate));

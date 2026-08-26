@@ -1,4 +1,4 @@
-function h5c = plotWhiskerMeanTrace(data_folder,save_folder)
+function h5c = plotWhiskerMeanTrace(data_folder,save_folder,code_folder)
 %% load atlas brain horizontal projection and outline  
 load(fullfile(data_folder,'tables','horizontal_cortex_atlas_50um.mat'));
 load(fullfile(data_folder,'tables',...
@@ -40,8 +40,6 @@ scale = 1;
     Utransformed,projectedAtlas1,projectedTemplate1,hemi,scale);
 [row,col] = ind2sub(size(projectedAtlas1),indexSSp);
 indexSSp2 = [col,row];
-%%
-T = readtable(fullfile(data_folder,'tables','whisker_stim_all2.xlsx'));
 %% load mean map across 5 animals
 load(fullfile(data_folder,'whisker','whisker_mean_maps','whisker_spirals_mean_all.mat'));
 load(fullfile(data_folder,'whisker','whisker_mean_maps','ZYE94_mimg.mat'));
@@ -49,5 +47,5 @@ load(fullfile(data_folder,'whisker','whisker_mean_maps','ZYE94_mimg.mat'));
 BW = logical(projectedAtlas1);
 BW2 = BW(1:8:end,1:8:end);
 %%
-[h5c] = plotMeanTrace4(mimgtransformed,wf_mean2);
+[h5c] = plotMeanTrace4(mimgtransformed,wf_mean2,data_folder,code_folder);
 print(h5c, fullfile(save_folder,'Fig5c_WhiskerMeanTrace'), '-dpdf', '-bestfit', '-painters');

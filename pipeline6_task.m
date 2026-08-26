@@ -1,8 +1,8 @@
 %% pipeline task
-githubdir = 'C:\Users\Steinmetz lab\Documents\git';                        % folder where repositories are hosted
-addpath(genpath(fullfile(githubdir, 'YE-et-al-2023-spirals_20250218')));            % paper repository
+githubdir = 'C:\Users\dell\Documents\git';                        % folder where repositories are hosted
+addpath(genpath(fullfile(githubdir, 'YE-et-al-2023-spirals')));            % paper repository
 %% load session table
-data_folder = 'E:\spiral_data_share\data';     
+data_folder = 'D:\data';     
 %% get psychometric curve and trial outcome
 save_folder = fullfile(data_folder,'task','psychometric_curve');
 getPsychometricCurve(data_folder,save_folder);                             % get psychometric curves for all subjects
